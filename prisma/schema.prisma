@@ -1,0 +1,65 @@
+generator client {
+  provider = "prisma-client-js"
+  output   = "../generated/prisma"
+  previewFeatures = ["driverAdapters"] } datasource db { provider = "postgresql" url      = env("DATABASE_URL") }
+
+model Ad {
+  id           String   @id @default(cuid())
+  name         String   @db.VarChar(100)
+  category     Category
+  createdAt    DateTime @default(now())
+  description  String   @db.Text
+  expiredAt    DateTime @default(now())
+  location     String   @db.VarChar(255)
+  organization String?  @db.VarChar(100)
+  phone        String   @db.VarChar(15)
+  pinCode      Int      @map("pin_code")
+  price        Decimal  @db.Decimal(10, 2)
+  title        String   @db.VarChar(255)
+  updatedAt    DateTime @updatedAt
+  userId       String
+  link         String   @db.VarChar(255)
+  platform     String   @db.VarChar(50)
+  user         String
+  image        image[]
+//User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  @@index([category])
+  @@index([pinCode])
+  @@index([userId], map: "ads_userId_fkey")
+  @@map("ads")
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  firstName String   @map("first_name")
+  lastName  String   @map("last_name")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+  // ads       Ad[]
+  
+
+  @@map("users")
+}
+
+model image {
+  id        String   @id
+  url       String
+  alt       String?
+  adId      String
+  createdAt DateTime @default(now())
+  ads       Ad       @relation(fields: [adId], references: [id], onDelete: Cascade, map: "Image_adId_fkey")
+
+  @@index([adId], map: "Image_adId_idx")
+}
+
+enum Category {
+  ELECTRONICS
+  VEHICLES
+  REAL_ESTATE
+  JOBS
+  FURNITURE
+  FASHION
+  SERVICES
+  PETS
+}
