@@ -94,22 +94,20 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
 
 exports.Prisma.AdScalarFieldEnum = {
   id: 'id',
-  name: 'name',
-  category: 'category',
-  createdAt: 'createdAt',
-  description: 'description',
-  expiredAt: 'expiredAt',
-  location: 'location',
-  organization: 'organization',
-  phone: 'phone',
-  pinCode: 'pinCode',
-  price: 'price',
   title: 'title',
-  updatedAt: 'updatedAt',
-  userId: 'userId',
+  description: 'description',
+  category: 'category',
+  price: 'price',
+  location: 'location',
+  pinCode: 'pinCode',
+  phone: 'phone',
+  organization: 'organization',
   link: 'link',
   platform: 'platform',
-  user: 'user'
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  expiredAt: 'expiredAt',
+  userId: 'userId'
 };
 
 exports.Prisma.UserScalarFieldEnum = {
@@ -117,16 +115,9 @@ exports.Prisma.UserScalarFieldEnum = {
   email: 'email',
   firstName: 'firstName',
   lastName: 'lastName',
+  apiKey: 'apiKey',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
-};
-
-exports.Prisma.ImageScalarFieldEnum = {
-  id: 'id',
-  url: 'url',
-  alt: 'alt',
-  adId: 'adId',
-  createdAt: 'createdAt'
 };
 
 exports.Prisma.SortOrder = {
@@ -156,8 +147,7 @@ exports.Category = exports.$Enums.Category = {
 
 exports.Prisma.ModelName = {
   Ad: 'Ad',
-  User: 'User',
-  image: 'image'
+  User: 'User'
 };
 /**
  * Create the Client
@@ -170,7 +160,7 @@ const config = {
       "value": "prisma-client-js"
     },
     "output": {
-      "value": "/media/imanpr33t/new/classjstack/generated/prisma",
+      "value": "/home/imanpr33t/Documents/classjstack/generated/prisma",
       "fromEnvVar": null
     },
     "config": {
@@ -186,7 +176,7 @@ const config = {
     "previewFeatures": [
       "driverAdapters"
     ],
-    "sourceFilePath": "/media/imanpr33t/new/classjstack/prisma/schema.prisma",
+    "sourceFilePath": "/home/imanpr33t/Documents/classjstack/prisma/schema.prisma",
     "isCustomOutput": true
   },
   "relativeEnvPaths": {
@@ -200,22 +190,21 @@ const config = {
     "db"
   ],
   "activeProvider": "postgresql",
-  "postinstall": false,
   "inlineDatasources": {
     "db": {
       "url": {
         "fromEnvVar": "DATABASE_URL",
-        "value": null
+        "value": "postgresql://postgres:12345@localhost:5432/classpnb"
       }
     }
   },
-  "inlineSchema": "generator client {\n  provider        = \"prisma-client-js\"\n  output          = \"../generated/prisma\"\n  previewFeatures = [\"driverAdapters\"]\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel Ad {\n  id           String   @id @default(cuid())\n  name         String   @db.VarChar(100)\n  category     Category\n  createdAt    DateTime @default(now())\n  description  String   @db.Text\n  expiredAt    DateTime @default(now())\n  location     String   @db.VarChar(255)\n  organization String?  @db.VarChar(100)\n  phone        String   @db.VarChar(15)\n  pinCode      Int      @map(\"pin_code\")\n  price        Decimal  @db.Decimal(10, 2)\n  title        String   @db.VarChar(255)\n  updatedAt    DateTime @updatedAt\n  userId       String\n  link         String   @db.VarChar(255)\n  platform     String   @db.VarChar(50)\n  user         String\n  image        image[]\n\n  //User     @relation(fields: [userId], references: [id], onDelete: Cascade)\n  @@index([category])\n  @@index([pinCode])\n  @@index([userId], map: \"ads_userId_fkey\")\n  @@map(\"ads\")\n}\n\nmodel User {\n  id        String   @id @default(cuid())\n  email     String   @unique\n  firstName String   @map(\"first_name\")\n  lastName  String   @map(\"last_name\")\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n  // ads       Ad[]\n\n  @@map(\"users\")\n}\n\nmodel image {\n  id        String   @id\n  url       String\n  alt       String?\n  adId      String\n  createdAt DateTime @default(now())\n  ads       Ad       @relation(fields: [adId], references: [id], onDelete: Cascade, map: \"Image_adId_fkey\")\n\n  @@index([adId], map: \"Image_adId_idx\")\n}\n\nenum Category {\n  ELECTRONICS\n  VEHICLES\n  REAL_ESTATE\n  JOBS\n  FURNITURE\n  FASHION\n  SERVICES\n  PETS\n}\n",
-  "inlineSchemaHash": "0f5eeead97dad398be9dad15dd236509ee62683cd68261eb936a16241e140d42",
+  "inlineSchema": "generator client {\n  provider        = \"prisma-client-js\"\n  output          = \"../generated/prisma\"\n  previewFeatures = [\"driverAdapters\"]\n}\n\ndatasource db {\n  provider = \"postgresql\"\n  url      = env(\"DATABASE_URL\")\n}\n\nmodel Ad {\n  id           String   @id @default(cuid())\n  title        String\n  description  String\n  category     Category\n  price        Decimal  @db.Decimal(10, 2)\n  location     String\n  pinCode      Int\n  phone        String   @db.VarChar(15)\n  organization String?\n  link         String\n  platform     String\n  createdAt    DateTime @default(now())\n  updatedAt    DateTime @updatedAt\n  expiredAt    DateTime @default(now())\n\n  userId Int\n  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)\n\n  @@index([category])\n  @@index([pinCode])\n}\n\nmodel User {\n  id        Int      @id @default(autoincrement())\n  email     String   @unique\n  firstName String\n  lastName  String\n  apiKey    String   @unique @default(cuid())\n  createdAt DateTime @default(now())\n  updatedAt DateTime @updatedAt\n\n  ads Ad[]\n\n  @@index([email])\n}\n\n// Optional: Enable when image uploading is implemented\n// model Image {\n//   id        String   @id @default(cuid())\n//   url       String\n//   alt       String?\n//   adId      String\n//   createdAt DateTime @default(now())\n\n//   ad        Ad       @relation(fields: [adId], references: [id], onDelete: Cascade)\n\n//   @@index([adId])\n// }\n\nenum Category {\n  ELECTRONICS\n  VEHICLES\n  REAL_ESTATE\n  JOBS\n  FURNITURE\n  FASHION\n  SERVICES\n  PETS\n}\n",
+  "inlineSchemaHash": "63cd718d7c23d4a646de9542fc9abad735333275432a04fd04e14a62f772a949",
   "copyEngine": true
 }
 config.dirname = '/'
 
-config.runtimeDataModel = JSON.parse("{\"models\":{\"Ad\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"name\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"category\",\"kind\":\"enum\",\"type\":\"Category\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"expiredAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"location\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"organization\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"phone\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"pinCode\",\"kind\":\"scalar\",\"type\":\"Int\",\"dbName\":\"pin_code\"},{\"name\":\"price\",\"kind\":\"scalar\",\"type\":\"Decimal\"},{\"name\":\"title\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"link\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"platform\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"user\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"image\",\"kind\":\"object\",\"type\":\"image\",\"relationName\":\"AdToimage\"}],\"dbName\":\"ads\"},\"User\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"firstName\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"first_name\"},{\"name\":\"lastName\",\"kind\":\"scalar\",\"type\":\"String\",\"dbName\":\"last_name\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"}],\"dbName\":\"users\"},\"image\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"url\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"alt\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"adId\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"ads\",\"kind\":\"object\",\"type\":\"Ad\",\"relationName\":\"AdToimage\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
+config.runtimeDataModel = JSON.parse("{\"models\":{\"Ad\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"title\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"description\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"category\",\"kind\":\"enum\",\"type\":\"Category\"},{\"name\":\"price\",\"kind\":\"scalar\",\"type\":\"Decimal\"},{\"name\":\"location\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"pinCode\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"phone\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"organization\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"link\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"platform\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"expiredAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"userId\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"user\",\"kind\":\"object\",\"type\":\"User\",\"relationName\":\"AdToUser\"}],\"dbName\":null},\"User\":{\"fields\":[{\"name\":\"id\",\"kind\":\"scalar\",\"type\":\"Int\"},{\"name\":\"email\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"firstName\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"lastName\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"apiKey\",\"kind\":\"scalar\",\"type\":\"String\"},{\"name\":\"createdAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"updatedAt\",\"kind\":\"scalar\",\"type\":\"DateTime\"},{\"name\":\"ads\",\"kind\":\"object\",\"type\":\"Ad\",\"relationName\":\"AdToUser\"}],\"dbName\":null}},\"enums\":{},\"types\":{}}")
 defineDmmfProperty(exports.Prisma, config.runtimeDataModel)
 config.engineWasm = {
   getRuntime: async () => require('./query_engine_bg.js'),

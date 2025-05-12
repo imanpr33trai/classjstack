@@ -23,11 +23,6 @@ export type Ad = $Result.DefaultSelection<Prisma.$AdPayload>
  * 
  */
 export type User = $Result.DefaultSelection<Prisma.$UserPayload>
-/**
- * Model image
- * 
- */
-export type image = $Result.DefaultSelection<Prisma.$imagePayload>
 
 /**
  * Enums
@@ -196,16 +191,6 @@ export class PrismaClient<
     * ```
     */
   get user(): Prisma.UserDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.image`: Exposes CRUD operations for the **image** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more Images
-    * const images = await prisma.image.findMany()
-    * ```
-    */
-  get image(): Prisma.imageDelegate<ExtArgs, ClientOptions>;
 }
 
 export namespace Prisma {
@@ -647,8 +632,7 @@ export namespace Prisma {
 
   export const ModelName: {
     Ad: 'Ad',
-    User: 'User',
-    image: 'image'
+    User: 'User'
   };
 
   export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -667,7 +651,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "ad" | "user" | "image"
+      modelProps: "ad" | "user"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -819,80 +803,6 @@ export namespace Prisma {
           }
         }
       }
-      image: {
-        payload: Prisma.$imagePayload<ExtArgs>
-        fields: Prisma.imageFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.imageFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$imagePayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.imageFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$imagePayload>
-          }
-          findFirst: {
-            args: Prisma.imageFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$imagePayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.imageFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$imagePayload>
-          }
-          findMany: {
-            args: Prisma.imageFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$imagePayload>[]
-          }
-          create: {
-            args: Prisma.imageCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$imagePayload>
-          }
-          createMany: {
-            args: Prisma.imageCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.imageCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$imagePayload>[]
-          }
-          delete: {
-            args: Prisma.imageDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$imagePayload>
-          }
-          update: {
-            args: Prisma.imageUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$imagePayload>
-          }
-          deleteMany: {
-            args: Prisma.imageDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.imageUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.imageUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$imagePayload>[]
-          }
-          upsert: {
-            args: Prisma.imageUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$imagePayload>
-          }
-          aggregate: {
-            args: Prisma.ImageAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateImage>
-          }
-          groupBy: {
-            args: Prisma.imageGroupByArgs<ExtArgs>
-            result: $Utils.Optional<ImageGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.imageCountArgs<ExtArgs>
-            result: $Utils.Optional<ImageCountAggregateOutputType> | number
-          }
-        }
-      }
     }
   } & {
     other: {
@@ -983,7 +893,6 @@ export namespace Prisma {
   export type GlobalOmitConfig = {
     ad?: AdOmit
     user?: UserOmit
-    image?: imageOmit
   }
 
   /* Types for Logging */
@@ -1074,33 +983,33 @@ export namespace Prisma {
 
 
   /**
-   * Count Type AdCountOutputType
+   * Count Type UserCountOutputType
    */
 
-  export type AdCountOutputType = {
-    image: number
+  export type UserCountOutputType = {
+    ads: number
   }
 
-  export type AdCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    image?: boolean | AdCountOutputTypeCountImageArgs
+  export type UserCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    ads?: boolean | UserCountOutputTypeCountAdsArgs
   }
 
   // Custom InputTypes
   /**
-   * AdCountOutputType without action
+   * UserCountOutputType without action
    */
-  export type AdCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+  export type UserCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     /**
-     * Select specific fields to fetch from the AdCountOutputType
+     * Select specific fields to fetch from the UserCountOutputType
      */
-    select?: AdCountOutputTypeSelect<ExtArgs> | null
+    select?: UserCountOutputTypeSelect<ExtArgs> | null
   }
 
   /**
-   * AdCountOutputType without action
+   * UserCountOutputType without action
    */
-  export type AdCountOutputTypeCountImageArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: imageWhereInput
+  export type UserCountOutputTypeCountAdsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: AdWhereInput
   }
 
 
@@ -1121,145 +1030,137 @@ export namespace Prisma {
   }
 
   export type AdAvgAggregateOutputType = {
-    pinCode: number | null
     price: Decimal | null
+    pinCode: number | null
+    userId: number | null
   }
 
   export type AdSumAggregateOutputType = {
-    pinCode: number | null
     price: Decimal | null
+    pinCode: number | null
+    userId: number | null
   }
 
   export type AdMinAggregateOutputType = {
     id: string | null
-    name: string | null
-    category: $Enums.Category | null
-    createdAt: Date | null
-    description: string | null
-    expiredAt: Date | null
-    location: string | null
-    organization: string | null
-    phone: string | null
-    pinCode: number | null
-    price: Decimal | null
     title: string | null
-    updatedAt: Date | null
-    userId: string | null
+    description: string | null
+    category: $Enums.Category | null
+    price: Decimal | null
+    location: string | null
+    pinCode: number | null
+    phone: string | null
+    organization: string | null
     link: string | null
     platform: string | null
-    user: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    expiredAt: Date | null
+    userId: number | null
   }
 
   export type AdMaxAggregateOutputType = {
     id: string | null
-    name: string | null
-    category: $Enums.Category | null
-    createdAt: Date | null
-    description: string | null
-    expiredAt: Date | null
-    location: string | null
-    organization: string | null
-    phone: string | null
-    pinCode: number | null
-    price: Decimal | null
     title: string | null
-    updatedAt: Date | null
-    userId: string | null
+    description: string | null
+    category: $Enums.Category | null
+    price: Decimal | null
+    location: string | null
+    pinCode: number | null
+    phone: string | null
+    organization: string | null
     link: string | null
     platform: string | null
-    user: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+    expiredAt: Date | null
+    userId: number | null
   }
 
   export type AdCountAggregateOutputType = {
     id: number
-    name: number
-    category: number
-    createdAt: number
-    description: number
-    expiredAt: number
-    location: number
-    organization: number
-    phone: number
-    pinCode: number
-    price: number
     title: number
-    updatedAt: number
-    userId: number
+    description: number
+    category: number
+    price: number
+    location: number
+    pinCode: number
+    phone: number
+    organization: number
     link: number
     platform: number
-    user: number
+    createdAt: number
+    updatedAt: number
+    expiredAt: number
+    userId: number
     _all: number
   }
 
 
   export type AdAvgAggregateInputType = {
-    pinCode?: true
     price?: true
+    pinCode?: true
+    userId?: true
   }
 
   export type AdSumAggregateInputType = {
-    pinCode?: true
     price?: true
+    pinCode?: true
+    userId?: true
   }
 
   export type AdMinAggregateInputType = {
     id?: true
-    name?: true
-    category?: true
-    createdAt?: true
-    description?: true
-    expiredAt?: true
-    location?: true
-    organization?: true
-    phone?: true
-    pinCode?: true
-    price?: true
     title?: true
-    updatedAt?: true
-    userId?: true
+    description?: true
+    category?: true
+    price?: true
+    location?: true
+    pinCode?: true
+    phone?: true
+    organization?: true
     link?: true
     platform?: true
-    user?: true
+    createdAt?: true
+    updatedAt?: true
+    expiredAt?: true
+    userId?: true
   }
 
   export type AdMaxAggregateInputType = {
     id?: true
-    name?: true
-    category?: true
-    createdAt?: true
-    description?: true
-    expiredAt?: true
-    location?: true
-    organization?: true
-    phone?: true
-    pinCode?: true
-    price?: true
     title?: true
-    updatedAt?: true
-    userId?: true
+    description?: true
+    category?: true
+    price?: true
+    location?: true
+    pinCode?: true
+    phone?: true
+    organization?: true
     link?: true
     platform?: true
-    user?: true
+    createdAt?: true
+    updatedAt?: true
+    expiredAt?: true
+    userId?: true
   }
 
   export type AdCountAggregateInputType = {
     id?: true
-    name?: true
-    category?: true
-    createdAt?: true
-    description?: true
-    expiredAt?: true
-    location?: true
-    organization?: true
-    phone?: true
-    pinCode?: true
-    price?: true
     title?: true
-    updatedAt?: true
-    userId?: true
+    description?: true
+    category?: true
+    price?: true
+    location?: true
+    pinCode?: true
+    phone?: true
+    organization?: true
     link?: true
     platform?: true
-    user?: true
+    createdAt?: true
+    updatedAt?: true
+    expiredAt?: true
+    userId?: true
     _all?: true
   }
 
@@ -1351,22 +1252,20 @@ export namespace Prisma {
 
   export type AdGroupByOutputType = {
     id: string
-    name: string
-    category: $Enums.Category
-    createdAt: Date
-    description: string
-    expiredAt: Date
-    location: string
-    organization: string | null
-    phone: string
-    pinCode: number
-    price: Decimal
     title: string
-    updatedAt: Date
-    userId: string
+    description: string
+    category: $Enums.Category
+    price: Decimal
+    location: string
+    pinCode: number
+    phone: string
+    organization: string | null
     link: string
     platform: string
-    user: string
+    createdAt: Date
+    updatedAt: Date
+    expiredAt: Date
+    userId: number
     _count: AdCountAggregateOutputType | null
     _avg: AdAvgAggregateOutputType | null
     _sum: AdSumAggregateOutputType | null
@@ -1390,117 +1289,111 @@ export namespace Prisma {
 
   export type AdSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    name?: boolean
-    category?: boolean
-    createdAt?: boolean
-    description?: boolean
-    expiredAt?: boolean
-    location?: boolean
-    organization?: boolean
-    phone?: boolean
-    pinCode?: boolean
-    price?: boolean
     title?: boolean
-    updatedAt?: boolean
-    userId?: boolean
+    description?: boolean
+    category?: boolean
+    price?: boolean
+    location?: boolean
+    pinCode?: boolean
+    phone?: boolean
+    organization?: boolean
     link?: boolean
     platform?: boolean
-    user?: boolean
-    image?: boolean | Ad$imageArgs<ExtArgs>
-    _count?: boolean | AdCountOutputTypeDefaultArgs<ExtArgs>
+    createdAt?: boolean
+    updatedAt?: boolean
+    expiredAt?: boolean
+    userId?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["ad"]>
 
   export type AdSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    name?: boolean
-    category?: boolean
-    createdAt?: boolean
-    description?: boolean
-    expiredAt?: boolean
-    location?: boolean
-    organization?: boolean
-    phone?: boolean
-    pinCode?: boolean
-    price?: boolean
     title?: boolean
-    updatedAt?: boolean
-    userId?: boolean
+    description?: boolean
+    category?: boolean
+    price?: boolean
+    location?: boolean
+    pinCode?: boolean
+    phone?: boolean
+    organization?: boolean
     link?: boolean
     platform?: boolean
-    user?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    expiredAt?: boolean
+    userId?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["ad"]>
 
   export type AdSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
-    name?: boolean
-    category?: boolean
-    createdAt?: boolean
-    description?: boolean
-    expiredAt?: boolean
-    location?: boolean
-    organization?: boolean
-    phone?: boolean
-    pinCode?: boolean
-    price?: boolean
     title?: boolean
-    updatedAt?: boolean
-    userId?: boolean
+    description?: boolean
+    category?: boolean
+    price?: boolean
+    location?: boolean
+    pinCode?: boolean
+    phone?: boolean
+    organization?: boolean
     link?: boolean
     platform?: boolean
-    user?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    expiredAt?: boolean
+    userId?: boolean
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["ad"]>
 
   export type AdSelectScalar = {
     id?: boolean
-    name?: boolean
-    category?: boolean
-    createdAt?: boolean
-    description?: boolean
-    expiredAt?: boolean
-    location?: boolean
-    organization?: boolean
-    phone?: boolean
-    pinCode?: boolean
-    price?: boolean
     title?: boolean
-    updatedAt?: boolean
-    userId?: boolean
+    description?: boolean
+    category?: boolean
+    price?: boolean
+    location?: boolean
+    pinCode?: boolean
+    phone?: boolean
+    organization?: boolean
     link?: boolean
     platform?: boolean
-    user?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    expiredAt?: boolean
+    userId?: boolean
   }
 
-  export type AdOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "category" | "createdAt" | "description" | "expiredAt" | "location" | "organization" | "phone" | "pinCode" | "price" | "title" | "updatedAt" | "userId" | "link" | "platform" | "user", ExtArgs["result"]["ad"]>
+  export type AdOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "description" | "category" | "price" | "location" | "pinCode" | "phone" | "organization" | "link" | "platform" | "createdAt" | "updatedAt" | "expiredAt" | "userId", ExtArgs["result"]["ad"]>
   export type AdInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    image?: boolean | Ad$imageArgs<ExtArgs>
-    _count?: boolean | AdCountOutputTypeDefaultArgs<ExtArgs>
+    user?: boolean | UserDefaultArgs<ExtArgs>
   }
-  export type AdIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
-  export type AdIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type AdIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
+  export type AdIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    user?: boolean | UserDefaultArgs<ExtArgs>
+  }
 
   export type $AdPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "Ad"
     objects: {
-      image: Prisma.$imagePayload<ExtArgs>[]
+      user: Prisma.$UserPayload<ExtArgs>
     }
     scalars: $Extensions.GetPayloadResult<{
       id: string
-      name: string
-      category: $Enums.Category
-      createdAt: Date
-      description: string
-      expiredAt: Date
-      location: string
-      organization: string | null
-      phone: string
-      pinCode: number
-      price: Prisma.Decimal
       title: string
-      updatedAt: Date
-      userId: string
+      description: string
+      category: $Enums.Category
+      price: Prisma.Decimal
+      location: string
+      pinCode: number
+      phone: string
+      organization: string | null
       link: string
       platform: string
-      user: string
+      createdAt: Date
+      updatedAt: Date
+      expiredAt: Date
+      userId: number
     }, ExtArgs["result"]["ad"]>
     composites: {}
   }
@@ -1895,7 +1788,7 @@ export namespace Prisma {
    */
   export interface Prisma__AdClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
-    image<T extends Ad$imageArgs<ExtArgs> = {}>(args?: Subset<T, Ad$imageArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$imagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    user<T extends UserDefaultArgs<ExtArgs> = {}>(args?: Subset<T, UserDefaultArgs<ExtArgs>>): Prisma__UserClient<$Result.GetResult<Prisma.$UserPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1926,22 +1819,20 @@ export namespace Prisma {
    */
   interface AdFieldRefs {
     readonly id: FieldRef<"Ad", 'String'>
-    readonly name: FieldRef<"Ad", 'String'>
-    readonly category: FieldRef<"Ad", 'Category'>
-    readonly createdAt: FieldRef<"Ad", 'DateTime'>
-    readonly description: FieldRef<"Ad", 'String'>
-    readonly expiredAt: FieldRef<"Ad", 'DateTime'>
-    readonly location: FieldRef<"Ad", 'String'>
-    readonly organization: FieldRef<"Ad", 'String'>
-    readonly phone: FieldRef<"Ad", 'String'>
-    readonly pinCode: FieldRef<"Ad", 'Int'>
-    readonly price: FieldRef<"Ad", 'Decimal'>
     readonly title: FieldRef<"Ad", 'String'>
-    readonly updatedAt: FieldRef<"Ad", 'DateTime'>
-    readonly userId: FieldRef<"Ad", 'String'>
+    readonly description: FieldRef<"Ad", 'String'>
+    readonly category: FieldRef<"Ad", 'Category'>
+    readonly price: FieldRef<"Ad", 'Decimal'>
+    readonly location: FieldRef<"Ad", 'String'>
+    readonly pinCode: FieldRef<"Ad", 'Int'>
+    readonly phone: FieldRef<"Ad", 'String'>
+    readonly organization: FieldRef<"Ad", 'String'>
     readonly link: FieldRef<"Ad", 'String'>
     readonly platform: FieldRef<"Ad", 'String'>
-    readonly user: FieldRef<"Ad", 'String'>
+    readonly createdAt: FieldRef<"Ad", 'DateTime'>
+    readonly updatedAt: FieldRef<"Ad", 'DateTime'>
+    readonly expiredAt: FieldRef<"Ad", 'DateTime'>
+    readonly userId: FieldRef<"Ad", 'Int'>
   }
     
 
@@ -2191,6 +2082,10 @@ export namespace Prisma {
      */
     data: AdCreateManyInput | AdCreateManyInput[]
     skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdIncludeCreateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -2261,6 +2156,10 @@ export namespace Prisma {
      * Limit how many Ads to update.
      */
     limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdIncludeUpdateManyAndReturn<ExtArgs> | null
   }
 
   /**
@@ -2330,30 +2229,6 @@ export namespace Prisma {
   }
 
   /**
-   * Ad.image
-   */
-  export type Ad$imageArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the image
-     */
-    select?: imageSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the image
-     */
-    omit?: imageOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: imageInclude<ExtArgs> | null
-    where?: imageWhereInput
-    orderBy?: imageOrderByWithRelationInput | imageOrderByWithRelationInput[]
-    cursor?: imageWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: ImageScalarFieldEnum | ImageScalarFieldEnum[]
-  }
-
-  /**
    * Ad without action
    */
   export type AdDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -2378,24 +2253,36 @@ export namespace Prisma {
 
   export type AggregateUser = {
     _count: UserCountAggregateOutputType | null
+    _avg: UserAvgAggregateOutputType | null
+    _sum: UserSumAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
     _max: UserMaxAggregateOutputType | null
   }
 
+  export type UserAvgAggregateOutputType = {
+    id: number | null
+  }
+
+  export type UserSumAggregateOutputType = {
+    id: number | null
+  }
+
   export type UserMinAggregateOutputType = {
-    id: string | null
+    id: number | null
     email: string | null
     firstName: string | null
     lastName: string | null
+    apiKey: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
 
   export type UserMaxAggregateOutputType = {
-    id: string | null
+    id: number | null
     email: string | null
     firstName: string | null
     lastName: string | null
+    apiKey: string | null
     createdAt: Date | null
     updatedAt: Date | null
   }
@@ -2405,17 +2292,27 @@ export namespace Prisma {
     email: number
     firstName: number
     lastName: number
+    apiKey: number
     createdAt: number
     updatedAt: number
     _all: number
   }
 
 
+  export type UserAvgAggregateInputType = {
+    id?: true
+  }
+
+  export type UserSumAggregateInputType = {
+    id?: true
+  }
+
   export type UserMinAggregateInputType = {
     id?: true
     email?: true
     firstName?: true
     lastName?: true
+    apiKey?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -2425,6 +2322,7 @@ export namespace Prisma {
     email?: true
     firstName?: true
     lastName?: true
+    apiKey?: true
     createdAt?: true
     updatedAt?: true
   }
@@ -2434,6 +2332,7 @@ export namespace Prisma {
     email?: true
     firstName?: true
     lastName?: true
+    apiKey?: true
     createdAt?: true
     updatedAt?: true
     _all?: true
@@ -2477,6 +2376,18 @@ export namespace Prisma {
     /**
      * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
      * 
+     * Select which fields to average
+    **/
+    _avg?: UserAvgAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to sum
+    **/
+    _sum?: UserSumAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
      * Select which fields to find the minimum value
     **/
     _min?: UserMinAggregateInputType
@@ -2507,18 +2418,23 @@ export namespace Prisma {
     take?: number
     skip?: number
     _count?: UserCountAggregateInputType | true
+    _avg?: UserAvgAggregateInputType
+    _sum?: UserSumAggregateInputType
     _min?: UserMinAggregateInputType
     _max?: UserMaxAggregateInputType
   }
 
   export type UserGroupByOutputType = {
-    id: string
+    id: number
     email: string
     firstName: string
     lastName: string
+    apiKey: string
     createdAt: Date
     updatedAt: Date
     _count: UserCountAggregateOutputType | null
+    _avg: UserAvgAggregateOutputType | null
+    _sum: UserSumAggregateOutputType | null
     _min: UserMinAggregateOutputType | null
     _max: UserMaxAggregateOutputType | null
   }
@@ -2542,8 +2458,11 @@ export namespace Prisma {
     email?: boolean
     firstName?: boolean
     lastName?: boolean
+    apiKey?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    ads?: boolean | User$adsArgs<ExtArgs>
+    _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["user"]>
 
   export type UserSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -2551,6 +2470,7 @@ export namespace Prisma {
     email?: boolean
     firstName?: boolean
     lastName?: boolean
+    apiKey?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["user"]>
@@ -2560,6 +2480,7 @@ export namespace Prisma {
     email?: boolean
     firstName?: boolean
     lastName?: boolean
+    apiKey?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }, ExtArgs["result"]["user"]>
@@ -2569,20 +2490,30 @@ export namespace Prisma {
     email?: boolean
     firstName?: boolean
     lastName?: boolean
+    apiKey?: boolean
     createdAt?: boolean
     updatedAt?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "firstName" | "lastName" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "firstName" | "lastName" | "apiKey" | "createdAt" | "updatedAt", ExtArgs["result"]["user"]>
+  export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    ads?: boolean | User$adsArgs<ExtArgs>
+    _count?: boolean | UserCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type UserIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
+  export type UserIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {}
 
   export type $UserPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     name: "User"
-    objects: {}
+    objects: {
+      ads: Prisma.$AdPayload<ExtArgs>[]
+    }
     scalars: $Extensions.GetPayloadResult<{
-      id: string
+      id: number
       email: string
       firstName: string
       lastName: string
+      apiKey: string
       createdAt: Date
       updatedAt: Date
     }, ExtArgs["result"]["user"]>
@@ -2979,6 +2910,7 @@ export namespace Prisma {
    */
   export interface Prisma__UserClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
     readonly [Symbol.toStringTag]: "PrismaPromise"
+    ads<T extends User$adsArgs<ExtArgs> = {}>(args?: Subset<T, User$adsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
     /**
      * Attaches callbacks for the resolution and/or rejection of the Promise.
      * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3008,10 +2940,11 @@ export namespace Prisma {
    * Fields of the User model
    */
   interface UserFieldRefs {
-    readonly id: FieldRef<"User", 'String'>
+    readonly id: FieldRef<"User", 'Int'>
     readonly email: FieldRef<"User", 'String'>
     readonly firstName: FieldRef<"User", 'String'>
     readonly lastName: FieldRef<"User", 'String'>
+    readonly apiKey: FieldRef<"User", 'String'>
     readonly createdAt: FieldRef<"User", 'DateTime'>
     readonly updatedAt: FieldRef<"User", 'DateTime'>
   }
@@ -3031,6 +2964,10 @@ export namespace Prisma {
      */
     omit?: UserOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
      * Filter, which User to fetch.
      */
     where: UserWhereUniqueInput
@@ -3049,6 +2986,10 @@ export namespace Prisma {
      */
     omit?: UserOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
      * Filter, which User to fetch.
      */
     where: UserWhereUniqueInput
@@ -3066,6 +3007,10 @@ export namespace Prisma {
      * Omit specific fields from the User
      */
     omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
     /**
      * Filter, which User to fetch.
      */
@@ -3115,6 +3060,10 @@ export namespace Prisma {
      */
     omit?: UserOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
      * Filter, which User to fetch.
      */
     where?: UserWhereInput
@@ -3163,6 +3112,10 @@ export namespace Prisma {
      */
     omit?: UserOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
      * Filter, which Users to fetch.
      */
     where?: UserWhereInput
@@ -3205,6 +3158,10 @@ export namespace Prisma {
      * Omit specific fields from the User
      */
     omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
     /**
      * The data needed to create a User.
      */
@@ -3253,6 +3210,10 @@ export namespace Prisma {
      * Omit specific fields from the User
      */
     omit?: UserOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
     /**
      * The data needed to update a User.
      */
@@ -3320,6 +3281,10 @@ export namespace Prisma {
      */
     omit?: UserOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
      * The filter to search for the User to update in case it exists.
      */
     where: UserWhereUniqueInput
@@ -3346,6 +3311,10 @@ export namespace Prisma {
      */
     omit?: UserOmit<ExtArgs> | null
     /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: UserInclude<ExtArgs> | null
+    /**
      * Filter which User to delete.
      */
     where: UserWhereUniqueInput
@@ -3366,6 +3335,30 @@ export namespace Prisma {
   }
 
   /**
+   * User.ads
+   */
+  export type User$adsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Ad
+     */
+    select?: AdSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Ad
+     */
+    omit?: AdOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdInclude<ExtArgs> | null
+    where?: AdWhereInput
+    orderBy?: AdOrderByWithRelationInput | AdOrderByWithRelationInput[]
+    cursor?: AdWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: AdScalarFieldEnum | AdScalarFieldEnum[]
+  }
+
+  /**
    * User without action
    */
   export type UserDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
@@ -3377,1064 +3370,10 @@ export namespace Prisma {
      * Omit specific fields from the User
      */
     omit?: UserOmit<ExtArgs> | null
-  }
-
-
-  /**
-   * Model image
-   */
-
-  export type AggregateImage = {
-    _count: ImageCountAggregateOutputType | null
-    _min: ImageMinAggregateOutputType | null
-    _max: ImageMaxAggregateOutputType | null
-  }
-
-  export type ImageMinAggregateOutputType = {
-    id: string | null
-    url: string | null
-    alt: string | null
-    adId: string | null
-    createdAt: Date | null
-  }
-
-  export type ImageMaxAggregateOutputType = {
-    id: string | null
-    url: string | null
-    alt: string | null
-    adId: string | null
-    createdAt: Date | null
-  }
-
-  export type ImageCountAggregateOutputType = {
-    id: number
-    url: number
-    alt: number
-    adId: number
-    createdAt: number
-    _all: number
-  }
-
-
-  export type ImageMinAggregateInputType = {
-    id?: true
-    url?: true
-    alt?: true
-    adId?: true
-    createdAt?: true
-  }
-
-  export type ImageMaxAggregateInputType = {
-    id?: true
-    url?: true
-    alt?: true
-    adId?: true
-    createdAt?: true
-  }
-
-  export type ImageCountAggregateInputType = {
-    id?: true
-    url?: true
-    alt?: true
-    adId?: true
-    createdAt?: true
-    _all?: true
-  }
-
-  export type ImageAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which image to aggregate.
-     */
-    where?: imageWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of images to fetch.
-     */
-    orderBy?: imageOrderByWithRelationInput | imageOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: imageWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` images from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` images.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned images
-    **/
-    _count?: true | ImageCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: ImageMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: ImageMaxAggregateInputType
-  }
-
-  export type GetImageAggregateType<T extends ImageAggregateArgs> = {
-        [P in keyof T & keyof AggregateImage]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateImage[P]>
-      : GetScalarType<T[P], AggregateImage[P]>
-  }
-
-
-
-
-  export type imageGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: imageWhereInput
-    orderBy?: imageOrderByWithAggregationInput | imageOrderByWithAggregationInput[]
-    by: ImageScalarFieldEnum[] | ImageScalarFieldEnum
-    having?: imageScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: ImageCountAggregateInputType | true
-    _min?: ImageMinAggregateInputType
-    _max?: ImageMaxAggregateInputType
-  }
-
-  export type ImageGroupByOutputType = {
-    id: string
-    url: string
-    alt: string | null
-    adId: string
-    createdAt: Date
-    _count: ImageCountAggregateOutputType | null
-    _min: ImageMinAggregateOutputType | null
-    _max: ImageMaxAggregateOutputType | null
-  }
-
-  type GetImageGroupByPayload<T extends imageGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<ImageGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof ImageGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], ImageGroupByOutputType[P]>
-            : GetScalarType<T[P], ImageGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type imageSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    url?: boolean
-    alt?: boolean
-    adId?: boolean
-    createdAt?: boolean
-    ads?: boolean | AdDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["image"]>
-
-  export type imageSelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    url?: boolean
-    alt?: boolean
-    adId?: boolean
-    createdAt?: boolean
-    ads?: boolean | AdDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["image"]>
-
-  export type imageSelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    url?: boolean
-    alt?: boolean
-    adId?: boolean
-    createdAt?: boolean
-    ads?: boolean | AdDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["image"]>
-
-  export type imageSelectScalar = {
-    id?: boolean
-    url?: boolean
-    alt?: boolean
-    adId?: boolean
-    createdAt?: boolean
-  }
-
-  export type imageOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "url" | "alt" | "adId" | "createdAt", ExtArgs["result"]["image"]>
-  export type imageInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    ads?: boolean | AdDefaultArgs<ExtArgs>
-  }
-  export type imageIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    ads?: boolean | AdDefaultArgs<ExtArgs>
-  }
-  export type imageIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    ads?: boolean | AdDefaultArgs<ExtArgs>
-  }
-
-  export type $imagePayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "image"
-    objects: {
-      ads: Prisma.$AdPayload<ExtArgs>
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      url: string
-      alt: string | null
-      adId: string
-      createdAt: Date
-    }, ExtArgs["result"]["image"]>
-    composites: {}
-  }
-
-  type imageGetPayload<S extends boolean | null | undefined | imageDefaultArgs> = $Result.GetResult<Prisma.$imagePayload, S>
-
-  type imageCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<imageFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: ImageCountAggregateInputType | true
-    }
-
-  export interface imageDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['image'], meta: { name: 'image' } }
-    /**
-     * Find zero or one Image that matches the filter.
-     * @param {imageFindUniqueArgs} args - Arguments to find a Image
-     * @example
-     * // Get one Image
-     * const image = await prisma.image.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends imageFindUniqueArgs>(args: SelectSubset<T, imageFindUniqueArgs<ExtArgs>>): Prisma__imageClient<$Result.GetResult<Prisma.$imagePayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one Image that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {imageFindUniqueOrThrowArgs} args - Arguments to find a Image
-     * @example
-     * // Get one Image
-     * const image = await prisma.image.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends imageFindUniqueOrThrowArgs>(args: SelectSubset<T, imageFindUniqueOrThrowArgs<ExtArgs>>): Prisma__imageClient<$Result.GetResult<Prisma.$imagePayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Image that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {imageFindFirstArgs} args - Arguments to find a Image
-     * @example
-     * // Get one Image
-     * const image = await prisma.image.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends imageFindFirstArgs>(args?: SelectSubset<T, imageFindFirstArgs<ExtArgs>>): Prisma__imageClient<$Result.GetResult<Prisma.$imagePayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first Image that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {imageFindFirstOrThrowArgs} args - Arguments to find a Image
-     * @example
-     * // Get one Image
-     * const image = await prisma.image.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends imageFindFirstOrThrowArgs>(args?: SelectSubset<T, imageFindFirstOrThrowArgs<ExtArgs>>): Prisma__imageClient<$Result.GetResult<Prisma.$imagePayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more Images that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {imageFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all Images
-     * const images = await prisma.image.findMany()
-     * 
-     * // Get first 10 Images
-     * const images = await prisma.image.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const imageWithIdOnly = await prisma.image.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends imageFindManyArgs>(args?: SelectSubset<T, imageFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$imagePayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a Image.
-     * @param {imageCreateArgs} args - Arguments to create a Image.
-     * @example
-     * // Create one Image
-     * const Image = await prisma.image.create({
-     *   data: {
-     *     // ... data to create a Image
-     *   }
-     * })
-     * 
-     */
-    create<T extends imageCreateArgs>(args: SelectSubset<T, imageCreateArgs<ExtArgs>>): Prisma__imageClient<$Result.GetResult<Prisma.$imagePayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many Images.
-     * @param {imageCreateManyArgs} args - Arguments to create many Images.
-     * @example
-     * // Create many Images
-     * const image = await prisma.image.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends imageCreateManyArgs>(args?: SelectSubset<T, imageCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many Images and returns the data saved in the database.
-     * @param {imageCreateManyAndReturnArgs} args - Arguments to create many Images.
-     * @example
-     * // Create many Images
-     * const image = await prisma.image.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many Images and only return the `id`
-     * const imageWithIdOnly = await prisma.image.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends imageCreateManyAndReturnArgs>(args?: SelectSubset<T, imageCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$imagePayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a Image.
-     * @param {imageDeleteArgs} args - Arguments to delete one Image.
-     * @example
-     * // Delete one Image
-     * const Image = await prisma.image.delete({
-     *   where: {
-     *     // ... filter to delete one Image
-     *   }
-     * })
-     * 
-     */
-    delete<T extends imageDeleteArgs>(args: SelectSubset<T, imageDeleteArgs<ExtArgs>>): Prisma__imageClient<$Result.GetResult<Prisma.$imagePayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one Image.
-     * @param {imageUpdateArgs} args - Arguments to update one Image.
-     * @example
-     * // Update one Image
-     * const image = await prisma.image.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends imageUpdateArgs>(args: SelectSubset<T, imageUpdateArgs<ExtArgs>>): Prisma__imageClient<$Result.GetResult<Prisma.$imagePayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more Images.
-     * @param {imageDeleteManyArgs} args - Arguments to filter Images to delete.
-     * @example
-     * // Delete a few Images
-     * const { count } = await prisma.image.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends imageDeleteManyArgs>(args?: SelectSubset<T, imageDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Images.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {imageUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many Images
-     * const image = await prisma.image.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends imageUpdateManyArgs>(args: SelectSubset<T, imageUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more Images and returns the data updated in the database.
-     * @param {imageUpdateManyAndReturnArgs} args - Arguments to update many Images.
-     * @example
-     * // Update many Images
-     * const image = await prisma.image.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more Images and only return the `id`
-     * const imageWithIdOnly = await prisma.image.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends imageUpdateManyAndReturnArgs>(args: SelectSubset<T, imageUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$imagePayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one Image.
-     * @param {imageUpsertArgs} args - Arguments to update or create a Image.
-     * @example
-     * // Update or create a Image
-     * const image = await prisma.image.upsert({
-     *   create: {
-     *     // ... data to create a Image
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the Image we want to update
-     *   }
-     * })
-     */
-    upsert<T extends imageUpsertArgs>(args: SelectSubset<T, imageUpsertArgs<ExtArgs>>): Prisma__imageClient<$Result.GetResult<Prisma.$imagePayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of Images.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {imageCountArgs} args - Arguments to filter Images to count.
-     * @example
-     * // Count the number of Images
-     * const count = await prisma.image.count({
-     *   where: {
-     *     // ... the filter for the Images we want to count
-     *   }
-     * })
-    **/
-    count<T extends imageCountArgs>(
-      args?: Subset<T, imageCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], ImageCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a Image.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {ImageAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends ImageAggregateArgs>(args: Subset<T, ImageAggregateArgs>): Prisma.PrismaPromise<GetImageAggregateType<T>>
-
-    /**
-     * Group by Image.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {imageGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends imageGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: imageGroupByArgs['orderBy'] }
-        : { orderBy?: imageGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, imageGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetImageGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the image model
-   */
-  readonly fields: imageFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for image.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__imageClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    ads<T extends AdDefaultArgs<ExtArgs> = {}>(args?: Subset<T, AdDefaultArgs<ExtArgs>>): Prisma__AdClient<$Result.GetResult<Prisma.$AdPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the image model
-   */
-  interface imageFieldRefs {
-    readonly id: FieldRef<"image", 'String'>
-    readonly url: FieldRef<"image", 'String'>
-    readonly alt: FieldRef<"image", 'String'>
-    readonly adId: FieldRef<"image", 'String'>
-    readonly createdAt: FieldRef<"image", 'DateTime'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * image findUnique
-   */
-  export type imageFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the image
-     */
-    select?: imageSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the image
-     */
-    omit?: imageOmit<ExtArgs> | null
     /**
      * Choose, which related nodes to fetch as well
      */
-    include?: imageInclude<ExtArgs> | null
-    /**
-     * Filter, which image to fetch.
-     */
-    where: imageWhereUniqueInput
-  }
-
-  /**
-   * image findUniqueOrThrow
-   */
-  export type imageFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the image
-     */
-    select?: imageSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the image
-     */
-    omit?: imageOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: imageInclude<ExtArgs> | null
-    /**
-     * Filter, which image to fetch.
-     */
-    where: imageWhereUniqueInput
-  }
-
-  /**
-   * image findFirst
-   */
-  export type imageFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the image
-     */
-    select?: imageSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the image
-     */
-    omit?: imageOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: imageInclude<ExtArgs> | null
-    /**
-     * Filter, which image to fetch.
-     */
-    where?: imageWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of images to fetch.
-     */
-    orderBy?: imageOrderByWithRelationInput | imageOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for images.
-     */
-    cursor?: imageWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` images from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` images.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of images.
-     */
-    distinct?: ImageScalarFieldEnum | ImageScalarFieldEnum[]
-  }
-
-  /**
-   * image findFirstOrThrow
-   */
-  export type imageFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the image
-     */
-    select?: imageSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the image
-     */
-    omit?: imageOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: imageInclude<ExtArgs> | null
-    /**
-     * Filter, which image to fetch.
-     */
-    where?: imageWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of images to fetch.
-     */
-    orderBy?: imageOrderByWithRelationInput | imageOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for images.
-     */
-    cursor?: imageWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` images from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` images.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of images.
-     */
-    distinct?: ImageScalarFieldEnum | ImageScalarFieldEnum[]
-  }
-
-  /**
-   * image findMany
-   */
-  export type imageFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the image
-     */
-    select?: imageSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the image
-     */
-    omit?: imageOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: imageInclude<ExtArgs> | null
-    /**
-     * Filter, which images to fetch.
-     */
-    where?: imageWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of images to fetch.
-     */
-    orderBy?: imageOrderByWithRelationInput | imageOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing images.
-     */
-    cursor?: imageWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` images from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` images.
-     */
-    skip?: number
-    distinct?: ImageScalarFieldEnum | ImageScalarFieldEnum[]
-  }
-
-  /**
-   * image create
-   */
-  export type imageCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the image
-     */
-    select?: imageSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the image
-     */
-    omit?: imageOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: imageInclude<ExtArgs> | null
-    /**
-     * The data needed to create a image.
-     */
-    data: XOR<imageCreateInput, imageUncheckedCreateInput>
-  }
-
-  /**
-   * image createMany
-   */
-  export type imageCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many images.
-     */
-    data: imageCreateManyInput | imageCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * image createManyAndReturn
-   */
-  export type imageCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the image
-     */
-    select?: imageSelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the image
-     */
-    omit?: imageOmit<ExtArgs> | null
-    /**
-     * The data used to create many images.
-     */
-    data: imageCreateManyInput | imageCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: imageIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * image update
-   */
-  export type imageUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the image
-     */
-    select?: imageSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the image
-     */
-    omit?: imageOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: imageInclude<ExtArgs> | null
-    /**
-     * The data needed to update a image.
-     */
-    data: XOR<imageUpdateInput, imageUncheckedUpdateInput>
-    /**
-     * Choose, which image to update.
-     */
-    where: imageWhereUniqueInput
-  }
-
-  /**
-   * image updateMany
-   */
-  export type imageUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update images.
-     */
-    data: XOR<imageUpdateManyMutationInput, imageUncheckedUpdateManyInput>
-    /**
-     * Filter which images to update
-     */
-    where?: imageWhereInput
-    /**
-     * Limit how many images to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * image updateManyAndReturn
-   */
-  export type imageUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the image
-     */
-    select?: imageSelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the image
-     */
-    omit?: imageOmit<ExtArgs> | null
-    /**
-     * The data used to update images.
-     */
-    data: XOR<imageUpdateManyMutationInput, imageUncheckedUpdateManyInput>
-    /**
-     * Filter which images to update
-     */
-    where?: imageWhereInput
-    /**
-     * Limit how many images to update.
-     */
-    limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: imageIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * image upsert
-   */
-  export type imageUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the image
-     */
-    select?: imageSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the image
-     */
-    omit?: imageOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: imageInclude<ExtArgs> | null
-    /**
-     * The filter to search for the image to update in case it exists.
-     */
-    where: imageWhereUniqueInput
-    /**
-     * In case the image found by the `where` argument doesn't exist, create a new image with this data.
-     */
-    create: XOR<imageCreateInput, imageUncheckedCreateInput>
-    /**
-     * In case the image was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<imageUpdateInput, imageUncheckedUpdateInput>
-  }
-
-  /**
-   * image delete
-   */
-  export type imageDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the image
-     */
-    select?: imageSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the image
-     */
-    omit?: imageOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: imageInclude<ExtArgs> | null
-    /**
-     * Filter which image to delete.
-     */
-    where: imageWhereUniqueInput
-  }
-
-  /**
-   * image deleteMany
-   */
-  export type imageDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which images to delete
-     */
-    where?: imageWhereInput
-    /**
-     * Limit how many images to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * image without action
-   */
-  export type imageDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the image
-     */
-    select?: imageSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the image
-     */
-    omit?: imageOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: imageInclude<ExtArgs> | null
+    include?: UserInclude<ExtArgs> | null
   }
 
 
@@ -4454,22 +3393,20 @@ export namespace Prisma {
 
   export const AdScalarFieldEnum: {
     id: 'id',
-    name: 'name',
-    category: 'category',
-    createdAt: 'createdAt',
-    description: 'description',
-    expiredAt: 'expiredAt',
-    location: 'location',
-    organization: 'organization',
-    phone: 'phone',
-    pinCode: 'pinCode',
-    price: 'price',
     title: 'title',
-    updatedAt: 'updatedAt',
-    userId: 'userId',
+    description: 'description',
+    category: 'category',
+    price: 'price',
+    location: 'location',
+    pinCode: 'pinCode',
+    phone: 'phone',
+    organization: 'organization',
     link: 'link',
     platform: 'platform',
-    user: 'user'
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt',
+    expiredAt: 'expiredAt',
+    userId: 'userId'
   };
 
   export type AdScalarFieldEnum = (typeof AdScalarFieldEnum)[keyof typeof AdScalarFieldEnum]
@@ -4480,22 +3417,12 @@ export namespace Prisma {
     email: 'email',
     firstName: 'firstName',
     lastName: 'lastName',
+    apiKey: 'apiKey',
     createdAt: 'createdAt',
     updatedAt: 'updatedAt'
   };
 
   export type UserScalarFieldEnum = (typeof UserScalarFieldEnum)[keyof typeof UserScalarFieldEnum]
-
-
-  export const ImageScalarFieldEnum: {
-    id: 'id',
-    url: 'url',
-    alt: 'alt',
-    adId: 'adId',
-    createdAt: 'createdAt'
-  };
-
-  export type ImageScalarFieldEnum = (typeof ImageScalarFieldEnum)[keyof typeof ImageScalarFieldEnum]
 
 
   export const SortOrder: {
@@ -4556,16 +3483,16 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'DateTime'
+   * Reference to a field of type 'Decimal'
    */
-  export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
+  export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal'>
     
 
 
   /**
-   * Reference to a field of type 'DateTime[]'
+   * Reference to a field of type 'Decimal[]'
    */
-  export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
+  export type ListDecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal[]'>
     
 
 
@@ -4584,16 +3511,16 @@ export namespace Prisma {
 
 
   /**
-   * Reference to a field of type 'Decimal'
+   * Reference to a field of type 'DateTime'
    */
-  export type DecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal'>
+  export type DateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime'>
     
 
 
   /**
-   * Reference to a field of type 'Decimal[]'
+   * Reference to a field of type 'DateTime[]'
    */
-  export type ListDecimalFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'Decimal[]'>
+  export type ListDateTimeFieldRefInput<$PrismaModel> = FieldRefInputType<$PrismaModel, 'DateTime[]'>
     
 
 
@@ -4619,44 +3546,40 @@ export namespace Prisma {
     OR?: AdWhereInput[]
     NOT?: AdWhereInput | AdWhereInput[]
     id?: StringFilter<"Ad"> | string
-    name?: StringFilter<"Ad"> | string
-    category?: EnumCategoryFilter<"Ad"> | $Enums.Category
-    createdAt?: DateTimeFilter<"Ad"> | Date | string
-    description?: StringFilter<"Ad"> | string
-    expiredAt?: DateTimeFilter<"Ad"> | Date | string
-    location?: StringFilter<"Ad"> | string
-    organization?: StringNullableFilter<"Ad"> | string | null
-    phone?: StringFilter<"Ad"> | string
-    pinCode?: IntFilter<"Ad"> | number
-    price?: DecimalFilter<"Ad"> | Decimal | DecimalJsLike | number | string
     title?: StringFilter<"Ad"> | string
-    updatedAt?: DateTimeFilter<"Ad"> | Date | string
-    userId?: StringFilter<"Ad"> | string
+    description?: StringFilter<"Ad"> | string
+    category?: EnumCategoryFilter<"Ad"> | $Enums.Category
+    price?: DecimalFilter<"Ad"> | Decimal | DecimalJsLike | number | string
+    location?: StringFilter<"Ad"> | string
+    pinCode?: IntFilter<"Ad"> | number
+    phone?: StringFilter<"Ad"> | string
+    organization?: StringNullableFilter<"Ad"> | string | null
     link?: StringFilter<"Ad"> | string
     platform?: StringFilter<"Ad"> | string
-    user?: StringFilter<"Ad"> | string
-    image?: ImageListRelationFilter
+    createdAt?: DateTimeFilter<"Ad"> | Date | string
+    updatedAt?: DateTimeFilter<"Ad"> | Date | string
+    expiredAt?: DateTimeFilter<"Ad"> | Date | string
+    userId?: IntFilter<"Ad"> | number
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
 
   export type AdOrderByWithRelationInput = {
     id?: SortOrder
-    name?: SortOrder
-    category?: SortOrder
-    createdAt?: SortOrder
-    description?: SortOrder
-    expiredAt?: SortOrder
-    location?: SortOrder
-    organization?: SortOrderInput | SortOrder
-    phone?: SortOrder
-    pinCode?: SortOrder
-    price?: SortOrder
     title?: SortOrder
-    updatedAt?: SortOrder
-    userId?: SortOrder
+    description?: SortOrder
+    category?: SortOrder
+    price?: SortOrder
+    location?: SortOrder
+    pinCode?: SortOrder
+    phone?: SortOrder
+    organization?: SortOrderInput | SortOrder
     link?: SortOrder
     platform?: SortOrder
-    user?: SortOrder
-    image?: imageOrderByRelationAggregateInput
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    expiredAt?: SortOrder
+    userId?: SortOrder
+    user?: UserOrderByWithRelationInput
   }
 
   export type AdWhereUniqueInput = Prisma.AtLeast<{
@@ -4664,43 +3587,39 @@ export namespace Prisma {
     AND?: AdWhereInput | AdWhereInput[]
     OR?: AdWhereInput[]
     NOT?: AdWhereInput | AdWhereInput[]
-    name?: StringFilter<"Ad"> | string
-    category?: EnumCategoryFilter<"Ad"> | $Enums.Category
-    createdAt?: DateTimeFilter<"Ad"> | Date | string
-    description?: StringFilter<"Ad"> | string
-    expiredAt?: DateTimeFilter<"Ad"> | Date | string
-    location?: StringFilter<"Ad"> | string
-    organization?: StringNullableFilter<"Ad"> | string | null
-    phone?: StringFilter<"Ad"> | string
-    pinCode?: IntFilter<"Ad"> | number
-    price?: DecimalFilter<"Ad"> | Decimal | DecimalJsLike | number | string
     title?: StringFilter<"Ad"> | string
-    updatedAt?: DateTimeFilter<"Ad"> | Date | string
-    userId?: StringFilter<"Ad"> | string
+    description?: StringFilter<"Ad"> | string
+    category?: EnumCategoryFilter<"Ad"> | $Enums.Category
+    price?: DecimalFilter<"Ad"> | Decimal | DecimalJsLike | number | string
+    location?: StringFilter<"Ad"> | string
+    pinCode?: IntFilter<"Ad"> | number
+    phone?: StringFilter<"Ad"> | string
+    organization?: StringNullableFilter<"Ad"> | string | null
     link?: StringFilter<"Ad"> | string
     platform?: StringFilter<"Ad"> | string
-    user?: StringFilter<"Ad"> | string
-    image?: ImageListRelationFilter
+    createdAt?: DateTimeFilter<"Ad"> | Date | string
+    updatedAt?: DateTimeFilter<"Ad"> | Date | string
+    expiredAt?: DateTimeFilter<"Ad"> | Date | string
+    userId?: IntFilter<"Ad"> | number
+    user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id">
 
   export type AdOrderByWithAggregationInput = {
     id?: SortOrder
-    name?: SortOrder
-    category?: SortOrder
-    createdAt?: SortOrder
-    description?: SortOrder
-    expiredAt?: SortOrder
-    location?: SortOrder
-    organization?: SortOrderInput | SortOrder
-    phone?: SortOrder
-    pinCode?: SortOrder
-    price?: SortOrder
     title?: SortOrder
-    updatedAt?: SortOrder
-    userId?: SortOrder
+    description?: SortOrder
+    category?: SortOrder
+    price?: SortOrder
+    location?: SortOrder
+    pinCode?: SortOrder
+    phone?: SortOrder
+    organization?: SortOrderInput | SortOrder
     link?: SortOrder
     platform?: SortOrder
-    user?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    expiredAt?: SortOrder
+    userId?: SortOrder
     _count?: AdCountOrderByAggregateInput
     _avg?: AdAvgOrderByAggregateInput
     _max?: AdMaxOrderByAggregateInput
@@ -4713,34 +3632,34 @@ export namespace Prisma {
     OR?: AdScalarWhereWithAggregatesInput[]
     NOT?: AdScalarWhereWithAggregatesInput | AdScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"Ad"> | string
-    name?: StringWithAggregatesFilter<"Ad"> | string
-    category?: EnumCategoryWithAggregatesFilter<"Ad"> | $Enums.Category
-    createdAt?: DateTimeWithAggregatesFilter<"Ad"> | Date | string
-    description?: StringWithAggregatesFilter<"Ad"> | string
-    expiredAt?: DateTimeWithAggregatesFilter<"Ad"> | Date | string
-    location?: StringWithAggregatesFilter<"Ad"> | string
-    organization?: StringNullableWithAggregatesFilter<"Ad"> | string | null
-    phone?: StringWithAggregatesFilter<"Ad"> | string
-    pinCode?: IntWithAggregatesFilter<"Ad"> | number
-    price?: DecimalWithAggregatesFilter<"Ad"> | Decimal | DecimalJsLike | number | string
     title?: StringWithAggregatesFilter<"Ad"> | string
-    updatedAt?: DateTimeWithAggregatesFilter<"Ad"> | Date | string
-    userId?: StringWithAggregatesFilter<"Ad"> | string
+    description?: StringWithAggregatesFilter<"Ad"> | string
+    category?: EnumCategoryWithAggregatesFilter<"Ad"> | $Enums.Category
+    price?: DecimalWithAggregatesFilter<"Ad"> | Decimal | DecimalJsLike | number | string
+    location?: StringWithAggregatesFilter<"Ad"> | string
+    pinCode?: IntWithAggregatesFilter<"Ad"> | number
+    phone?: StringWithAggregatesFilter<"Ad"> | string
+    organization?: StringNullableWithAggregatesFilter<"Ad"> | string | null
     link?: StringWithAggregatesFilter<"Ad"> | string
     platform?: StringWithAggregatesFilter<"Ad"> | string
-    user?: StringWithAggregatesFilter<"Ad"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"Ad"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"Ad"> | Date | string
+    expiredAt?: DateTimeWithAggregatesFilter<"Ad"> | Date | string
+    userId?: IntWithAggregatesFilter<"Ad"> | number
   }
 
   export type UserWhereInput = {
     AND?: UserWhereInput | UserWhereInput[]
     OR?: UserWhereInput[]
     NOT?: UserWhereInput | UserWhereInput[]
-    id?: StringFilter<"User"> | string
+    id?: IntFilter<"User"> | number
     email?: StringFilter<"User"> | string
     firstName?: StringFilter<"User"> | string
     lastName?: StringFilter<"User"> | string
+    apiKey?: StringFilter<"User"> | string
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
+    ads?: AdListRelationFilter
   }
 
   export type UserOrderByWithRelationInput = {
@@ -4748,13 +3667,16 @@ export namespace Prisma {
     email?: SortOrder
     firstName?: SortOrder
     lastName?: SortOrder
+    apiKey?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    ads?: AdOrderByRelationAggregateInput
   }
 
   export type UserWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
+    id?: number
     email?: string
+    apiKey?: string
     AND?: UserWhereInput | UserWhereInput[]
     OR?: UserWhereInput[]
     NOT?: UserWhereInput | UserWhereInput[]
@@ -4762,347 +3684,231 @@ export namespace Prisma {
     lastName?: StringFilter<"User"> | string
     createdAt?: DateTimeFilter<"User"> | Date | string
     updatedAt?: DateTimeFilter<"User"> | Date | string
-  }, "id" | "email">
+    ads?: AdListRelationFilter
+  }, "id" | "email" | "apiKey">
 
   export type UserOrderByWithAggregationInput = {
     id?: SortOrder
     email?: SortOrder
     firstName?: SortOrder
     lastName?: SortOrder
+    apiKey?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
     _count?: UserCountOrderByAggregateInput
+    _avg?: UserAvgOrderByAggregateInput
     _max?: UserMaxOrderByAggregateInput
     _min?: UserMinOrderByAggregateInput
+    _sum?: UserSumOrderByAggregateInput
   }
 
   export type UserScalarWhereWithAggregatesInput = {
     AND?: UserScalarWhereWithAggregatesInput | UserScalarWhereWithAggregatesInput[]
     OR?: UserScalarWhereWithAggregatesInput[]
     NOT?: UserScalarWhereWithAggregatesInput | UserScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"User"> | string
+    id?: IntWithAggregatesFilter<"User"> | number
     email?: StringWithAggregatesFilter<"User"> | string
     firstName?: StringWithAggregatesFilter<"User"> | string
     lastName?: StringWithAggregatesFilter<"User"> | string
+    apiKey?: StringWithAggregatesFilter<"User"> | string
     createdAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
   }
 
-  export type imageWhereInput = {
-    AND?: imageWhereInput | imageWhereInput[]
-    OR?: imageWhereInput[]
-    NOT?: imageWhereInput | imageWhereInput[]
-    id?: StringFilter<"image"> | string
-    url?: StringFilter<"image"> | string
-    alt?: StringNullableFilter<"image"> | string | null
-    adId?: StringFilter<"image"> | string
-    createdAt?: DateTimeFilter<"image"> | Date | string
-    ads?: XOR<AdScalarRelationFilter, AdWhereInput>
-  }
-
-  export type imageOrderByWithRelationInput = {
-    id?: SortOrder
-    url?: SortOrder
-    alt?: SortOrderInput | SortOrder
-    adId?: SortOrder
-    createdAt?: SortOrder
-    ads?: AdOrderByWithRelationInput
-  }
-
-  export type imageWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    AND?: imageWhereInput | imageWhereInput[]
-    OR?: imageWhereInput[]
-    NOT?: imageWhereInput | imageWhereInput[]
-    url?: StringFilter<"image"> | string
-    alt?: StringNullableFilter<"image"> | string | null
-    adId?: StringFilter<"image"> | string
-    createdAt?: DateTimeFilter<"image"> | Date | string
-    ads?: XOR<AdScalarRelationFilter, AdWhereInput>
-  }, "id">
-
-  export type imageOrderByWithAggregationInput = {
-    id?: SortOrder
-    url?: SortOrder
-    alt?: SortOrderInput | SortOrder
-    adId?: SortOrder
-    createdAt?: SortOrder
-    _count?: imageCountOrderByAggregateInput
-    _max?: imageMaxOrderByAggregateInput
-    _min?: imageMinOrderByAggregateInput
-  }
-
-  export type imageScalarWhereWithAggregatesInput = {
-    AND?: imageScalarWhereWithAggregatesInput | imageScalarWhereWithAggregatesInput[]
-    OR?: imageScalarWhereWithAggregatesInput[]
-    NOT?: imageScalarWhereWithAggregatesInput | imageScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"image"> | string
-    url?: StringWithAggregatesFilter<"image"> | string
-    alt?: StringNullableWithAggregatesFilter<"image"> | string | null
-    adId?: StringWithAggregatesFilter<"image"> | string
-    createdAt?: DateTimeWithAggregatesFilter<"image"> | Date | string
-  }
-
   export type AdCreateInput = {
     id?: string
-    name: string
-    category: $Enums.Category
-    createdAt?: Date | string
-    description: string
-    expiredAt?: Date | string
-    location: string
-    organization?: string | null
-    phone: string
-    pinCode: number
-    price: Decimal | DecimalJsLike | number | string
     title: string
-    updatedAt?: Date | string
-    userId: string
+    description: string
+    category: $Enums.Category
+    price: Decimal | DecimalJsLike | number | string
+    location: string
+    pinCode: number
+    phone: string
+    organization?: string | null
     link: string
     platform: string
-    user: string
-    image?: imageCreateNestedManyWithoutAdsInput
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    expiredAt?: Date | string
+    user: UserCreateNestedOneWithoutAdsInput
   }
 
   export type AdUncheckedCreateInput = {
     id?: string
-    name: string
-    category: $Enums.Category
-    createdAt?: Date | string
-    description: string
-    expiredAt?: Date | string
-    location: string
-    organization?: string | null
-    phone: string
-    pinCode: number
-    price: Decimal | DecimalJsLike | number | string
     title: string
-    updatedAt?: Date | string
-    userId: string
+    description: string
+    category: $Enums.Category
+    price: Decimal | DecimalJsLike | number | string
+    location: string
+    pinCode: number
+    phone: string
+    organization?: string | null
     link: string
     platform: string
-    user: string
-    image?: imageUncheckedCreateNestedManyWithoutAdsInput
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    expiredAt?: Date | string
+    userId: number
   }
 
   export type AdUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    category?: EnumCategoryFieldUpdateOperationsInput | $Enums.Category
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    description?: StringFieldUpdateOperationsInput | string
-    expiredAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    location?: StringFieldUpdateOperationsInput | string
-    organization?: NullableStringFieldUpdateOperationsInput | string | null
-    phone?: StringFieldUpdateOperationsInput | string
-    pinCode?: IntFieldUpdateOperationsInput | number
-    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     title?: StringFieldUpdateOperationsInput | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    userId?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    category?: EnumCategoryFieldUpdateOperationsInput | $Enums.Category
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    location?: StringFieldUpdateOperationsInput | string
+    pinCode?: IntFieldUpdateOperationsInput | number
+    phone?: StringFieldUpdateOperationsInput | string
+    organization?: NullableStringFieldUpdateOperationsInput | string | null
     link?: StringFieldUpdateOperationsInput | string
     platform?: StringFieldUpdateOperationsInput | string
-    user?: StringFieldUpdateOperationsInput | string
-    image?: imageUpdateManyWithoutAdsNestedInput
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    user?: UserUpdateOneRequiredWithoutAdsNestedInput
   }
 
   export type AdUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    category?: EnumCategoryFieldUpdateOperationsInput | $Enums.Category
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    description?: StringFieldUpdateOperationsInput | string
-    expiredAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    location?: StringFieldUpdateOperationsInput | string
-    organization?: NullableStringFieldUpdateOperationsInput | string | null
-    phone?: StringFieldUpdateOperationsInput | string
-    pinCode?: IntFieldUpdateOperationsInput | number
-    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     title?: StringFieldUpdateOperationsInput | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    userId?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    category?: EnumCategoryFieldUpdateOperationsInput | $Enums.Category
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    location?: StringFieldUpdateOperationsInput | string
+    pinCode?: IntFieldUpdateOperationsInput | number
+    phone?: StringFieldUpdateOperationsInput | string
+    organization?: NullableStringFieldUpdateOperationsInput | string | null
     link?: StringFieldUpdateOperationsInput | string
     platform?: StringFieldUpdateOperationsInput | string
-    user?: StringFieldUpdateOperationsInput | string
-    image?: imageUncheckedUpdateManyWithoutAdsNestedInput
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: IntFieldUpdateOperationsInput | number
   }
 
   export type AdCreateManyInput = {
     id?: string
-    name: string
-    category: $Enums.Category
-    createdAt?: Date | string
-    description: string
-    expiredAt?: Date | string
-    location: string
-    organization?: string | null
-    phone: string
-    pinCode: number
-    price: Decimal | DecimalJsLike | number | string
     title: string
-    updatedAt?: Date | string
-    userId: string
+    description: string
+    category: $Enums.Category
+    price: Decimal | DecimalJsLike | number | string
+    location: string
+    pinCode: number
+    phone: string
+    organization?: string | null
     link: string
     platform: string
-    user: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    expiredAt?: Date | string
+    userId: number
   }
 
   export type AdUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    category?: EnumCategoryFieldUpdateOperationsInput | $Enums.Category
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    description?: StringFieldUpdateOperationsInput | string
-    expiredAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    location?: StringFieldUpdateOperationsInput | string
-    organization?: NullableStringFieldUpdateOperationsInput | string | null
-    phone?: StringFieldUpdateOperationsInput | string
-    pinCode?: IntFieldUpdateOperationsInput | number
-    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     title?: StringFieldUpdateOperationsInput | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    userId?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    category?: EnumCategoryFieldUpdateOperationsInput | $Enums.Category
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    location?: StringFieldUpdateOperationsInput | string
+    pinCode?: IntFieldUpdateOperationsInput | number
+    phone?: StringFieldUpdateOperationsInput | string
+    organization?: NullableStringFieldUpdateOperationsInput | string | null
     link?: StringFieldUpdateOperationsInput | string
     platform?: StringFieldUpdateOperationsInput | string
-    user?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiredAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type AdUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    category?: EnumCategoryFieldUpdateOperationsInput | $Enums.Category
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    description?: StringFieldUpdateOperationsInput | string
-    expiredAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    location?: StringFieldUpdateOperationsInput | string
-    organization?: NullableStringFieldUpdateOperationsInput | string | null
-    phone?: StringFieldUpdateOperationsInput | string
-    pinCode?: IntFieldUpdateOperationsInput | number
-    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
     title?: StringFieldUpdateOperationsInput | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    userId?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    category?: EnumCategoryFieldUpdateOperationsInput | $Enums.Category
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    location?: StringFieldUpdateOperationsInput | string
+    pinCode?: IntFieldUpdateOperationsInput | number
+    phone?: StringFieldUpdateOperationsInput | string
+    organization?: NullableStringFieldUpdateOperationsInput | string | null
     link?: StringFieldUpdateOperationsInput | string
     platform?: StringFieldUpdateOperationsInput | string
-    user?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: IntFieldUpdateOperationsInput | number
   }
 
   export type UserCreateInput = {
-    id?: string
     email: string
     firstName: string
     lastName: string
+    apiKey?: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    ads?: AdCreateNestedManyWithoutUserInput
   }
 
   export type UserUncheckedCreateInput = {
-    id?: string
+    id?: number
     email: string
     firstName: string
     lastName: string
+    apiKey?: string
     createdAt?: Date | string
     updatedAt?: Date | string
+    ads?: AdUncheckedCreateNestedManyWithoutUserInput
   }
 
   export type UserUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
+    apiKey?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ads?: AdUpdateManyWithoutUserNestedInput
   }
 
   export type UserUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
+    id?: IntFieldUpdateOperationsInput | number
     email?: StringFieldUpdateOperationsInput | string
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
+    apiKey?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ads?: AdUncheckedUpdateManyWithoutUserNestedInput
   }
 
   export type UserCreateManyInput = {
-    id?: string
+    id?: number
     email: string
     firstName: string
     lastName: string
+    apiKey?: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
 
   export type UserUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
     email?: StringFieldUpdateOperationsInput | string
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
+    apiKey?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type UserUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
+    id?: IntFieldUpdateOperationsInput | number
     email?: StringFieldUpdateOperationsInput | string
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
+    apiKey?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type imageCreateInput = {
-    id: string
-    url: string
-    alt?: string | null
-    createdAt?: Date | string
-    ads: AdCreateNestedOneWithoutImageInput
-  }
-
-  export type imageUncheckedCreateInput = {
-    id: string
-    url: string
-    alt?: string | null
-    adId: string
-    createdAt?: Date | string
-  }
-
-  export type imageUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    url?: StringFieldUpdateOperationsInput | string
-    alt?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    ads?: AdUpdateOneRequiredWithoutImageNestedInput
-  }
-
-  export type imageUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    url?: StringFieldUpdateOperationsInput | string
-    alt?: NullableStringFieldUpdateOperationsInput | string | null
-    adId?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type imageCreateManyInput = {
-    id: string
-    url: string
-    alt?: string | null
-    adId: string
-    createdAt?: Date | string
-  }
-
-  export type imageUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    url?: StringFieldUpdateOperationsInput | string
-    alt?: NullableStringFieldUpdateOperationsInput | string | null
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type imageUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    url?: StringFieldUpdateOperationsInput | string
-    alt?: NullableStringFieldUpdateOperationsInput | string | null
-    adId?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type StringFilter<$PrismaModel = never> = {
@@ -5127,15 +3933,26 @@ export namespace Prisma {
     not?: NestedEnumCategoryFilter<$PrismaModel> | $Enums.Category
   }
 
-  export type DateTimeFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  export type DecimalFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
+  }
+
+  export type IntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
   }
 
   export type StringNullableFilter<$PrismaModel = never> = {
@@ -5153,32 +3970,20 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
-  export type IntFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
+  export type DateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
-  export type DecimalFilter<$PrismaModel = never> = {
-    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
-    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
-    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    not?: NestedDecimalFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
-  }
-
-  export type ImageListRelationFilter = {
-    every?: imageWhereInput
-    some?: imageWhereInput
-    none?: imageWhereInput
+  export type UserScalarRelationFilter = {
+    is?: UserWhereInput
+    isNot?: UserWhereInput
   }
 
   export type SortOrderInput = {
@@ -5186,78 +3991,70 @@ export namespace Prisma {
     nulls?: NullsOrder
   }
 
-  export type imageOrderByRelationAggregateInput = {
-    _count?: SortOrder
-  }
-
   export type AdCountOrderByAggregateInput = {
     id?: SortOrder
-    name?: SortOrder
-    category?: SortOrder
-    createdAt?: SortOrder
-    description?: SortOrder
-    expiredAt?: SortOrder
-    location?: SortOrder
-    organization?: SortOrder
-    phone?: SortOrder
-    pinCode?: SortOrder
-    price?: SortOrder
     title?: SortOrder
-    updatedAt?: SortOrder
-    userId?: SortOrder
+    description?: SortOrder
+    category?: SortOrder
+    price?: SortOrder
+    location?: SortOrder
+    pinCode?: SortOrder
+    phone?: SortOrder
+    organization?: SortOrder
     link?: SortOrder
     platform?: SortOrder
-    user?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    expiredAt?: SortOrder
+    userId?: SortOrder
   }
 
   export type AdAvgOrderByAggregateInput = {
-    pinCode?: SortOrder
     price?: SortOrder
+    pinCode?: SortOrder
+    userId?: SortOrder
   }
 
   export type AdMaxOrderByAggregateInput = {
     id?: SortOrder
-    name?: SortOrder
-    category?: SortOrder
-    createdAt?: SortOrder
-    description?: SortOrder
-    expiredAt?: SortOrder
-    location?: SortOrder
-    organization?: SortOrder
-    phone?: SortOrder
-    pinCode?: SortOrder
-    price?: SortOrder
     title?: SortOrder
-    updatedAt?: SortOrder
-    userId?: SortOrder
+    description?: SortOrder
+    category?: SortOrder
+    price?: SortOrder
+    location?: SortOrder
+    pinCode?: SortOrder
+    phone?: SortOrder
+    organization?: SortOrder
     link?: SortOrder
     platform?: SortOrder
-    user?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    expiredAt?: SortOrder
+    userId?: SortOrder
   }
 
   export type AdMinOrderByAggregateInput = {
     id?: SortOrder
-    name?: SortOrder
-    category?: SortOrder
-    createdAt?: SortOrder
-    description?: SortOrder
-    expiredAt?: SortOrder
-    location?: SortOrder
-    organization?: SortOrder
-    phone?: SortOrder
-    pinCode?: SortOrder
-    price?: SortOrder
     title?: SortOrder
-    updatedAt?: SortOrder
-    userId?: SortOrder
+    description?: SortOrder
+    category?: SortOrder
+    price?: SortOrder
+    location?: SortOrder
+    pinCode?: SortOrder
+    phone?: SortOrder
+    organization?: SortOrder
     link?: SortOrder
     platform?: SortOrder
-    user?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    expiredAt?: SortOrder
+    userId?: SortOrder
   }
 
   export type AdSumOrderByAggregateInput = {
-    pinCode?: SortOrder
     price?: SortOrder
+    pinCode?: SortOrder
+    userId?: SortOrder
   }
 
   export type StringWithAggregatesFilter<$PrismaModel = never> = {
@@ -5288,18 +4085,36 @@ export namespace Prisma {
     _max?: NestedEnumCategoryFilter<$PrismaModel>
   }
 
-  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+  export type DecimalWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
     _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
+    _avg?: NestedDecimalFilter<$PrismaModel>
+    _sum?: NestedDecimalFilter<$PrismaModel>
+    _min?: NestedDecimalFilter<$PrismaModel>
+    _max?: NestedDecimalFilter<$PrismaModel>
+  }
+
+  export type IntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
   }
 
   export type StringNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -5320,36 +4135,28 @@ export namespace Prisma {
     _max?: NestedStringNullableFilter<$PrismaModel>
   }
 
-  export type IntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+  export type DateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
     _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
-  export type DecimalWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
-    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
-    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    not?: NestedDecimalWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedDecimalFilter<$PrismaModel>
-    _sum?: NestedDecimalFilter<$PrismaModel>
-    _min?: NestedDecimalFilter<$PrismaModel>
-    _max?: NestedDecimalFilter<$PrismaModel>
+  export type AdListRelationFilter = {
+    every?: AdWhereInput
+    some?: AdWhereInput
+    none?: AdWhereInput
+  }
+
+  export type AdOrderByRelationAggregateInput = {
+    _count?: SortOrder
   }
 
   export type UserCountOrderByAggregateInput = {
@@ -5357,8 +4164,13 @@ export namespace Prisma {
     email?: SortOrder
     firstName?: SortOrder
     lastName?: SortOrder
+    apiKey?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+  }
+
+  export type UserAvgOrderByAggregateInput = {
+    id?: SortOrder
   }
 
   export type UserMaxOrderByAggregateInput = {
@@ -5366,6 +4178,7 @@ export namespace Prisma {
     email?: SortOrder
     firstName?: SortOrder
     lastName?: SortOrder
+    apiKey?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
@@ -5375,51 +4188,19 @@ export namespace Prisma {
     email?: SortOrder
     firstName?: SortOrder
     lastName?: SortOrder
+    apiKey?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
   }
 
-  export type AdScalarRelationFilter = {
-    is?: AdWhereInput
-    isNot?: AdWhereInput
-  }
-
-  export type imageCountOrderByAggregateInput = {
+  export type UserSumOrderByAggregateInput = {
     id?: SortOrder
-    url?: SortOrder
-    alt?: SortOrder
-    adId?: SortOrder
-    createdAt?: SortOrder
   }
 
-  export type imageMaxOrderByAggregateInput = {
-    id?: SortOrder
-    url?: SortOrder
-    alt?: SortOrder
-    adId?: SortOrder
-    createdAt?: SortOrder
-  }
-
-  export type imageMinOrderByAggregateInput = {
-    id?: SortOrder
-    url?: SortOrder
-    alt?: SortOrder
-    adId?: SortOrder
-    createdAt?: SortOrder
-  }
-
-  export type imageCreateNestedManyWithoutAdsInput = {
-    create?: XOR<imageCreateWithoutAdsInput, imageUncheckedCreateWithoutAdsInput> | imageCreateWithoutAdsInput[] | imageUncheckedCreateWithoutAdsInput[]
-    connectOrCreate?: imageCreateOrConnectWithoutAdsInput | imageCreateOrConnectWithoutAdsInput[]
-    createMany?: imageCreateManyAdsInputEnvelope
-    connect?: imageWhereUniqueInput | imageWhereUniqueInput[]
-  }
-
-  export type imageUncheckedCreateNestedManyWithoutAdsInput = {
-    create?: XOR<imageCreateWithoutAdsInput, imageUncheckedCreateWithoutAdsInput> | imageCreateWithoutAdsInput[] | imageUncheckedCreateWithoutAdsInput[]
-    connectOrCreate?: imageCreateOrConnectWithoutAdsInput | imageCreateOrConnectWithoutAdsInput[]
-    createMany?: imageCreateManyAdsInputEnvelope
-    connect?: imageWhereUniqueInput | imageWhereUniqueInput[]
+  export type UserCreateNestedOneWithoutAdsInput = {
+    create?: XOR<UserCreateWithoutAdsInput, UserUncheckedCreateWithoutAdsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutAdsInput
+    connect?: UserWhereUniqueInput
   }
 
   export type StringFieldUpdateOperationsInput = {
@@ -5430,12 +4211,12 @@ export namespace Prisma {
     set?: $Enums.Category
   }
 
-  export type DateTimeFieldUpdateOperationsInput = {
-    set?: Date | string
-  }
-
-  export type NullableStringFieldUpdateOperationsInput = {
-    set?: string | null
+  export type DecimalFieldUpdateOperationsInput = {
+    set?: Decimal | DecimalJsLike | number | string
+    increment?: Decimal | DecimalJsLike | number | string
+    decrement?: Decimal | DecimalJsLike | number | string
+    multiply?: Decimal | DecimalJsLike | number | string
+    divide?: Decimal | DecimalJsLike | number | string
   }
 
   export type IntFieldUpdateOperationsInput = {
@@ -5446,54 +4227,62 @@ export namespace Prisma {
     divide?: number
   }
 
-  export type DecimalFieldUpdateOperationsInput = {
-    set?: Decimal | DecimalJsLike | number | string
-    increment?: Decimal | DecimalJsLike | number | string
-    decrement?: Decimal | DecimalJsLike | number | string
-    multiply?: Decimal | DecimalJsLike | number | string
-    divide?: Decimal | DecimalJsLike | number | string
+  export type NullableStringFieldUpdateOperationsInput = {
+    set?: string | null
   }
 
-  export type imageUpdateManyWithoutAdsNestedInput = {
-    create?: XOR<imageCreateWithoutAdsInput, imageUncheckedCreateWithoutAdsInput> | imageCreateWithoutAdsInput[] | imageUncheckedCreateWithoutAdsInput[]
-    connectOrCreate?: imageCreateOrConnectWithoutAdsInput | imageCreateOrConnectWithoutAdsInput[]
-    upsert?: imageUpsertWithWhereUniqueWithoutAdsInput | imageUpsertWithWhereUniqueWithoutAdsInput[]
-    createMany?: imageCreateManyAdsInputEnvelope
-    set?: imageWhereUniqueInput | imageWhereUniqueInput[]
-    disconnect?: imageWhereUniqueInput | imageWhereUniqueInput[]
-    delete?: imageWhereUniqueInput | imageWhereUniqueInput[]
-    connect?: imageWhereUniqueInput | imageWhereUniqueInput[]
-    update?: imageUpdateWithWhereUniqueWithoutAdsInput | imageUpdateWithWhereUniqueWithoutAdsInput[]
-    updateMany?: imageUpdateManyWithWhereWithoutAdsInput | imageUpdateManyWithWhereWithoutAdsInput[]
-    deleteMany?: imageScalarWhereInput | imageScalarWhereInput[]
+  export type DateTimeFieldUpdateOperationsInput = {
+    set?: Date | string
   }
 
-  export type imageUncheckedUpdateManyWithoutAdsNestedInput = {
-    create?: XOR<imageCreateWithoutAdsInput, imageUncheckedCreateWithoutAdsInput> | imageCreateWithoutAdsInput[] | imageUncheckedCreateWithoutAdsInput[]
-    connectOrCreate?: imageCreateOrConnectWithoutAdsInput | imageCreateOrConnectWithoutAdsInput[]
-    upsert?: imageUpsertWithWhereUniqueWithoutAdsInput | imageUpsertWithWhereUniqueWithoutAdsInput[]
-    createMany?: imageCreateManyAdsInputEnvelope
-    set?: imageWhereUniqueInput | imageWhereUniqueInput[]
-    disconnect?: imageWhereUniqueInput | imageWhereUniqueInput[]
-    delete?: imageWhereUniqueInput | imageWhereUniqueInput[]
-    connect?: imageWhereUniqueInput | imageWhereUniqueInput[]
-    update?: imageUpdateWithWhereUniqueWithoutAdsInput | imageUpdateWithWhereUniqueWithoutAdsInput[]
-    updateMany?: imageUpdateManyWithWhereWithoutAdsInput | imageUpdateManyWithWhereWithoutAdsInput[]
-    deleteMany?: imageScalarWhereInput | imageScalarWhereInput[]
+  export type UserUpdateOneRequiredWithoutAdsNestedInput = {
+    create?: XOR<UserCreateWithoutAdsInput, UserUncheckedCreateWithoutAdsInput>
+    connectOrCreate?: UserCreateOrConnectWithoutAdsInput
+    upsert?: UserUpsertWithoutAdsInput
+    connect?: UserWhereUniqueInput
+    update?: XOR<XOR<UserUpdateToOneWithWhereWithoutAdsInput, UserUpdateWithoutAdsInput>, UserUncheckedUpdateWithoutAdsInput>
   }
 
-  export type AdCreateNestedOneWithoutImageInput = {
-    create?: XOR<AdCreateWithoutImageInput, AdUncheckedCreateWithoutImageInput>
-    connectOrCreate?: AdCreateOrConnectWithoutImageInput
-    connect?: AdWhereUniqueInput
+  export type AdCreateNestedManyWithoutUserInput = {
+    create?: XOR<AdCreateWithoutUserInput, AdUncheckedCreateWithoutUserInput> | AdCreateWithoutUserInput[] | AdUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: AdCreateOrConnectWithoutUserInput | AdCreateOrConnectWithoutUserInput[]
+    createMany?: AdCreateManyUserInputEnvelope
+    connect?: AdWhereUniqueInput | AdWhereUniqueInput[]
   }
 
-  export type AdUpdateOneRequiredWithoutImageNestedInput = {
-    create?: XOR<AdCreateWithoutImageInput, AdUncheckedCreateWithoutImageInput>
-    connectOrCreate?: AdCreateOrConnectWithoutImageInput
-    upsert?: AdUpsertWithoutImageInput
-    connect?: AdWhereUniqueInput
-    update?: XOR<XOR<AdUpdateToOneWithWhereWithoutImageInput, AdUpdateWithoutImageInput>, AdUncheckedUpdateWithoutImageInput>
+  export type AdUncheckedCreateNestedManyWithoutUserInput = {
+    create?: XOR<AdCreateWithoutUserInput, AdUncheckedCreateWithoutUserInput> | AdCreateWithoutUserInput[] | AdUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: AdCreateOrConnectWithoutUserInput | AdCreateOrConnectWithoutUserInput[]
+    createMany?: AdCreateManyUserInputEnvelope
+    connect?: AdWhereUniqueInput | AdWhereUniqueInput[]
+  }
+
+  export type AdUpdateManyWithoutUserNestedInput = {
+    create?: XOR<AdCreateWithoutUserInput, AdUncheckedCreateWithoutUserInput> | AdCreateWithoutUserInput[] | AdUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: AdCreateOrConnectWithoutUserInput | AdCreateOrConnectWithoutUserInput[]
+    upsert?: AdUpsertWithWhereUniqueWithoutUserInput | AdUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: AdCreateManyUserInputEnvelope
+    set?: AdWhereUniqueInput | AdWhereUniqueInput[]
+    disconnect?: AdWhereUniqueInput | AdWhereUniqueInput[]
+    delete?: AdWhereUniqueInput | AdWhereUniqueInput[]
+    connect?: AdWhereUniqueInput | AdWhereUniqueInput[]
+    update?: AdUpdateWithWhereUniqueWithoutUserInput | AdUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: AdUpdateManyWithWhereWithoutUserInput | AdUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: AdScalarWhereInput | AdScalarWhereInput[]
+  }
+
+  export type AdUncheckedUpdateManyWithoutUserNestedInput = {
+    create?: XOR<AdCreateWithoutUserInput, AdUncheckedCreateWithoutUserInput> | AdCreateWithoutUserInput[] | AdUncheckedCreateWithoutUserInput[]
+    connectOrCreate?: AdCreateOrConnectWithoutUserInput | AdCreateOrConnectWithoutUserInput[]
+    upsert?: AdUpsertWithWhereUniqueWithoutUserInput | AdUpsertWithWhereUniqueWithoutUserInput[]
+    createMany?: AdCreateManyUserInputEnvelope
+    set?: AdWhereUniqueInput | AdWhereUniqueInput[]
+    disconnect?: AdWhereUniqueInput | AdWhereUniqueInput[]
+    delete?: AdWhereUniqueInput | AdWhereUniqueInput[]
+    connect?: AdWhereUniqueInput | AdWhereUniqueInput[]
+    update?: AdUpdateWithWhereUniqueWithoutUserInput | AdUpdateWithWhereUniqueWithoutUserInput[]
+    updateMany?: AdUpdateManyWithWhereWithoutUserInput | AdUpdateManyWithWhereWithoutUserInput[]
+    deleteMany?: AdScalarWhereInput | AdScalarWhereInput[]
   }
 
   export type NestedStringFilter<$PrismaModel = never> = {
@@ -5517,15 +4306,26 @@ export namespace Prisma {
     not?: NestedEnumCategoryFilter<$PrismaModel> | $Enums.Category
   }
 
-  export type NestedDateTimeFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
+  export type NestedDecimalFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
+  }
+
+  export type NestedIntFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntFilter<$PrismaModel> | number
   }
 
   export type NestedStringNullableFilter<$PrismaModel = never> = {
@@ -5542,26 +4342,15 @@ export namespace Prisma {
     not?: NestedStringNullableFilter<$PrismaModel> | string | null
   }
 
-  export type NestedIntFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntFilter<$PrismaModel> | number
-  }
-
-  export type NestedDecimalFilter<$PrismaModel = never> = {
-    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
-    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
-    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    not?: NestedDecimalFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
+  export type NestedDateTimeFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeFilter<$PrismaModel> | Date | string
   }
 
   export type NestedStringWithAggregatesFilter<$PrismaModel = never> = {
@@ -5591,18 +4380,47 @@ export namespace Prisma {
     _max?: NestedEnumCategoryFilter<$PrismaModel>
   }
 
-  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
-    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
-    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
+  export type NestedDecimalWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
+    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
+    not?: NestedDecimalWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
     _count?: NestedIntFilter<$PrismaModel>
-    _min?: NestedDateTimeFilter<$PrismaModel>
-    _max?: NestedDateTimeFilter<$PrismaModel>
+    _avg?: NestedDecimalFilter<$PrismaModel>
+    _sum?: NestedDecimalFilter<$PrismaModel>
+    _min?: NestedDecimalFilter<$PrismaModel>
+    _max?: NestedDecimalFilter<$PrismaModel>
+  }
+
+  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: number | IntFieldRefInput<$PrismaModel>
+    in?: number[] | ListIntFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
+    lt?: number | IntFieldRefInput<$PrismaModel>
+    lte?: number | IntFieldRefInput<$PrismaModel>
+    gt?: number | IntFieldRefInput<$PrismaModel>
+    gte?: number | IntFieldRefInput<$PrismaModel>
+    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+    _count?: NestedIntFilter<$PrismaModel>
+    _avg?: NestedFloatFilter<$PrismaModel>
+    _sum?: NestedIntFilter<$PrismaModel>
+    _min?: NestedIntFilter<$PrismaModel>
+    _max?: NestedIntFilter<$PrismaModel>
+  }
+
+  export type NestedFloatFilter<$PrismaModel = never> = {
+    equals?: number | FloatFieldRefInput<$PrismaModel>
+    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
+    lt?: number | FloatFieldRefInput<$PrismaModel>
+    lte?: number | FloatFieldRefInput<$PrismaModel>
+    gt?: number | FloatFieldRefInput<$PrismaModel>
+    gte?: number | FloatFieldRefInput<$PrismaModel>
+    not?: NestedFloatFilter<$PrismaModel> | number
   }
 
   export type NestedStringNullableWithAggregatesFilter<$PrismaModel = never> = {
@@ -5633,222 +4451,221 @@ export namespace Prisma {
     not?: NestedIntNullableFilter<$PrismaModel> | number | null
   }
 
-  export type NestedIntWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: number | IntFieldRefInput<$PrismaModel>
-    in?: number[] | ListIntFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListIntFieldRefInput<$PrismaModel>
-    lt?: number | IntFieldRefInput<$PrismaModel>
-    lte?: number | IntFieldRefInput<$PrismaModel>
-    gt?: number | IntFieldRefInput<$PrismaModel>
-    gte?: number | IntFieldRefInput<$PrismaModel>
-    not?: NestedIntWithAggregatesFilter<$PrismaModel> | number
+  export type NestedDateTimeWithAggregatesFilter<$PrismaModel = never> = {
+    equals?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    in?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    notIn?: Date[] | string[] | ListDateTimeFieldRefInput<$PrismaModel>
+    lt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    lte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gt?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    gte?: Date | string | DateTimeFieldRefInput<$PrismaModel>
+    not?: NestedDateTimeWithAggregatesFilter<$PrismaModel> | Date | string
     _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedFloatFilter<$PrismaModel>
-    _sum?: NestedIntFilter<$PrismaModel>
-    _min?: NestedIntFilter<$PrismaModel>
-    _max?: NestedIntFilter<$PrismaModel>
+    _min?: NestedDateTimeFilter<$PrismaModel>
+    _max?: NestedDateTimeFilter<$PrismaModel>
   }
 
-  export type NestedFloatFilter<$PrismaModel = never> = {
-    equals?: number | FloatFieldRefInput<$PrismaModel>
-    in?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    notIn?: number[] | ListFloatFieldRefInput<$PrismaModel>
-    lt?: number | FloatFieldRefInput<$PrismaModel>
-    lte?: number | FloatFieldRefInput<$PrismaModel>
-    gt?: number | FloatFieldRefInput<$PrismaModel>
-    gte?: number | FloatFieldRefInput<$PrismaModel>
-    not?: NestedFloatFilter<$PrismaModel> | number
-  }
-
-  export type NestedDecimalWithAggregatesFilter<$PrismaModel = never> = {
-    equals?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    in?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
-    notIn?: Decimal[] | DecimalJsLike[] | number[] | string[] | ListDecimalFieldRefInput<$PrismaModel>
-    lt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    lte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gt?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    gte?: Decimal | DecimalJsLike | number | string | DecimalFieldRefInput<$PrismaModel>
-    not?: NestedDecimalWithAggregatesFilter<$PrismaModel> | Decimal | DecimalJsLike | number | string
-    _count?: NestedIntFilter<$PrismaModel>
-    _avg?: NestedDecimalFilter<$PrismaModel>
-    _sum?: NestedDecimalFilter<$PrismaModel>
-    _min?: NestedDecimalFilter<$PrismaModel>
-    _max?: NestedDecimalFilter<$PrismaModel>
-  }
-
-  export type imageCreateWithoutAdsInput = {
-    id: string
-    url: string
-    alt?: string | null
+  export type UserCreateWithoutAdsInput = {
+    email: string
+    firstName: string
+    lastName: string
+    apiKey?: string
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
-  export type imageUncheckedCreateWithoutAdsInput = {
-    id: string
-    url: string
-    alt?: string | null
+  export type UserUncheckedCreateWithoutAdsInput = {
+    id?: number
+    email: string
+    firstName: string
+    lastName: string
+    apiKey?: string
     createdAt?: Date | string
+    updatedAt?: Date | string
   }
 
-  export type imageCreateOrConnectWithoutAdsInput = {
-    where: imageWhereUniqueInput
-    create: XOR<imageCreateWithoutAdsInput, imageUncheckedCreateWithoutAdsInput>
+  export type UserCreateOrConnectWithoutAdsInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutAdsInput, UserUncheckedCreateWithoutAdsInput>
   }
 
-  export type imageCreateManyAdsInputEnvelope = {
-    data: imageCreateManyAdsInput | imageCreateManyAdsInput[]
+  export type UserUpsertWithoutAdsInput = {
+    update: XOR<UserUpdateWithoutAdsInput, UserUncheckedUpdateWithoutAdsInput>
+    create: XOR<UserCreateWithoutAdsInput, UserUncheckedCreateWithoutAdsInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutAdsInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutAdsInput, UserUncheckedUpdateWithoutAdsInput>
+  }
+
+  export type UserUpdateWithoutAdsInput = {
+    email?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    apiKey?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type UserUncheckedUpdateWithoutAdsInput = {
+    id?: IntFieldUpdateOperationsInput | number
+    email?: StringFieldUpdateOperationsInput | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    apiKey?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type AdCreateWithoutUserInput = {
+    id?: string
+    title: string
+    description: string
+    category: $Enums.Category
+    price: Decimal | DecimalJsLike | number | string
+    location: string
+    pinCode: number
+    phone: string
+    organization?: string | null
+    link: string
+    platform: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    expiredAt?: Date | string
+  }
+
+  export type AdUncheckedCreateWithoutUserInput = {
+    id?: string
+    title: string
+    description: string
+    category: $Enums.Category
+    price: Decimal | DecimalJsLike | number | string
+    location: string
+    pinCode: number
+    phone: string
+    organization?: string | null
+    link: string
+    platform: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    expiredAt?: Date | string
+  }
+
+  export type AdCreateOrConnectWithoutUserInput = {
+    where: AdWhereUniqueInput
+    create: XOR<AdCreateWithoutUserInput, AdUncheckedCreateWithoutUserInput>
+  }
+
+  export type AdCreateManyUserInputEnvelope = {
+    data: AdCreateManyUserInput | AdCreateManyUserInput[]
     skipDuplicates?: boolean
   }
 
-  export type imageUpsertWithWhereUniqueWithoutAdsInput = {
-    where: imageWhereUniqueInput
-    update: XOR<imageUpdateWithoutAdsInput, imageUncheckedUpdateWithoutAdsInput>
-    create: XOR<imageCreateWithoutAdsInput, imageUncheckedCreateWithoutAdsInput>
-  }
-
-  export type imageUpdateWithWhereUniqueWithoutAdsInput = {
-    where: imageWhereUniqueInput
-    data: XOR<imageUpdateWithoutAdsInput, imageUncheckedUpdateWithoutAdsInput>
-  }
-
-  export type imageUpdateManyWithWhereWithoutAdsInput = {
-    where: imageScalarWhereInput
-    data: XOR<imageUpdateManyMutationInput, imageUncheckedUpdateManyWithoutAdsInput>
-  }
-
-  export type imageScalarWhereInput = {
-    AND?: imageScalarWhereInput | imageScalarWhereInput[]
-    OR?: imageScalarWhereInput[]
-    NOT?: imageScalarWhereInput | imageScalarWhereInput[]
-    id?: StringFilter<"image"> | string
-    url?: StringFilter<"image"> | string
-    alt?: StringNullableFilter<"image"> | string | null
-    adId?: StringFilter<"image"> | string
-    createdAt?: DateTimeFilter<"image"> | Date | string
-  }
-
-  export type AdCreateWithoutImageInput = {
-    id?: string
-    name: string
-    category: $Enums.Category
-    createdAt?: Date | string
-    description: string
-    expiredAt?: Date | string
-    location: string
-    organization?: string | null
-    phone: string
-    pinCode: number
-    price: Decimal | DecimalJsLike | number | string
-    title: string
-    updatedAt?: Date | string
-    userId: string
-    link: string
-    platform: string
-    user: string
-  }
-
-  export type AdUncheckedCreateWithoutImageInput = {
-    id?: string
-    name: string
-    category: $Enums.Category
-    createdAt?: Date | string
-    description: string
-    expiredAt?: Date | string
-    location: string
-    organization?: string | null
-    phone: string
-    pinCode: number
-    price: Decimal | DecimalJsLike | number | string
-    title: string
-    updatedAt?: Date | string
-    userId: string
-    link: string
-    platform: string
-    user: string
-  }
-
-  export type AdCreateOrConnectWithoutImageInput = {
+  export type AdUpsertWithWhereUniqueWithoutUserInput = {
     where: AdWhereUniqueInput
-    create: XOR<AdCreateWithoutImageInput, AdUncheckedCreateWithoutImageInput>
+    update: XOR<AdUpdateWithoutUserInput, AdUncheckedUpdateWithoutUserInput>
+    create: XOR<AdCreateWithoutUserInput, AdUncheckedCreateWithoutUserInput>
   }
 
-  export type AdUpsertWithoutImageInput = {
-    update: XOR<AdUpdateWithoutImageInput, AdUncheckedUpdateWithoutImageInput>
-    create: XOR<AdCreateWithoutImageInput, AdUncheckedCreateWithoutImageInput>
-    where?: AdWhereInput
+  export type AdUpdateWithWhereUniqueWithoutUserInput = {
+    where: AdWhereUniqueInput
+    data: XOR<AdUpdateWithoutUserInput, AdUncheckedUpdateWithoutUserInput>
   }
 
-  export type AdUpdateToOneWithWhereWithoutImageInput = {
-    where?: AdWhereInput
-    data: XOR<AdUpdateWithoutImageInput, AdUncheckedUpdateWithoutImageInput>
+  export type AdUpdateManyWithWhereWithoutUserInput = {
+    where: AdScalarWhereInput
+    data: XOR<AdUpdateManyMutationInput, AdUncheckedUpdateManyWithoutUserInput>
   }
 
-  export type AdUpdateWithoutImageInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    category?: EnumCategoryFieldUpdateOperationsInput | $Enums.Category
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    description?: StringFieldUpdateOperationsInput | string
-    expiredAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    location?: StringFieldUpdateOperationsInput | string
-    organization?: NullableStringFieldUpdateOperationsInput | string | null
-    phone?: StringFieldUpdateOperationsInput | string
-    pinCode?: IntFieldUpdateOperationsInput | number
-    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    title?: StringFieldUpdateOperationsInput | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    userId?: StringFieldUpdateOperationsInput | string
-    link?: StringFieldUpdateOperationsInput | string
-    platform?: StringFieldUpdateOperationsInput | string
-    user?: StringFieldUpdateOperationsInput | string
+  export type AdScalarWhereInput = {
+    AND?: AdScalarWhereInput | AdScalarWhereInput[]
+    OR?: AdScalarWhereInput[]
+    NOT?: AdScalarWhereInput | AdScalarWhereInput[]
+    id?: StringFilter<"Ad"> | string
+    title?: StringFilter<"Ad"> | string
+    description?: StringFilter<"Ad"> | string
+    category?: EnumCategoryFilter<"Ad"> | $Enums.Category
+    price?: DecimalFilter<"Ad"> | Decimal | DecimalJsLike | number | string
+    location?: StringFilter<"Ad"> | string
+    pinCode?: IntFilter<"Ad"> | number
+    phone?: StringFilter<"Ad"> | string
+    organization?: StringNullableFilter<"Ad"> | string | null
+    link?: StringFilter<"Ad"> | string
+    platform?: StringFilter<"Ad"> | string
+    createdAt?: DateTimeFilter<"Ad"> | Date | string
+    updatedAt?: DateTimeFilter<"Ad"> | Date | string
+    expiredAt?: DateTimeFilter<"Ad"> | Date | string
+    userId?: IntFilter<"Ad"> | number
   }
 
-  export type AdUncheckedUpdateWithoutImageInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    category?: EnumCategoryFieldUpdateOperationsInput | $Enums.Category
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    description?: StringFieldUpdateOperationsInput | string
-    expiredAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    location?: StringFieldUpdateOperationsInput | string
-    organization?: NullableStringFieldUpdateOperationsInput | string | null
-    phone?: StringFieldUpdateOperationsInput | string
-    pinCode?: IntFieldUpdateOperationsInput | number
-    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
-    title?: StringFieldUpdateOperationsInput | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    userId?: StringFieldUpdateOperationsInput | string
-    link?: StringFieldUpdateOperationsInput | string
-    platform?: StringFieldUpdateOperationsInput | string
-    user?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type imageCreateManyAdsInput = {
-    id: string
-    url: string
-    alt?: string | null
+  export type AdCreateManyUserInput = {
+    id?: string
+    title: string
+    description: string
+    category: $Enums.Category
+    price: Decimal | DecimalJsLike | number | string
+    location: string
+    pinCode: number
+    phone: string
+    organization?: string | null
+    link: string
+    platform: string
     createdAt?: Date | string
+    updatedAt?: Date | string
+    expiredAt?: Date | string
   }
 
-  export type imageUpdateWithoutAdsInput = {
+  export type AdUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    url?: StringFieldUpdateOperationsInput | string
-    alt?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    category?: EnumCategoryFieldUpdateOperationsInput | $Enums.Category
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    location?: StringFieldUpdateOperationsInput | string
+    pinCode?: IntFieldUpdateOperationsInput | number
+    phone?: StringFieldUpdateOperationsInput | string
+    organization?: NullableStringFieldUpdateOperationsInput | string | null
+    link?: StringFieldUpdateOperationsInput | string
+    platform?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiredAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type imageUncheckedUpdateWithoutAdsInput = {
+  export type AdUncheckedUpdateWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    url?: StringFieldUpdateOperationsInput | string
-    alt?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    category?: EnumCategoryFieldUpdateOperationsInput | $Enums.Category
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    location?: StringFieldUpdateOperationsInput | string
+    pinCode?: IntFieldUpdateOperationsInput | number
+    phone?: StringFieldUpdateOperationsInput | string
+    organization?: NullableStringFieldUpdateOperationsInput | string | null
+    link?: StringFieldUpdateOperationsInput | string
+    platform?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiredAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
-  export type imageUncheckedUpdateManyWithoutAdsInput = {
+  export type AdUncheckedUpdateManyWithoutUserInput = {
     id?: StringFieldUpdateOperationsInput | string
-    url?: StringFieldUpdateOperationsInput | string
-    alt?: NullableStringFieldUpdateOperationsInput | string | null
+    title?: StringFieldUpdateOperationsInput | string
+    description?: StringFieldUpdateOperationsInput | string
+    category?: EnumCategoryFieldUpdateOperationsInput | $Enums.Category
+    price?: DecimalFieldUpdateOperationsInput | Decimal | DecimalJsLike | number | string
+    location?: StringFieldUpdateOperationsInput | string
+    pinCode?: IntFieldUpdateOperationsInput | number
+    phone?: StringFieldUpdateOperationsInput | string
+    organization?: NullableStringFieldUpdateOperationsInput | string | null
+    link?: StringFieldUpdateOperationsInput | string
+    platform?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    expiredAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
 

@@ -11,53 +11,53 @@ datasource db {
 
 model Ad {
   id           String   @id @default(cuid())
-  name         String   @db.VarChar(100)
+  title        String
+  description  String
   category     Category
-  createdAt    DateTime @default(now())
-  description  String   @db.Text
-  expiredAt    DateTime @default(now())
-  location     String   @db.VarChar(255)
-  organization String?  @db.VarChar(100)
-  phone        String   @db.VarChar(15)
-  pinCode      Int      @map("pin_code")
   price        Decimal  @db.Decimal(10, 2)
-  title        String   @db.VarChar(255)
+  location     String
+  pinCode      Int
+  phone        String   @db.VarChar(15)
+  organization String?
+  link         String
+  platform     String
+  createdAt    DateTime @default(now())
   updatedAt    DateTime @updatedAt
-  userId       String
-  link         String   @db.VarChar(255)
-  platform     String   @db.VarChar(50)
-  user         String
-  image        image[]
+  expiredAt    DateTime @default(now())
 
-  //User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId Int
+  user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
   @@index([category])
   @@index([pinCode])
-  @@index([userId], map: "ads_userId_fkey")
-  @@map("ads")
 }
 
 model User {
-  id        String   @id @default(cuid())
+  id        Int      @id @default(autoincrement())
   email     String   @unique
-  firstName String   @map("first_name")
-  lastName  String   @map("last_name")
+  firstName String
+  lastName  String
+  apiKey    String   @unique @default(cuid())
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  // ads       Ad[]
 
-  @@map("users")
+  ads Ad[]
+
+  @@index([email])
 }
 
-model image {
-  id        String   @id
-  url       String
-  alt       String?
-  adId      String
-  createdAt DateTime @default(now())
-  ads       Ad       @relation(fields: [adId], references: [id], onDelete: Cascade, map: "Image_adId_fkey")
+// Optional: Enable when image uploading is implemented
+// model Image {
+//   id        String   @id @default(cuid())
+//   url       String
+//   alt       String?
+//   adId      String
+//   createdAt DateTime @default(now())
 
-  @@index([adId], map: "Image_adId_idx")
-}
+//   ad        Ad       @relation(fields: [adId], references: [id], onDelete: Cascade)
+
+//   @@index([adId])
+// }
 
 enum Category {
   ELECTRONICS

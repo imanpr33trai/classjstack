@@ -122,22 +122,20 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
 
 exports.Prisma.AdScalarFieldEnum = {
   id: 'id',
-  name: 'name',
-  category: 'category',
-  createdAt: 'createdAt',
-  description: 'description',
-  expiredAt: 'expiredAt',
-  location: 'location',
-  organization: 'organization',
-  phone: 'phone',
-  pinCode: 'pinCode',
-  price: 'price',
   title: 'title',
-  updatedAt: 'updatedAt',
-  userId: 'userId',
+  description: 'description',
+  category: 'category',
+  price: 'price',
+  location: 'location',
+  pinCode: 'pinCode',
+  phone: 'phone',
+  organization: 'organization',
   link: 'link',
   platform: 'platform',
-  user: 'user'
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  expiredAt: 'expiredAt',
+  userId: 'userId'
 };
 
 exports.Prisma.UserScalarFieldEnum = {
@@ -145,16 +143,9 @@ exports.Prisma.UserScalarFieldEnum = {
   email: 'email',
   firstName: 'firstName',
   lastName: 'lastName',
+  apiKey: 'apiKey',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
-};
-
-exports.Prisma.ImageScalarFieldEnum = {
-  id: 'id',
-  url: 'url',
-  alt: 'alt',
-  adId: 'adId',
-  createdAt: 'createdAt'
 };
 
 exports.Prisma.SortOrder = {
@@ -184,8 +175,7 @@ exports.Category = exports.$Enums.Category = {
 
 exports.Prisma.ModelName = {
   Ad: 'Ad',
-  User: 'User',
-  image: 'image'
+  User: 'User'
 };
 
 /**
