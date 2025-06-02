@@ -1,0 +1,169 @@
+generator client {
+  provider        = "prisma-client-js"
+  output          = "../generated/prisma"
+  previewFeatures = ["driverAdapters"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Ad {
+  id           String   @id @default(cuid())
+  title        String
+  description  String
+  categoryId   String
+  category     Category @relation(fields: [categoryId], references: [id])
+  price        Decimal  @db.Decimal(10, 2)
+  location     String
+  pinCode      Int
+  phone        String   @db.VarChar(15)
+  organization String?
+  link         String
+  platform     String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  expiredAt    DateTime @default(now())
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  subCategoryId String?
+  subCategory   SubCategory? @relation(fields: [subCategoryId], references: [id])
+
+  @@index([categoryId])
+  @@index([pinCode])
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  firstName String
+  lastName  String
+  apiKey    String   @unique @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  ads      Ad[]
+  BlogPost BlogPost[]
+
+  name          String
+  emailVerified Boolean
+  image         String?
+  sessions      Session[]
+  accounts      Account[]
+
+  @@index([email])
+  @@map("user")
+}
+
+// Optional: Enable when image uploading is implemented
+// model Image {
+//   id        String   @id @default(cuid())
+//   url       String
+//   alt       String?
+//   adId      String
+//   createdAt DateTime @default(now())
+
+//   ad        Ad       @relation(fields: [adId], references: [id], onDelete: Cascade)
+
+//   @@index([adId])
+// }
+
+model Category {
+  id            String        @id @default(cuid())
+  name          String        @unique
+  slug          String        @unique
+  description   String?
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  ads           Ad[]
+  subCategories SubCategory[]
+}
+
+model BlogCategory {
+  id        String     @id @default(cuid())
+  name      String     @unique
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  image     String
+  posts     BlogPost[]
+}
+
+model BlogPost {
+  id          String        @id @default(cuid())
+  title       String
+  content     String
+  excerpt     String?
+  image       String?
+  status      String        @default("DRAFT")
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  publishedAt DateTime?
+  userId      String
+  user        User          @relation(fields: [userId], references: [id])
+  categoryId  String?
+  category    BlogCategory? @relation(fields: [categoryId], references: [id])
+
+  @@index([userId])
+  @@index([categoryId])
+}
+
+model SubCategory {
+  id         String   @id @default(cuid())
+  name       String
+  slug       String   @unique
+  categoryId String
+  category   Category @relation(fields: [categoryId], references: [id])
+  ads        Ad[]
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@unique([name, categoryId])
+}
+
+model Session {
+  id        String   @id
+  expiresAt DateTime
+  token     String
+  createdAt DateTime
+  updatedAt DateTime
+  ipAddress String?
+  userAgent String?
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([token])
+  @@map("session")
+}
+
+model Account {
+  id                    String    @id
+  accountId             String
+  providerId            String
+  userId                String
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime
+  updatedAt             DateTime
+
+  @@map("account")
+}
+
+model Verification {
+  id         String    @id
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime?
+  updatedAt  DateTime?
+
+  @@map("verification")
+}

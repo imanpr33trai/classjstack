@@ -1,0 +1,284 @@
+generator client {
+  provider        = "prisma-client-js"
+  output          = "../generated/prisma"
+  previewFeatures = ["driverAdapters"]
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model Ad {
+  id           String   @id @default(cuid())
+  title        String
+  description  String
+  categoryId   String
+  category     Category @relation(fields: [categoryId], references: [id])
+  price        Decimal  @db.Decimal(10, 2)
+  location     String
+  pinCode      Int
+  phone        String   @db.VarChar(15)
+  organization String?
+  link         String
+  platform     String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+  expiredAt    DateTime @default(now())
+
+  userId String
+  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  subCategoryId String?
+  subCategory   SubCategory? @relation(fields: [subCategoryId], references: [id])
+
+  @@index([categoryId])
+  @@index([pinCode])
+}
+
+model User {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  firstName String
+  lastName  String
+  apiKey    String   @unique @default(cuid())
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  ads      Ad[]
+  BlogPost BlogPost[]
+
+  name          String
+  emailVerified Boolean
+  image         String?
+  sessions      Session[]
+  accounts      Account[]
+
+  @@index([email])
+  @@map("user")
+}
+
+// Optional: Enable when image uploading is implemented
+// model Image {
+//   id        String   @id @default(cuid())
+//   url       String
+//   alt       String?
+//   adId      String
+//   createdAt DateTime @default(now())
+
+//   ad        Ad       @relation(fields: [adId], references: [id], onDelete: Cascade)
+
+//   @@index([adId])
+// }
+
+model Category {
+  id            String        @id @default(cuid())
+  name          String        @unique
+  slug          String        @unique
+  description   String?
+  createdAt     DateTime      @default(now())
+  updatedAt     DateTime      @updatedAt
+  ads           Ad[]
+  subCategories SubCategory[]
+}
+
+model BlogCategory {
+  id        String     @id @default(cuid())
+  name      String     @unique
+  createdAt DateTime   @default(now())
+  updatedAt DateTime   @updatedAt
+  image     String
+  posts     BlogPost[]
+}
+
+model BlogPost {
+  id          String        @id @default(cuid())
+  title       String
+  content     String
+  excerpt     String?
+  image       String?
+  status      String        @default("DRAFT")
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+  publishedAt DateTime?
+  userId      String
+  user        User          @relation(fields: [userId], references: [id])
+  categoryId  String?
+  category    BlogCategory? @relation(fields: [categoryId], references: [id])
+
+  @@index([userId])
+  @@index([categoryId])
+}
+
+model SubCategory {
+  id         String   @id @default(cuid())
+  name       String
+  slug       String   @unique
+  categoryId String
+  category   Category @relation(fields: [categoryId], references: [id])
+  ads        Ad[]
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@unique([name, categoryId])
+}
+
+// generator client {
+//   provider        = "prisma-client-js"
+//   output          = "../generated/prisma"
+//   previewFeatures = ["driverAdapters"]
+// }
+
+// datasource db {
+//   provider = "postgresql"
+//   url      = env("DATABASE_URL")
+// }
+
+// model Ad {
+//   id           String   @id @default(cuid())
+//   title        String
+//   description  String
+//   category     Category
+//   price        Decimal  @db.Decimal(10, 2)
+//   location     String
+//   pinCode      Int
+//   phone        String   @db.VarChar(15)
+//   organization String?
+//   link         String
+//   platform     String
+//   createdAt    DateTime @default(now())
+//   updatedAt    DateTime @updatedAt
+//   expiredAt    DateTime @default(now())
+
+//   userId Int
+//   user   User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+//   subCategoryId String?
+//   subCategory   SubCategory? @relation(fields: [subCategoryId], references: [id])
+
+//   @@index([category])
+//   @@index([pinCode])
+// }
+
+// model User {
+//   id        Int      @id @default(autoincrement())
+//   email     String   @unique
+//   firstName String
+//   lastName  String
+//   apiKey    String   @unique @default(cuid())
+//   createdAt DateTime @default(now())
+//   updatedAt DateTime @updatedAt
+
+//   ads      Ad[]
+//   BlogPost BlogPost[]
+
+//   @@index([email])
+// }
+
+// // Optional: Enable when image uploading is implemented
+// // model Image {
+// //   id        String   @id @default(cuid())
+// //   url       String
+// //   alt       String?
+// //   adId      String
+// //   createdAt DateTime @default(now())
+
+// //   ad        Ad       @relation(fields: [adId], references: [id], onDelete: Cascade)
+
+// //   @@index([adId])
+// // }
+
+// enum Category {
+//   ELECTRONICS
+//   VEHICLES
+//   REAL_ESTATE
+//   JOBS
+//   FURNITURE
+//   FASHION
+//   SERVICES
+//   PETS
+// }
+
+// model BlogCategory {
+//   id        String     @id @default(cuid())
+//   name      String     @unique
+//   createdAt DateTime   @default(now())
+//   updatedAt DateTime   @updatedAt
+//   posts     BlogPost[]
+// }
+
+// model BlogPost {
+//   id          String        @id @default(cuid())
+//   title       String
+//   content     String // Assuming the main content is here
+//   excerpt     String? // Optional short description
+//   image       String? // URL or path to the main image
+//   // images      Json?      // If you store multiple images as JSON like in PHP example
+//   status      String        @default("DRAFT") // e.g., DRAFT, PUBLISHED, ARCHIVED
+//   createdAt   DateTime      @default(now())
+//   updatedAt   DateTime      @updatedAt
+//   publishedAt DateTime?
+//   userId      Int // Author
+//   user        User          @relation(fields: [userId], references: [id])
+//   categoryId  String?
+//   category    BlogCategory? @relation(fields: [categoryId], references: [id])
+
+//   // If you want to store author name directly too (denormalization)
+//   // authorName  String?
+// }
+
+// model SubCategory {
+//   id           String   @id @default(cuid())
+//   name         String
+//   categoryName Category
+//   ads          Ad[] // If you want to add subcategories to ads
+//   createdAt    DateTime @default(now())
+//   updatedAt    DateTime @updatedAt
+
+//   @@unique([name, categoryName])
+// }
+
+model Session {
+  id        String   @id
+  expiresAt DateTime
+  token     String
+  createdAt DateTime
+  updatedAt DateTime
+  ipAddress String?
+  userAgent String?
+  userId    String
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([token])
+  @@map("session")
+}
+
+model Account {
+  id                    String    @id
+  accountId             String
+  providerId            String
+  userId                String
+  user                  User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  accessToken           String?
+  refreshToken          String?
+  idToken               String?
+  accessTokenExpiresAt  DateTime?
+  refreshTokenExpiresAt DateTime?
+  scope                 String?
+  password              String?
+  createdAt             DateTime
+  updatedAt             DateTime
+
+  @@map("account")
+}
+
+model Verification {
+  id         String    @id
+  identifier String
+  value      String
+  expiresAt  DateTime
+  createdAt  DateTime?
+  updatedAt  DateTime?
+
+  @@map("verification")
+}
