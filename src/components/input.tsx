@@ -1,6 +1,6 @@
 "use client";
 
-import { InputUI } from "./ui/input";
+import { Input } from "./ui/input";
 
 import { cn } from "@/lib/utils";
 import { LoaderCircle, Mic, Search, Send } from "lucide-react";
@@ -13,7 +13,7 @@ function InputComponent({
   divClasses,
   isSearch = true,
   isSend = false,
-  type="search",
+  type = "search",
   id,
   name,
 }: {
@@ -23,11 +23,10 @@ function InputComponent({
   divClasses?: string;
   isSearch?: boolean;
   isSend?: boolean;
-  type?:'text' | 'password' | 'email' | 'search' | 'tel' | 'url'|'checkbox';
- id?:string;
- name?:string;
+  type?: "text" | "password" | "email" | "search" | "tel" | "url" | "checkbox";
+  id?: string;
+  name?: string;
 }) {
-  
   const [inputValue, setInputValue] = useState("");
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -45,7 +44,7 @@ function InputComponent({
   return (
     <div className={cn("space-y-2 min-w-[100px]", divClasses)}>
       <div className="relative">
-        <InputUI
+        <Input
           id={id}
           className={cn("peer pe-9 ps-9 h-[50px] ", className)}
           placeholder={placeholder}
@@ -54,20 +53,20 @@ function InputComponent({
           onChange={(e) => setInputValue(e.target.value)}
         />
         {isSearch && (
-        <div className="pointer-events-none absolute inset-y-0 start-0 flex items-center justify-center ps-3 text-muted-foreground/80 peer-disabled:opacity-50">
-          {isLoading ? (
-            <LoaderCircle
-              className="animate-spin"
-              size={16}
-              strokeWidth={2}
-              role="status"
-              aria-label="Loading..."
-            />
-          ) : (
-            <Search size={16} strokeWidth={2} aria-hidden="true" />
-          )}
-        </div>
-      )}
+          <div className="pointer-events-none absolute inset-y-0 start-0 flex items-center justify-center ps-3 text-muted-foreground/80 peer-disabled:opacity-50">
+            {isLoading ? (
+              <LoaderCircle
+                className="animate-spin"
+                size={16}
+                strokeWidth={2}
+                role="status"
+                aria-label="Loading..."
+              />
+            ) : (
+              <Search size={16} strokeWidth={2} aria-hidden="true" />
+            )}
+          </div>
+        )}
 
         {isMic ? (
           <>
@@ -91,7 +90,6 @@ function InputComponent({
             </button>
           </>
         ) : null}
-        
       </div>
     </div>
   );

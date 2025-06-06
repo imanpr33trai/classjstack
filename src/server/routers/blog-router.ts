@@ -2,7 +2,7 @@
 import { z } from "zod";
 import { publicProcedure, j } from "../jstack";
 import { db } from "@/db";
-import { BlogPost, BlogPostSchema } from "@/types/schema";
+import { BlogPost, BlogPostSchema } from "@/types/category";
 
 const blogPostInputSchema = z.object({
   page: z.number().default(1),
