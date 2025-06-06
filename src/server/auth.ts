@@ -2,7 +2,7 @@ import { betterAuth, string } from "better-auth";
 import { prismaAdapter } from "better-auth/adapters/prisma";
 import { db } from "@/db";
 import { nextCookies } from "better-auth/next-js";
-import { signUpSchema } from "@/types/auth";
+
 import { Role } from "../../generated/prisma";
 
 export const auth = betterAuth({

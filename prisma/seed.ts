@@ -3,78 +3,102 @@ import { Prisma } from "../generated/prisma";
 
 async function main() {
   // Create Users
-  const category = await db.category.createMany({
-    data: [
-      {
-        id: "cat1",
-        name: "Electronics",
-        slug: "electronics",
-        description: "Gadgets and devices",
-      },
-      {
-        id: "cat2",
-        name: "Real Estate",
-        slug: "real-estate",
-        description: "Properties and lands",
-      },
-      {
-        id: "cat3",
-        name: "Vehicles",
-        slug: "vehicles",
-        description: "Cars, bikes, and more",
-      },
-      { id: "cat4", name: "Jobs", slug: "jobs", description: "Job listings" },
-      {
-        id: "cat5",
-        name: "Services",
-        slug: "services",
-        description: "Professional services",
-      },
-    ],
+  const catElectronics = await db.category.create({
+    data: {
+      name: "Electronics",
+      slug: "electronics",
+      description: "Gadgets and devices",
+    },
+  });
+  const catRealEstate = await db.category.create({
+    data: {
+      name: "Real Estate",
+      slug: "real-estate",
+      description: "Properties and lands",
+    },
+  });
+  const catVehicles = await db.category.create({
+    data: {
+      name: "Vehicles",
+      slug: "vehicles",
+      description: "Cars, bikes, and more",
+    },
   });
 
-  const subCategory = await db.subCategory.createMany({
-    data: [
-      {
-        id: "sub1",
-        name: "Mobile Phones",
-        slug: "mobile-phones",
-        categoryId: "cat1",
-      },
-      { id: "sub2", name: "Laptops", slug: "laptops", categoryId: "cat1" },
-      {
-        id: "sub3",
-        name: "Apartments",
-        slug: "apartments",
-        categoryId: "cat2",
-      },
-      { id: "sub4", name: "Cars", slug: "cars", categoryId: "cat3" },
-      { id: "sub5", name: "IT Jobs", slug: "it-jobs", categoryId: "cat4" },
-    ],
+  const catJobs = await db.category.create({
+    data: { name: "Jobs", slug: "jobs", description: "Job listings" },
   });
-  const user = await db.user.createMany({
-    data: [
-      { id: 1, email: "john@example.com", firstName: "John", lastName: "Doe" },
-      {
-        id: 2,
-        email: "jane@example.com",
-        firstName: "Jane",
-        lastName: "Smith",
-      },
-      { id: 3, email: "bob@example.com", firstName: "Bob", lastName: "Brown" },
-      {
-        id: 4,
-        email: "alice@example.com",
-        firstName: "Alice",
-        lastName: "Johnson",
-      },
-      {
-        id: 5,
-        email: "mark@example.com",
-        firstName: "Mark",
-        lastName: "Taylor",
-      },
-    ],
+  const catServices = await db.category.create({
+    data: {
+      name: "Services",
+      slug: "services",
+      description: "Professional services",
+    },
+  });
+
+  const subCatMobile = await db.subCategory.create({
+    data: {
+      name: "Mobile Phones",
+      slug: "mobile-phones",
+      categoryId: catElectronics.id,
+    },
+  });
+  const subCatApartments = await db.subCategory.create({
+    data: {
+      name: "Apartments",
+      slug: "apartments",
+      categoryId: catRealEstate.id,
+    },
+  });
+  const subCatJobs = await db.subCategory.create({
+    data: {
+      name: "IT Jobs",
+      slug: "it-jobs",
+      categoryId: catJobs.id,
+    },
+  });
+  const subCatCars = await db.subCategory.create({
+    data: { name: "Cars", slug: "cars", categoryId: catVehicles.id },
+  });
+  const user1 = await db.user.create({
+    data: {
+      email: "john@example.com",
+      firstname: "John",
+      lastname: "Doe",
+      emailVerified: true,
+    },
+  });
+  const user2 = await db.user.create({
+    data: {
+      email: "jane@example.com",
+      firstname: "Jane",
+      lastname: "Smith",
+      emailVerified: true,
+    },
+  });
+  const user3 = await db.user.create({
+    data: {
+      email: "bob@example.com",
+      firstname: "Bob",
+      lastname: "Brown",
+      emailVerified: true,
+    },
+  });
+  const user4 = await db.user.create({
+    data: {
+      email: "alice@example.com",
+      firstname: "Alice",
+      lastname: "Johnson",
+      emailVerified: true,
+    },
+  });
+  const user5 = await db.user.create({
+    data: {
+      email: "mark@example.com",
+      firstname: "Mark",
+      lastname: "Taylor",
+      emailVerified: true,
+    },
   });
   const ad = await db.ad.createMany({
     data: [
@@ -82,8 +106,8 @@ async function main() {
         id: "ad1",
         title: "iPhone 13 for Sale",
         description: "Mint condition, barely used.",
-        categoryId: "cat1",
-        subCategoryId: "sub1",
+        categoryId: catElectronics.id,
+        subCategoryId: subCatMobile.id,
         price: new Prisma.Decimal("699.99"),
         location: "New York",
         pinCode: 10001,
@@ -91,15 +115,15 @@ async function main() {
         organization: "Apple Store",
         link: "https://example.com/iphone13",
         platform: "web",
-        userId: 1,
+        userId: user1.id,
         expiredAt: new Date(Date.now() + 10 * 86400000),
       },
       {
         id: "ad2",
         title: "2BHK Apartment in LA",
         description: "Spacious and furnished.",
-        categoryId: "cat2",
-        subCategoryId: "sub3",
+        categoryId: catRealEstate.id,
+        subCategoryId: subCatApartments.id,
         price: new Prisma.Decimal("1500.00"),
         location: "Los Angeles",
         pinCode: 90001,
@@ -107,15 +131,15 @@ async function main() {
         organization: "Real Estate Inc.",
         link: "https://example.com/apartment",
         platform: "web",
-        userId: 2,
+        userId: user2.id,
         expiredAt: new Date(Date.now() + 15 * 86400000),
       },
       {
         id: "ad3",
         title: "Used Toyota Camry",
         description: "2018 model, great condition.",
-        categoryId: "cat3",
-        subCategoryId: "sub4",
+        categoryId: catVehicles.id,
+        subCategoryId: subCatCars.id,
         price: new Prisma.Decimal("11000.00"),
         location: "San Francisco",
         pinCode: 94101,
@@ -123,15 +147,15 @@ async function main() {
         organization: "Toyota Dealership",
         link: "https://example.com/car",
         platform: "app",
-        userId: 3,
+        userId: user3.id,
         expiredAt: new Date(Date.now() + 20 * 86400000),
       },
       {
         id: "ad4",
         title: "Frontend Developer Wanted",
         description: "Remote position, React experience required.",
-        categoryId: "cat4",
-        subCategoryId: "sub5",
+        categoryId: catJobs.id,
+        subCategoryId: subCatJobs.id,
         price: new Prisma.Decimal("0.00"),
         location: "Remote",
         pinCode: 12345,
@@ -139,14 +163,14 @@ async function main() {
         organization: "Tech Startup",
         link: "https://example.com/job",
         platform: "web",
-        userId: 4,
+        userId: user4.id,
         expiredAt: new Date(Date.now() + 30 * 86400000),
       },
       {
         id: "ad5",
         title: "House Cleaning Services",
         description: "Available daily in NYC area.",
-        categoryId: "cat5",
+        categoryId: catServices.id,
         price: new Prisma.Decimal("80.00"),
         location: "Brooklyn",
         pinCode: 11201,
@@ -154,7 +178,8 @@ async function main() {
         organization: "CleanCo",
         link: "https://example.com/cleaning",
         platform: "web",
-        userId: 5,
+        userId: user5.id,
+        subCategoryId: subCatJobs.id,
         expiredAt: new Date(Date.now() + 7 * 86400000),
       },
     ],
@@ -197,7 +222,7 @@ async function main() {
         excerpt: "Explore the top programming languages...",
         image: "https://example.com/img/code.jpg",
         status: "PUBLISHED",
-        userId: 1,
+        userId: user1.id,
         categoryId: "blogCat1",
         publishedAt: new Date(),
       },
@@ -208,7 +233,7 @@ async function main() {
         excerpt: "Boost your productivity at home...",
         image: "https://example.com/img/home.jpg",
         status: "PUBLISHED",
-        userId: 2,
+        userId: user2.id,
         categoryId: "blogCat2",
         publishedAt: new Date(),
       },
@@ -217,7 +242,7 @@ async function main() {
         title: "How to Save Money in 2025",
         content: "Track your expenses, invest smart...",
         status: "DRAFT",
-        userId: 3,
+        userId: user3.id,
         categoryId: "blogCat3",
       },
       {
@@ -225,7 +250,7 @@ async function main() {
         title: "Resume Building for Tech Roles",
         content: "Highlight skills, projects, and experience...",
         status: "PUBLISHED",
-        userId: 4,
+        userId: user4.id,
         categoryId: "blogCat4",
         publishedAt: new Date(),
       },
@@ -236,7 +261,7 @@ async function main() {
         excerpt: "Free and paid resources for coders...",
         image: "https://example.com/img/learn.jpg",
         status: "PUBLISHED",
-        userId: 5,
+        userId: user5.id,
         categoryId: "blogCat5",
         publishedAt: new Date(),
       },

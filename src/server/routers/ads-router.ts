@@ -2,7 +2,6 @@ import { z } from "zod";
 import { type Ad, User } from "../../../generated/prisma";
 import { j, publicProcedure } from "../jstack";
 import { db } from "@/db";
-import { CreateAdInput } from "@/types/user";
 
 export const adsRouter = j.router({
   // Get all ads
