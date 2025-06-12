@@ -3,6 +3,7 @@ import { userRouter } from "./routers/user-router";
 import { adsRouter } from "./routers/ads-router";
 import { blogRouter } from "./routers/blog-router";
 import { categoryRouter } from "./routers/category-router";
+import { authRouter } from "./routers/auth-router";
 
 /**
  * This is your base API.
@@ -25,6 +26,7 @@ const appRouter = j.mergeRouters(api, {
   ads: adsRouter,
   blog: blogRouter,
   category: categoryRouter,
+  auth: authRouter,
 });
 
 export type AppRouter = typeof appRouter;

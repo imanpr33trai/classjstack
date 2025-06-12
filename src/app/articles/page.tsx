@@ -9,10 +9,6 @@ import ArticleCard from "@/components/ArticleCard";
 import Pagination from "@/components/Pagination";
 import { client } from "@/lib/client";
 import type { Category, BlogPost, BlogPostsResponse } from "@/types/category";
-import { useUser } from "@/lib/useUser";
-
-const ARTICLES_POST_URL = "/articles/post";
-const ASSET_BASE_URL = process.env.NEXT_PUBLIC_ASSET_BASE_URL || "";
 
 export default function ArticlesPage() {
   const [currentPage, setCurrentPage] = useState<number>(1);
@@ -64,7 +60,7 @@ export default function ArticlesPage() {
 
   const isLoading = isLoadingCategories || isLoadingPosts;
   const displayError = categoriesError || postsError;
-  console.log(useUser);
+
   // if (postsData?.posts.length === 0 && !isLoadingPosts && !displayError) {
   //   return <div>not get</div>;
   // }

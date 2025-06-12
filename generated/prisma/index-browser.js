@@ -147,7 +147,6 @@ exports.Prisma.UserScalarFieldEnum = {
   updatedAt: 'updatedAt',
   firstName: 'firstName',
   lastName: 'lastName',
-  password: 'password',
   role: 'role',
   emailVerified: 'emailVerified',
   image: 'image'
@@ -159,15 +158,28 @@ exports.Prisma.CategoryScalarFieldEnum = {
   slug: 'slug',
   description: 'description',
   createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  image: 'image'
+};
+
+exports.Prisma.SubCategoryScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  slug: 'slug',
+  categoryId: 'categoryId',
+  image: 'image',
+  createdAt: 'createdAt',
   updatedAt: 'updatedAt'
 };
 
 exports.Prisma.BlogCategoryScalarFieldEnum = {
   id: 'id',
   name: 'name',
+  slug: 'slug',
+  description: 'description',
+  image: 'image',
   createdAt: 'createdAt',
-  updatedAt: 'updatedAt',
-  image: 'image'
+  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.BlogPostScalarFieldEnum = {
@@ -182,15 +194,6 @@ exports.Prisma.BlogPostScalarFieldEnum = {
   publishedAt: 'publishedAt',
   userId: 'userId',
   categoryId: 'categoryId'
-};
-
-exports.Prisma.SubCategoryScalarFieldEnum = {
-  id: 'id',
-  name: 'name',
-  slug: 'slug',
-  categoryId: 'categoryId',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
 };
 
 exports.Prisma.SessionScalarFieldEnum = {
@@ -252,9 +255,9 @@ exports.Prisma.ModelName = {
   Ad: 'Ad',
   User: 'User',
   Category: 'Category',
+  SubCategory: 'SubCategory',
   BlogCategory: 'BlogCategory',
   BlogPost: 'BlogPost',
-  SubCategory: 'SubCategory',
   Session: 'Session',
   Account: 'Account',
   Verification: 'Verification'

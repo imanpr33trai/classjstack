@@ -1,24 +1,23 @@
 "use server";
+import { authClient } from "@/lib/authClient";
 import { auth } from "./auth";
 
 export const signUp = async ({
   email,
-  lastname,
-  firstname,
+  lastName,
+  firstName,
   password,
 }: {
   email: string;
-  lastname: string;
-  firstname: string;
+  lastName: string;
+  firstName: string;
   password: string;
 }) => {
-  await auth.api.signUpEmail({
-    body: {
-      email,
-      lastname,
-      name: `${firstname} ${lastname}`,
-      password,
-      callbackURL: "/articles",
-    },
+  await authClient.signUp.email({
+    email,
+    lastName,
+    name: `${firstName} ${lastName}`,
+    password,
+    callbackURL: "/articles",
   });
 };

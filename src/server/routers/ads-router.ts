@@ -7,7 +7,15 @@ export const adsRouter = j.router({
   // Get all ads
   getAll: publicProcedure.query(async ({ c }) => {
     const ads = await db.ad.findMany({
-      include: {
+      select: {
+        title: true,
+        description: true,
+        link: true,
+        id: true,
+        createdAt: true,
+        price: true,
+        location: true,
+
         user: {
           select: {
             email: true,

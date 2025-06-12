@@ -1,30 +1,22 @@
 "use server";
 
-import { auth } from "@/server/auth";
+import { authClient } from "@/lib/authClient";
 
 export const signIn = async () => {
-  await auth.api.signInEmail({
-    body: {
-      email: "manpr33t@gmail.com",
-      password: "123456789",
-    },
+  await authClient.signIn.email({
+    email: "manpr33t@gmail.com",
+    password: "123456789",
   });
 };
 
 export const signUp = async () => {
-  await auth.api.signUpEmail({
-    body: {
-      email: "manpr33t@gmail.com",
-      password: "123456789",
-      name: "Manpreet",
-      lastname: "Singh",
-    },
+  await authClient.signUp.email({
+    email: "manpr33t@gmail.com",
+    password: "123456789",
+    name: "Manpreet",
+    lastName: "Singh",
   });
 };
 export const signOut = async () => {
-  await auth.api.signOut({
-    headers: {
-      delete: "true",
-    },
-  });
+  await authClient.signOut();
 };

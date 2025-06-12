@@ -4,7 +4,7 @@ import { useState } from "react";
 import { MaxWidthWrapper } from "./max-width-wrapper";
 
 import { InputComponent } from "./input";
-import { InputUI } from "./ui/input";
+import { Input } from "./ui/input";
 import { MapPin } from "lucide-react";
 import { Label } from "./ui/label";
 import { FileUpload } from "./ui/file-upload";
@@ -218,7 +218,7 @@ export default function AdForm() {
             <label htmlFor="Other" className="block text-sm font-sm  mb-1">
               Other*
             </label>
-            <InputUI
+            <Input
               type="text"
               id="Other"
               name="Other"
@@ -404,13 +404,11 @@ export default function AdForm() {
             type="submit"
             className="bg-brand-100 text-base w-[200px] hover:underline transition-all"
             onClick={handleSubmit}
-            
           >
             Post This Ad
           </Button>
-          </div>
+        </div>
       </form>
-
     </MaxWidthWrapper>
   );
 }
@@ -443,7 +441,7 @@ export default function AdForm() {
 //           className="w-full"
 //         />
 //       </div>
-      
+
 //       <div>
 //         <label htmlFor="description" className="block text-sm font-medium text-gray-700 mb-1">Description *</label>
 //         <textarea
@@ -456,7 +454,7 @@ export default function AdForm() {
 //           className="w-full min-h-[150px] p-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-brand-100"
 //         />
 //       </div>
-      
+
 //       <div>
 //         <label htmlFor="price" className="block text-sm font-medium text-gray-700 mb-1">Price *</label>
 //         <InputUI
@@ -469,7 +467,7 @@ export default function AdForm() {
 //           className="w-full"
 //         />
 //       </div>
-      
+
 //       <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 //       <div>
 //         <label htmlFor="category" className="block text-sm font-medium text-gray-700 mb-1">Category *</label>
@@ -487,7 +485,7 @@ export default function AdForm() {
 //           ))}
 //         </select>
 //       </div>
-        
+
 //         <div>
 //           <label htmlFor="subcategory" className="block text-sm font-medium text-gray-700 mb-1">Subcategory *</label>
 //           <select
@@ -508,7 +506,7 @@ export default function AdForm() {
 //       </div>
 //     </div>
 //   </div>
-  
+
 //   <div className="bg-gray-50 p-6 rounded-lg">
 //     <h2 className="text-xl font-semibold mb-4">Location Information</h2>
 //     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
@@ -524,7 +522,7 @@ export default function AdForm() {
 //           className="w-full"
 //         />
 //       </div>
-      
+
 //       <div>
 //         <label htmlFor="city" className="block text-sm font-medium text-gray-700 mb-1">City *</label>
 //         <InputUI
@@ -539,7 +537,7 @@ export default function AdForm() {
 //       </div>
 //     </div>
 //   </div>
-  
+
 //   <div className="bg-gray-50 p-6 rounded-lg">
 //     <h2 className="text-xl font-semibold mb-4">Contact Information</h2>
 //     <div className="space-y-4">
@@ -555,7 +553,7 @@ export default function AdForm() {
 //           className="w-full"
 //         />
 //       </div>
-      
+
 //       <div>
 //         <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">Email *</label>
 //         <InputUI
@@ -569,7 +567,7 @@ export default function AdForm() {
 //           className="w-full"
 //         />
 //       </div>
-      
+
 //       <div>
 //         <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">Phone Number *</label>
 //         <InputUI
@@ -584,17 +582,17 @@ export default function AdForm() {
 //       </div>
 //     </div>
 //   </div>
-  
+
 //   {error && (
 //     <div className="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded">
 //       <p>{error}</p>
 //     </div>
 //   )}
-  
+
 //   <div className="flex justify-end">
 //     <SiteButton type="submit">
 //       {isSubmitting ? 'Submitting...' : 'Post Ad'}
 //     </SiteButton>
 //   </div>
 // </form>
-// )} 
+// )}

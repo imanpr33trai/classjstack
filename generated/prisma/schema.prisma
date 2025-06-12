@@ -49,7 +49,6 @@ model User {
   updatedAt     DateTime   @updatedAt
   firstName     String
   lastName      String
-  password      String
   role          Role?      @default(USER) // USER, ADMIN, MODERATOR
   ads           Ad[]
   BlogPost      BlogPost[]
@@ -82,17 +81,35 @@ model Category {
   description   String?
   createdAt     DateTime      @default(now())
   updatedAt     DateTime      @updatedAt
+  image         String
   ads           Ad[]
   subCategories SubCategory[]
 }
 
+model SubCategory {
+  id         String   @id @default(cuid())
+  name       String
+  slug       String   @unique
+  categoryId String
+  image      String
+  category   Category @relation(fields: [categoryId], references: [id], onDelete: Cascade)
+  ads        Ad[]
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  @@unique([name, categoryId])
+  @@index([categoryId]) // IMPROVEMENT: Explicitly index for faster lookups.
+}
+
 model BlogCategory {
-  id        String     @id @default(cuid())
-  name      String     @unique
-  createdAt DateTime   @default(now())
-  updatedAt DateTime   @updatedAt
-  image     String
-  posts     BlogPost[]
+  id          String     @id @default(cuid())
+  name        String     @unique
+  slug        String     @unique // IMPROVEMENT: Added for clean URLs.
+  description String? // IMPROVEMENT: Added for SEO and UI consistency.
+  image       String
+  createdAt   DateTime   @default(now())
+  updatedAt   DateTime   @updatedAt
+  posts       BlogPost[]
 }
 
 model BlogPost {
@@ -112,19 +129,6 @@ model BlogPost {
 
   @@index([userId])
   @@index([categoryId])
-}
-
-model SubCategory {
-  id         String   @id @default(cuid())
-  name       String
-  slug       String   @unique
-  categoryId String
-  category   Category @relation(fields: [categoryId], references: [id])
-  ads        Ad[]
-  createdAt  DateTime @default(now())
-  updatedAt  DateTime @updatedAt
-
-  @@unique([name, categoryId])
 }
 
 model Session {

@@ -1,6 +1,7 @@
 import { db } from "@/db";
-import { j, publicProcedure } from "../jstack";
+import { adminProcedure, j, publicProcedure } from "../jstack";
 import { z } from "zod";
+import { createAdSchema, createCategorySchema } from "@/types/ads";
 
 export const categoryRouter = j.router({
   getAllCategory: publicProcedure.query(async ({ c }) => {
@@ -56,7 +57,7 @@ export const categoryRouter = j.router({
         slug: z.string(),
       })
     )
-    .query(async ({ input, c }) => {
+    .query(async ({ input, c, ctx }) => {
       const category = await db.category.findFirst({
         where: {
           slug: input.slug,
@@ -82,5 +83,18 @@ export const categoryRouter = j.router({
       }
 
       return c.superjson(category);
+    }),
+  createAdCategory: adminProcedure
+    .input(createCategorySchema)
+    .mutation(async ({ c, ctx, input }) => {
+      const { user } = ctx;
+      const category = await db.category.create({
+        data: {
+          name: input.name,
+          slug: input.slug,
+          image: input.image,
+        },
+      });
+      return c.json({ category });
     }),
 });

@@ -1,5 +1,6 @@
 import { z } from "zod";
 import { Ad, User } from "../../generated/prisma/client";
+import { AD_NAME_VALIDATOR } from "@/lib/validators/ad-validator";
 export interface AdWithUser extends Ad {
   user: {
     email: string;
@@ -10,22 +11,12 @@ export interface AdWithUser extends Ad {
   };
 }
 
-export const CategoryEnum = z.enum([
-  "ELECTRONICS",
-  "VEHICLES",
-  "REAL_ESTATE",
-  "JOBS",
-  "FURNITURE",
-  "FASHION",
-  "SERVICES",
-  "PETS",
-]);
-
 // Category Schema
 export const createCategorySchema = z.object({
   name: z.string(),
   slug: z.string(),
   description: z.string().optional(),
+  image: z.string().url(),
 });
 
 // SubCategory Schema
@@ -37,7 +28,7 @@ export const createSubCategorySchema = z.object({
 
 // Ad Schema
 export const createAdSchema = z.object({
-  title: z.string(),
+  title: AD_NAME_VALIDATOR,
   description: z.string(),
   categoryId: z.string().cuid(),
   price: z.number().positive().multipleOf(0.01),

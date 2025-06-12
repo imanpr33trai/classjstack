@@ -29,6 +29,11 @@ export type User = $Result.DefaultSelection<Prisma.$UserPayload>
  */
 export type Category = $Result.DefaultSelection<Prisma.$CategoryPayload>
 /**
+ * Model SubCategory
+ * 
+ */
+export type SubCategory = $Result.DefaultSelection<Prisma.$SubCategoryPayload>
+/**
  * Model BlogCategory
  * 
  */
@@ -38,11 +43,6 @@ export type BlogCategory = $Result.DefaultSelection<Prisma.$BlogCategoryPayload>
  * 
  */
 export type BlogPost = $Result.DefaultSelection<Prisma.$BlogPostPayload>
-/**
- * Model SubCategory
- * 
- */
-export type SubCategory = $Result.DefaultSelection<Prisma.$SubCategoryPayload>
 /**
  * Model Session
  * 
@@ -232,6 +232,16 @@ export class PrismaClient<
   get category(): Prisma.CategoryDelegate<ExtArgs, ClientOptions>;
 
   /**
+   * `prisma.subCategory`: Exposes CRUD operations for the **SubCategory** model.
+    * Example usage:
+    * ```ts
+    * // Fetch zero or more SubCategories
+    * const subCategories = await prisma.subCategory.findMany()
+    * ```
+    */
+  get subCategory(): Prisma.SubCategoryDelegate<ExtArgs, ClientOptions>;
+
+  /**
    * `prisma.blogCategory`: Exposes CRUD operations for the **BlogCategory** model.
     * Example usage:
     * ```ts
@@ -250,16 +260,6 @@ export class PrismaClient<
     * ```
     */
   get blogPost(): Prisma.BlogPostDelegate<ExtArgs, ClientOptions>;
-
-  /**
-   * `prisma.subCategory`: Exposes CRUD operations for the **SubCategory** model.
-    * Example usage:
-    * ```ts
-    * // Fetch zero or more SubCategories
-    * const subCategories = await prisma.subCategory.findMany()
-    * ```
-    */
-  get subCategory(): Prisma.SubCategoryDelegate<ExtArgs, ClientOptions>;
 
   /**
    * `prisma.session`: Exposes CRUD operations for the **Session** model.
@@ -733,9 +733,9 @@ export namespace Prisma {
     Ad: 'Ad',
     User: 'User',
     Category: 'Category',
+    SubCategory: 'SubCategory',
     BlogCategory: 'BlogCategory',
     BlogPost: 'BlogPost',
-    SubCategory: 'SubCategory',
     Session: 'Session',
     Account: 'Account',
     Verification: 'Verification'
@@ -757,7 +757,7 @@ export namespace Prisma {
       omit: GlobalOmitOptions
     }
     meta: {
-      modelProps: "ad" | "user" | "category" | "blogCategory" | "blogPost" | "subCategory" | "session" | "account" | "verification"
+      modelProps: "ad" | "user" | "category" | "subCategory" | "blogCategory" | "blogPost" | "session" | "account" | "verification"
       txIsolationLevel: Prisma.TransactionIsolationLevel
     }
     model: {
@@ -983,6 +983,80 @@ export namespace Prisma {
           }
         }
       }
+      SubCategory: {
+        payload: Prisma.$SubCategoryPayload<ExtArgs>
+        fields: Prisma.SubCategoryFieldRefs
+        operations: {
+          findUnique: {
+            args: Prisma.SubCategoryFindUniqueArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SubCategoryPayload> | null
+          }
+          findUniqueOrThrow: {
+            args: Prisma.SubCategoryFindUniqueOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SubCategoryPayload>
+          }
+          findFirst: {
+            args: Prisma.SubCategoryFindFirstArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SubCategoryPayload> | null
+          }
+          findFirstOrThrow: {
+            args: Prisma.SubCategoryFindFirstOrThrowArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SubCategoryPayload>
+          }
+          findMany: {
+            args: Prisma.SubCategoryFindManyArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SubCategoryPayload>[]
+          }
+          create: {
+            args: Prisma.SubCategoryCreateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SubCategoryPayload>
+          }
+          createMany: {
+            args: Prisma.SubCategoryCreateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          createManyAndReturn: {
+            args: Prisma.SubCategoryCreateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SubCategoryPayload>[]
+          }
+          delete: {
+            args: Prisma.SubCategoryDeleteArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SubCategoryPayload>
+          }
+          update: {
+            args: Prisma.SubCategoryUpdateArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SubCategoryPayload>
+          }
+          deleteMany: {
+            args: Prisma.SubCategoryDeleteManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateMany: {
+            args: Prisma.SubCategoryUpdateManyArgs<ExtArgs>
+            result: BatchPayload
+          }
+          updateManyAndReturn: {
+            args: Prisma.SubCategoryUpdateManyAndReturnArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SubCategoryPayload>[]
+          }
+          upsert: {
+            args: Prisma.SubCategoryUpsertArgs<ExtArgs>
+            result: $Utils.PayloadToResult<Prisma.$SubCategoryPayload>
+          }
+          aggregate: {
+            args: Prisma.SubCategoryAggregateArgs<ExtArgs>
+            result: $Utils.Optional<AggregateSubCategory>
+          }
+          groupBy: {
+            args: Prisma.SubCategoryGroupByArgs<ExtArgs>
+            result: $Utils.Optional<SubCategoryGroupByOutputType>[]
+          }
+          count: {
+            args: Prisma.SubCategoryCountArgs<ExtArgs>
+            result: $Utils.Optional<SubCategoryCountAggregateOutputType> | number
+          }
+        }
+      }
       BlogCategory: {
         payload: Prisma.$BlogCategoryPayload<ExtArgs>
         fields: Prisma.BlogCategoryFieldRefs
@@ -1128,80 +1202,6 @@ export namespace Prisma {
           count: {
             args: Prisma.BlogPostCountArgs<ExtArgs>
             result: $Utils.Optional<BlogPostCountAggregateOutputType> | number
-          }
-        }
-      }
-      SubCategory: {
-        payload: Prisma.$SubCategoryPayload<ExtArgs>
-        fields: Prisma.SubCategoryFieldRefs
-        operations: {
-          findUnique: {
-            args: Prisma.SubCategoryFindUniqueArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SubCategoryPayload> | null
-          }
-          findUniqueOrThrow: {
-            args: Prisma.SubCategoryFindUniqueOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SubCategoryPayload>
-          }
-          findFirst: {
-            args: Prisma.SubCategoryFindFirstArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SubCategoryPayload> | null
-          }
-          findFirstOrThrow: {
-            args: Prisma.SubCategoryFindFirstOrThrowArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SubCategoryPayload>
-          }
-          findMany: {
-            args: Prisma.SubCategoryFindManyArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SubCategoryPayload>[]
-          }
-          create: {
-            args: Prisma.SubCategoryCreateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SubCategoryPayload>
-          }
-          createMany: {
-            args: Prisma.SubCategoryCreateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          createManyAndReturn: {
-            args: Prisma.SubCategoryCreateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SubCategoryPayload>[]
-          }
-          delete: {
-            args: Prisma.SubCategoryDeleteArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SubCategoryPayload>
-          }
-          update: {
-            args: Prisma.SubCategoryUpdateArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SubCategoryPayload>
-          }
-          deleteMany: {
-            args: Prisma.SubCategoryDeleteManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateMany: {
-            args: Prisma.SubCategoryUpdateManyArgs<ExtArgs>
-            result: BatchPayload
-          }
-          updateManyAndReturn: {
-            args: Prisma.SubCategoryUpdateManyAndReturnArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SubCategoryPayload>[]
-          }
-          upsert: {
-            args: Prisma.SubCategoryUpsertArgs<ExtArgs>
-            result: $Utils.PayloadToResult<Prisma.$SubCategoryPayload>
-          }
-          aggregate: {
-            args: Prisma.SubCategoryAggregateArgs<ExtArgs>
-            result: $Utils.Optional<AggregateSubCategory>
-          }
-          groupBy: {
-            args: Prisma.SubCategoryGroupByArgs<ExtArgs>
-            result: $Utils.Optional<SubCategoryGroupByOutputType>[]
-          }
-          count: {
-            args: Prisma.SubCategoryCountArgs<ExtArgs>
-            result: $Utils.Optional<SubCategoryCountAggregateOutputType> | number
           }
         }
       }
@@ -1518,9 +1518,9 @@ export namespace Prisma {
     ad?: AdOmit
     user?: UserOmit
     category?: CategoryOmit
+    subCategory?: SubCategoryOmit
     blogCategory?: BlogCategoryOmit
     blogPost?: BlogPostOmit
-    subCategory?: SubCategoryOmit
     session?: SessionOmit
     account?: AccountOmit
     verification?: VerificationOmit
@@ -1712,37 +1712,6 @@ export namespace Prisma {
 
 
   /**
-   * Count Type BlogCategoryCountOutputType
-   */
-
-  export type BlogCategoryCountOutputType = {
-    posts: number
-  }
-
-  export type BlogCategoryCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    posts?: boolean | BlogCategoryCountOutputTypeCountPostsArgs
-  }
-
-  // Custom InputTypes
-  /**
-   * BlogCategoryCountOutputType without action
-   */
-  export type BlogCategoryCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the BlogCategoryCountOutputType
-     */
-    select?: BlogCategoryCountOutputTypeSelect<ExtArgs> | null
-  }
-
-  /**
-   * BlogCategoryCountOutputType without action
-   */
-  export type BlogCategoryCountOutputTypeCountPostsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: BlogPostWhereInput
-  }
-
-
-  /**
    * Count Type SubCategoryCountOutputType
    */
 
@@ -1770,6 +1739,37 @@ export namespace Prisma {
    */
   export type SubCategoryCountOutputTypeCountAdsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     where?: AdWhereInput
+  }
+
+
+  /**
+   * Count Type BlogCategoryCountOutputType
+   */
+
+  export type BlogCategoryCountOutputType = {
+    posts: number
+  }
+
+  export type BlogCategoryCountOutputTypeSelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    posts?: boolean | BlogCategoryCountOutputTypeCountPostsArgs
+  }
+
+  // Custom InputTypes
+  /**
+   * BlogCategoryCountOutputType without action
+   */
+  export type BlogCategoryCountOutputTypeDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the BlogCategoryCountOutputType
+     */
+    select?: BlogCategoryCountOutputTypeSelect<ExtArgs> | null
+  }
+
+  /**
+   * BlogCategoryCountOutputType without action
+   */
+  export type BlogCategoryCountOutputTypeCountPostsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: BlogPostWhereInput
   }
 
 
@@ -3069,7 +3069,6 @@ export namespace Prisma {
     updatedAt: Date | null
     firstName: string | null
     lastName: string | null
-    password: string | null
     role: $Enums.Role | null
     emailVerified: boolean | null
     image: string | null
@@ -3083,7 +3082,6 @@ export namespace Prisma {
     updatedAt: Date | null
     firstName: string | null
     lastName: string | null
-    password: string | null
     role: $Enums.Role | null
     emailVerified: boolean | null
     image: string | null
@@ -3097,7 +3095,6 @@ export namespace Prisma {
     updatedAt: number
     firstName: number
     lastName: number
-    password: number
     role: number
     emailVerified: number
     image: number
@@ -3113,7 +3110,6 @@ export namespace Prisma {
     updatedAt?: true
     firstName?: true
     lastName?: true
-    password?: true
     role?: true
     emailVerified?: true
     image?: true
@@ -3127,7 +3123,6 @@ export namespace Prisma {
     updatedAt?: true
     firstName?: true
     lastName?: true
-    password?: true
     role?: true
     emailVerified?: true
     image?: true
@@ -3141,7 +3136,6 @@ export namespace Prisma {
     updatedAt?: true
     firstName?: true
     lastName?: true
-    password?: true
     role?: true
     emailVerified?: true
     image?: true
@@ -3228,7 +3222,6 @@ export namespace Prisma {
     updatedAt: Date
     firstName: string
     lastName: string
-    password: string
     role: $Enums.Role | null
     emailVerified: boolean
     image: string | null
@@ -3259,7 +3252,6 @@ export namespace Prisma {
     updatedAt?: boolean
     firstName?: boolean
     lastName?: boolean
-    password?: boolean
     role?: boolean
     emailVerified?: boolean
     image?: boolean
@@ -3278,7 +3270,6 @@ export namespace Prisma {
     updatedAt?: boolean
     firstName?: boolean
     lastName?: boolean
-    password?: boolean
     role?: boolean
     emailVerified?: boolean
     image?: boolean
@@ -3292,7 +3283,6 @@ export namespace Prisma {
     updatedAt?: boolean
     firstName?: boolean
     lastName?: boolean
-    password?: boolean
     role?: boolean
     emailVerified?: boolean
     image?: boolean
@@ -3306,13 +3296,12 @@ export namespace Prisma {
     updatedAt?: boolean
     firstName?: boolean
     lastName?: boolean
-    password?: boolean
     role?: boolean
     emailVerified?: boolean
     image?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "apiKey" | "createdAt" | "updatedAt" | "firstName" | "lastName" | "password" | "role" | "emailVerified" | "image", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "email" | "apiKey" | "createdAt" | "updatedAt" | "firstName" | "lastName" | "role" | "emailVerified" | "image", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     ads?: boolean | User$adsArgs<ExtArgs>
     BlogPost?: boolean | User$BlogPostArgs<ExtArgs>
@@ -3339,7 +3328,6 @@ export namespace Prisma {
       updatedAt: Date
       firstName: string
       lastName: string
-      password: string
       role: $Enums.Role | null
       emailVerified: boolean
       image: string | null
@@ -3777,7 +3765,6 @@ export namespace Prisma {
     readonly updatedAt: FieldRef<"User", 'DateTime'>
     readonly firstName: FieldRef<"User", 'String'>
     readonly lastName: FieldRef<"User", 'String'>
-    readonly password: FieldRef<"User", 'String'>
     readonly role: FieldRef<"User", 'Role'>
     readonly emailVerified: FieldRef<"User", 'Boolean'>
     readonly image: FieldRef<"User", 'String'>
@@ -4300,6 +4287,7 @@ export namespace Prisma {
     description: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    image: string | null
   }
 
   export type CategoryMaxAggregateOutputType = {
@@ -4309,6 +4297,7 @@ export namespace Prisma {
     description: string | null
     createdAt: Date | null
     updatedAt: Date | null
+    image: string | null
   }
 
   export type CategoryCountAggregateOutputType = {
@@ -4318,6 +4307,7 @@ export namespace Prisma {
     description: number
     createdAt: number
     updatedAt: number
+    image: number
     _all: number
   }
 
@@ -4329,6 +4319,7 @@ export namespace Prisma {
     description?: true
     createdAt?: true
     updatedAt?: true
+    image?: true
   }
 
   export type CategoryMaxAggregateInputType = {
@@ -4338,6 +4329,7 @@ export namespace Prisma {
     description?: true
     createdAt?: true
     updatedAt?: true
+    image?: true
   }
 
   export type CategoryCountAggregateInputType = {
@@ -4347,6 +4339,7 @@ export namespace Prisma {
     description?: true
     createdAt?: true
     updatedAt?: true
+    image?: true
     _all?: true
   }
 
@@ -4429,6 +4422,7 @@ export namespace Prisma {
     description: string | null
     createdAt: Date
     updatedAt: Date
+    image: string
     _count: CategoryCountAggregateOutputType | null
     _min: CategoryMinAggregateOutputType | null
     _max: CategoryMaxAggregateOutputType | null
@@ -4455,6 +4449,7 @@ export namespace Prisma {
     description?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    image?: boolean
     ads?: boolean | Category$adsArgs<ExtArgs>
     subCategories?: boolean | Category$subCategoriesArgs<ExtArgs>
     _count?: boolean | CategoryCountOutputTypeDefaultArgs<ExtArgs>
@@ -4467,6 +4462,7 @@ export namespace Prisma {
     description?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    image?: boolean
   }, ExtArgs["result"]["category"]>
 
   export type CategorySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
@@ -4476,6 +4472,7 @@ export namespace Prisma {
     description?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    image?: boolean
   }, ExtArgs["result"]["category"]>
 
   export type CategorySelectScalar = {
@@ -4485,9 +4482,10 @@ export namespace Prisma {
     description?: boolean
     createdAt?: boolean
     updatedAt?: boolean
+    image?: boolean
   }
 
-  export type CategoryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "description" | "createdAt" | "updatedAt", ExtArgs["result"]["category"]>
+  export type CategoryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "description" | "createdAt" | "updatedAt" | "image", ExtArgs["result"]["category"]>
   export type CategoryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     ads?: boolean | Category$adsArgs<ExtArgs>
     subCategories?: boolean | Category$subCategoriesArgs<ExtArgs>
@@ -4509,6 +4507,7 @@ export namespace Prisma {
       description: string | null
       createdAt: Date
       updatedAt: Date
+      image: string
     }, ExtArgs["result"]["category"]>
     composites: {}
   }
@@ -4940,6 +4939,7 @@ export namespace Prisma {
     readonly description: FieldRef<"Category", 'String'>
     readonly createdAt: FieldRef<"Category", 'DateTime'>
     readonly updatedAt: FieldRef<"Category", 'DateTime'>
+    readonly image: FieldRef<"Category", 'String'>
   }
     
 
@@ -5395,6 +5395,1120 @@ export namespace Prisma {
 
 
   /**
+   * Model SubCategory
+   */
+
+  export type AggregateSubCategory = {
+    _count: SubCategoryCountAggregateOutputType | null
+    _min: SubCategoryMinAggregateOutputType | null
+    _max: SubCategoryMaxAggregateOutputType | null
+  }
+
+  export type SubCategoryMinAggregateOutputType = {
+    id: string | null
+    name: string | null
+    slug: string | null
+    categoryId: string | null
+    image: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type SubCategoryMaxAggregateOutputType = {
+    id: string | null
+    name: string | null
+    slug: string | null
+    categoryId: string | null
+    image: string | null
+    createdAt: Date | null
+    updatedAt: Date | null
+  }
+
+  export type SubCategoryCountAggregateOutputType = {
+    id: number
+    name: number
+    slug: number
+    categoryId: number
+    image: number
+    createdAt: number
+    updatedAt: number
+    _all: number
+  }
+
+
+  export type SubCategoryMinAggregateInputType = {
+    id?: true
+    name?: true
+    slug?: true
+    categoryId?: true
+    image?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type SubCategoryMaxAggregateInputType = {
+    id?: true
+    name?: true
+    slug?: true
+    categoryId?: true
+    image?: true
+    createdAt?: true
+    updatedAt?: true
+  }
+
+  export type SubCategoryCountAggregateInputType = {
+    id?: true
+    name?: true
+    slug?: true
+    categoryId?: true
+    image?: true
+    createdAt?: true
+    updatedAt?: true
+    _all?: true
+  }
+
+  export type SubCategoryAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SubCategory to aggregate.
+     */
+    where?: SubCategoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SubCategories to fetch.
+     */
+    orderBy?: SubCategoryOrderByWithRelationInput | SubCategoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the start position
+     */
+    cursor?: SubCategoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SubCategories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SubCategories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Count returned SubCategories
+    **/
+    _count?: true | SubCategoryCountAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the minimum value
+    **/
+    _min?: SubCategoryMinAggregateInputType
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+     * 
+     * Select which fields to find the maximum value
+    **/
+    _max?: SubCategoryMaxAggregateInputType
+  }
+
+  export type GetSubCategoryAggregateType<T extends SubCategoryAggregateArgs> = {
+        [P in keyof T & keyof AggregateSubCategory]: P extends '_count' | 'count'
+      ? T[P] extends true
+        ? number
+        : GetScalarType<T[P], AggregateSubCategory[P]>
+      : GetScalarType<T[P], AggregateSubCategory[P]>
+  }
+
+
+
+
+  export type SubCategoryGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    where?: SubCategoryWhereInput
+    orderBy?: SubCategoryOrderByWithAggregationInput | SubCategoryOrderByWithAggregationInput[]
+    by: SubCategoryScalarFieldEnum[] | SubCategoryScalarFieldEnum
+    having?: SubCategoryScalarWhereWithAggregatesInput
+    take?: number
+    skip?: number
+    _count?: SubCategoryCountAggregateInputType | true
+    _min?: SubCategoryMinAggregateInputType
+    _max?: SubCategoryMaxAggregateInputType
+  }
+
+  export type SubCategoryGroupByOutputType = {
+    id: string
+    name: string
+    slug: string
+    categoryId: string
+    image: string
+    createdAt: Date
+    updatedAt: Date
+    _count: SubCategoryCountAggregateOutputType | null
+    _min: SubCategoryMinAggregateOutputType | null
+    _max: SubCategoryMaxAggregateOutputType | null
+  }
+
+  type GetSubCategoryGroupByPayload<T extends SubCategoryGroupByArgs> = Prisma.PrismaPromise<
+    Array<
+      PickEnumerable<SubCategoryGroupByOutputType, T['by']> &
+        {
+          [P in ((keyof T) & (keyof SubCategoryGroupByOutputType))]: P extends '_count'
+            ? T[P] extends boolean
+              ? number
+              : GetScalarType<T[P], SubCategoryGroupByOutputType[P]>
+            : GetScalarType<T[P], SubCategoryGroupByOutputType[P]>
+        }
+      >
+    >
+
+
+  export type SubCategorySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    slug?: boolean
+    categoryId?: boolean
+    image?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    category?: boolean | CategoryDefaultArgs<ExtArgs>
+    ads?: boolean | SubCategory$adsArgs<ExtArgs>
+    _count?: boolean | SubCategoryCountOutputTypeDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["subCategory"]>
+
+  export type SubCategorySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    slug?: boolean
+    categoryId?: boolean
+    image?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    category?: boolean | CategoryDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["subCategory"]>
+
+  export type SubCategorySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
+    id?: boolean
+    name?: boolean
+    slug?: boolean
+    categoryId?: boolean
+    image?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+    category?: boolean | CategoryDefaultArgs<ExtArgs>
+  }, ExtArgs["result"]["subCategory"]>
+
+  export type SubCategorySelectScalar = {
+    id?: boolean
+    name?: boolean
+    slug?: boolean
+    categoryId?: boolean
+    image?: boolean
+    createdAt?: boolean
+    updatedAt?: boolean
+  }
+
+  export type SubCategoryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "categoryId" | "image" | "createdAt" | "updatedAt", ExtArgs["result"]["subCategory"]>
+  export type SubCategoryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    category?: boolean | CategoryDefaultArgs<ExtArgs>
+    ads?: boolean | SubCategory$adsArgs<ExtArgs>
+    _count?: boolean | SubCategoryCountOutputTypeDefaultArgs<ExtArgs>
+  }
+  export type SubCategoryIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    category?: boolean | CategoryDefaultArgs<ExtArgs>
+  }
+  export type SubCategoryIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    category?: boolean | CategoryDefaultArgs<ExtArgs>
+  }
+
+  export type $SubCategoryPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    name: "SubCategory"
+    objects: {
+      category: Prisma.$CategoryPayload<ExtArgs>
+      ads: Prisma.$AdPayload<ExtArgs>[]
+    }
+    scalars: $Extensions.GetPayloadResult<{
+      id: string
+      name: string
+      slug: string
+      categoryId: string
+      image: string
+      createdAt: Date
+      updatedAt: Date
+    }, ExtArgs["result"]["subCategory"]>
+    composites: {}
+  }
+
+  type SubCategoryGetPayload<S extends boolean | null | undefined | SubCategoryDefaultArgs> = $Result.GetResult<Prisma.$SubCategoryPayload, S>
+
+  type SubCategoryCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
+    Omit<SubCategoryFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
+      select?: SubCategoryCountAggregateInputType | true
+    }
+
+  export interface SubCategoryDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
+    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['SubCategory'], meta: { name: 'SubCategory' } }
+    /**
+     * Find zero or one SubCategory that matches the filter.
+     * @param {SubCategoryFindUniqueArgs} args - Arguments to find a SubCategory
+     * @example
+     * // Get one SubCategory
+     * const subCategory = await prisma.subCategory.findUnique({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUnique<T extends SubCategoryFindUniqueArgs>(args: SelectSubset<T, SubCategoryFindUniqueArgs<ExtArgs>>): Prisma__SubCategoryClient<$Result.GetResult<Prisma.$SubCategoryPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find one SubCategory that matches the filter or throw an error with `error.code='P2025'`
+     * if no matches were found.
+     * @param {SubCategoryFindUniqueOrThrowArgs} args - Arguments to find a SubCategory
+     * @example
+     * // Get one SubCategory
+     * const subCategory = await prisma.subCategory.findUniqueOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findUniqueOrThrow<T extends SubCategoryFindUniqueOrThrowArgs>(args: SelectSubset<T, SubCategoryFindUniqueOrThrowArgs<ExtArgs>>): Prisma__SubCategoryClient<$Result.GetResult<Prisma.$SubCategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first SubCategory that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SubCategoryFindFirstArgs} args - Arguments to find a SubCategory
+     * @example
+     * // Get one SubCategory
+     * const subCategory = await prisma.subCategory.findFirst({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirst<T extends SubCategoryFindFirstArgs>(args?: SelectSubset<T, SubCategoryFindFirstArgs<ExtArgs>>): Prisma__SubCategoryClient<$Result.GetResult<Prisma.$SubCategoryPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find the first SubCategory that matches the filter or
+     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SubCategoryFindFirstOrThrowArgs} args - Arguments to find a SubCategory
+     * @example
+     * // Get one SubCategory
+     * const subCategory = await prisma.subCategory.findFirstOrThrow({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     */
+    findFirstOrThrow<T extends SubCategoryFindFirstOrThrowArgs>(args?: SelectSubset<T, SubCategoryFindFirstOrThrowArgs<ExtArgs>>): Prisma__SubCategoryClient<$Result.GetResult<Prisma.$SubCategoryPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Find zero or more SubCategories that matches the filter.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SubCategoryFindManyArgs} args - Arguments to filter and select certain fields only.
+     * @example
+     * // Get all SubCategories
+     * const subCategories = await prisma.subCategory.findMany()
+     * 
+     * // Get first 10 SubCategories
+     * const subCategories = await prisma.subCategory.findMany({ take: 10 })
+     * 
+     * // Only select the `id`
+     * const subCategoryWithIdOnly = await prisma.subCategory.findMany({ select: { id: true } })
+     * 
+     */
+    findMany<T extends SubCategoryFindManyArgs>(args?: SelectSubset<T, SubCategoryFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SubCategoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
+
+    /**
+     * Create a SubCategory.
+     * @param {SubCategoryCreateArgs} args - Arguments to create a SubCategory.
+     * @example
+     * // Create one SubCategory
+     * const SubCategory = await prisma.subCategory.create({
+     *   data: {
+     *     // ... data to create a SubCategory
+     *   }
+     * })
+     * 
+     */
+    create<T extends SubCategoryCreateArgs>(args: SelectSubset<T, SubCategoryCreateArgs<ExtArgs>>): Prisma__SubCategoryClient<$Result.GetResult<Prisma.$SubCategoryPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Create many SubCategories.
+     * @param {SubCategoryCreateManyArgs} args - Arguments to create many SubCategories.
+     * @example
+     * // Create many SubCategories
+     * const subCategory = await prisma.subCategory.createMany({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     *     
+     */
+    createMany<T extends SubCategoryCreateManyArgs>(args?: SelectSubset<T, SubCategoryCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Create many SubCategories and returns the data saved in the database.
+     * @param {SubCategoryCreateManyAndReturnArgs} args - Arguments to create many SubCategories.
+     * @example
+     * // Create many SubCategories
+     * const subCategory = await prisma.subCategory.createManyAndReturn({
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Create many SubCategories and only return the `id`
+     * const subCategoryWithIdOnly = await prisma.subCategory.createManyAndReturn({
+     *   select: { id: true },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    createManyAndReturn<T extends SubCategoryCreateManyAndReturnArgs>(args?: SelectSubset<T, SubCategoryCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SubCategoryPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Delete a SubCategory.
+     * @param {SubCategoryDeleteArgs} args - Arguments to delete one SubCategory.
+     * @example
+     * // Delete one SubCategory
+     * const SubCategory = await prisma.subCategory.delete({
+     *   where: {
+     *     // ... filter to delete one SubCategory
+     *   }
+     * })
+     * 
+     */
+    delete<T extends SubCategoryDeleteArgs>(args: SelectSubset<T, SubCategoryDeleteArgs<ExtArgs>>): Prisma__SubCategoryClient<$Result.GetResult<Prisma.$SubCategoryPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Update one SubCategory.
+     * @param {SubCategoryUpdateArgs} args - Arguments to update one SubCategory.
+     * @example
+     * // Update one SubCategory
+     * const subCategory = await prisma.subCategory.update({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    update<T extends SubCategoryUpdateArgs>(args: SelectSubset<T, SubCategoryUpdateArgs<ExtArgs>>): Prisma__SubCategoryClient<$Result.GetResult<Prisma.$SubCategoryPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+    /**
+     * Delete zero or more SubCategories.
+     * @param {SubCategoryDeleteManyArgs} args - Arguments to filter SubCategories to delete.
+     * @example
+     * // Delete a few SubCategories
+     * const { count } = await prisma.subCategory.deleteMany({
+     *   where: {
+     *     // ... provide filter here
+     *   }
+     * })
+     * 
+     */
+    deleteMany<T extends SubCategoryDeleteManyArgs>(args?: SelectSubset<T, SubCategoryDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more SubCategories.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SubCategoryUpdateManyArgs} args - Arguments to update one or more rows.
+     * @example
+     * // Update many SubCategories
+     * const subCategory = await prisma.subCategory.updateMany({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: {
+     *     // ... provide data here
+     *   }
+     * })
+     * 
+     */
+    updateMany<T extends SubCategoryUpdateManyArgs>(args: SelectSubset<T, SubCategoryUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
+
+    /**
+     * Update zero or more SubCategories and returns the data updated in the database.
+     * @param {SubCategoryUpdateManyAndReturnArgs} args - Arguments to update many SubCategories.
+     * @example
+     * // Update many SubCategories
+     * const subCategory = await prisma.subCategory.updateManyAndReturn({
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * 
+     * // Update zero or more SubCategories and only return the `id`
+     * const subCategoryWithIdOnly = await prisma.subCategory.updateManyAndReturn({
+     *   select: { id: true },
+     *   where: {
+     *     // ... provide filter here
+     *   },
+     *   data: [
+     *     // ... provide data here
+     *   ]
+     * })
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * 
+     */
+    updateManyAndReturn<T extends SubCategoryUpdateManyAndReturnArgs>(args: SelectSubset<T, SubCategoryUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SubCategoryPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
+
+    /**
+     * Create or update one SubCategory.
+     * @param {SubCategoryUpsertArgs} args - Arguments to update or create a SubCategory.
+     * @example
+     * // Update or create a SubCategory
+     * const subCategory = await prisma.subCategory.upsert({
+     *   create: {
+     *     // ... data to create a SubCategory
+     *   },
+     *   update: {
+     *     // ... in case it already exists, update
+     *   },
+     *   where: {
+     *     // ... the filter for the SubCategory we want to update
+     *   }
+     * })
+     */
+    upsert<T extends SubCategoryUpsertArgs>(args: SelectSubset<T, SubCategoryUpsertArgs<ExtArgs>>): Prisma__SubCategoryClient<$Result.GetResult<Prisma.$SubCategoryPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
+
+
+    /**
+     * Count the number of SubCategories.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SubCategoryCountArgs} args - Arguments to filter SubCategories to count.
+     * @example
+     * // Count the number of SubCategories
+     * const count = await prisma.subCategory.count({
+     *   where: {
+     *     // ... the filter for the SubCategories we want to count
+     *   }
+     * })
+    **/
+    count<T extends SubCategoryCountArgs>(
+      args?: Subset<T, SubCategoryCountArgs>,
+    ): Prisma.PrismaPromise<
+      T extends $Utils.Record<'select', any>
+        ? T['select'] extends true
+          ? number
+          : GetScalarType<T['select'], SubCategoryCountAggregateOutputType>
+        : number
+    >
+
+    /**
+     * Allows you to perform aggregations operations on a SubCategory.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SubCategoryAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
+     * @example
+     * // Ordered by age ascending
+     * // Where email contains prisma.io
+     * // Limited to the 10 users
+     * const aggregations = await prisma.user.aggregate({
+     *   _avg: {
+     *     age: true,
+     *   },
+     *   where: {
+     *     email: {
+     *       contains: "prisma.io",
+     *     },
+     *   },
+     *   orderBy: {
+     *     age: "asc",
+     *   },
+     *   take: 10,
+     * })
+    **/
+    aggregate<T extends SubCategoryAggregateArgs>(args: Subset<T, SubCategoryAggregateArgs>): Prisma.PrismaPromise<GetSubCategoryAggregateType<T>>
+
+    /**
+     * Group by SubCategory.
+     * Note, that providing `undefined` is treated as the value not being there.
+     * Read more here: https://pris.ly/d/null-undefined
+     * @param {SubCategoryGroupByArgs} args - Group by arguments.
+     * @example
+     * // Group by city, order by createdAt, get count
+     * const result = await prisma.user.groupBy({
+     *   by: ['city', 'createdAt'],
+     *   orderBy: {
+     *     createdAt: true
+     *   },
+     *   _count: {
+     *     _all: true
+     *   },
+     * })
+     * 
+    **/
+    groupBy<
+      T extends SubCategoryGroupByArgs,
+      HasSelectOrTake extends Or<
+        Extends<'skip', Keys<T>>,
+        Extends<'take', Keys<T>>
+      >,
+      OrderByArg extends True extends HasSelectOrTake
+        ? { orderBy: SubCategoryGroupByArgs['orderBy'] }
+        : { orderBy?: SubCategoryGroupByArgs['orderBy'] },
+      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
+      ByFields extends MaybeTupleToUnion<T['by']>,
+      ByValid extends Has<ByFields, OrderFields>,
+      HavingFields extends GetHavingFields<T['having']>,
+      HavingValid extends Has<ByFields, HavingFields>,
+      ByEmpty extends T['by'] extends never[] ? True : False,
+      InputErrors extends ByEmpty extends True
+      ? `Error: "by" must not be empty.`
+      : HavingValid extends False
+      ? {
+          [P in HavingFields]: P extends ByFields
+            ? never
+            : P extends string
+            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
+            : [
+                Error,
+                'Field ',
+                P,
+                ` in "having" needs to be provided in "by"`,
+              ]
+        }[HavingFields]
+      : 'take' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "take", you also need to provide "orderBy"'
+      : 'skip' extends Keys<T>
+      ? 'orderBy' extends Keys<T>
+        ? ByValid extends True
+          ? {}
+          : {
+              [P in OrderFields]: P extends ByFields
+                ? never
+                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+            }[OrderFields]
+        : 'Error: If you provide "skip", you also need to provide "orderBy"'
+      : ByValid extends True
+      ? {}
+      : {
+          [P in OrderFields]: P extends ByFields
+            ? never
+            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
+        }[OrderFields]
+    >(args: SubsetIntersection<T, SubCategoryGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSubCategoryGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
+  /**
+   * Fields of the SubCategory model
+   */
+  readonly fields: SubCategoryFieldRefs;
+  }
+
+  /**
+   * The delegate class that acts as a "Promise-like" for SubCategory.
+   * Why is this prefixed with `Prisma__`?
+   * Because we want to prevent naming conflicts as mentioned in
+   * https://github.com/prisma/prisma-client-js/issues/707
+   */
+  export interface Prisma__SubCategoryClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
+    readonly [Symbol.toStringTag]: "PrismaPromise"
+    category<T extends CategoryDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CategoryDefaultArgs<ExtArgs>>): Prisma__CategoryClient<$Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
+    ads<T extends SubCategory$adsArgs<ExtArgs> = {}>(args?: Subset<T, SubCategory$adsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+    /**
+     * Attaches callbacks for the resolution and/or rejection of the Promise.
+     * @param onfulfilled The callback to execute when the Promise is resolved.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of which ever callback is executed.
+     */
+    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
+    /**
+     * Attaches a callback for only the rejection of the Promise.
+     * @param onrejected The callback to execute when the Promise is rejected.
+     * @returns A Promise for the completion of the callback.
+     */
+    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
+    /**
+     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
+     * resolved value cannot be modified from the callback.
+     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
+     * @returns A Promise for the completion of the callback.
+     */
+    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
+  }
+
+
+
+
+  /**
+   * Fields of the SubCategory model
+   */
+  interface SubCategoryFieldRefs {
+    readonly id: FieldRef<"SubCategory", 'String'>
+    readonly name: FieldRef<"SubCategory", 'String'>
+    readonly slug: FieldRef<"SubCategory", 'String'>
+    readonly categoryId: FieldRef<"SubCategory", 'String'>
+    readonly image: FieldRef<"SubCategory", 'String'>
+    readonly createdAt: FieldRef<"SubCategory", 'DateTime'>
+    readonly updatedAt: FieldRef<"SubCategory", 'DateTime'>
+  }
+    
+
+  // Custom InputTypes
+  /**
+   * SubCategory findUnique
+   */
+  export type SubCategoryFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SubCategory
+     */
+    select?: SubCategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SubCategory
+     */
+    omit?: SubCategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SubCategoryInclude<ExtArgs> | null
+    /**
+     * Filter, which SubCategory to fetch.
+     */
+    where: SubCategoryWhereUniqueInput
+  }
+
+  /**
+   * SubCategory findUniqueOrThrow
+   */
+  export type SubCategoryFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SubCategory
+     */
+    select?: SubCategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SubCategory
+     */
+    omit?: SubCategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SubCategoryInclude<ExtArgs> | null
+    /**
+     * Filter, which SubCategory to fetch.
+     */
+    where: SubCategoryWhereUniqueInput
+  }
+
+  /**
+   * SubCategory findFirst
+   */
+  export type SubCategoryFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SubCategory
+     */
+    select?: SubCategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SubCategory
+     */
+    omit?: SubCategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SubCategoryInclude<ExtArgs> | null
+    /**
+     * Filter, which SubCategory to fetch.
+     */
+    where?: SubCategoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SubCategories to fetch.
+     */
+    orderBy?: SubCategoryOrderByWithRelationInput | SubCategoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SubCategories.
+     */
+    cursor?: SubCategoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SubCategories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SubCategories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SubCategories.
+     */
+    distinct?: SubCategoryScalarFieldEnum | SubCategoryScalarFieldEnum[]
+  }
+
+  /**
+   * SubCategory findFirstOrThrow
+   */
+  export type SubCategoryFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SubCategory
+     */
+    select?: SubCategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SubCategory
+     */
+    omit?: SubCategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SubCategoryInclude<ExtArgs> | null
+    /**
+     * Filter, which SubCategory to fetch.
+     */
+    where?: SubCategoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SubCategories to fetch.
+     */
+    orderBy?: SubCategoryOrderByWithRelationInput | SubCategoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for searching for SubCategories.
+     */
+    cursor?: SubCategoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SubCategories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SubCategories.
+     */
+    skip?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
+     * 
+     * Filter by unique combinations of SubCategories.
+     */
+    distinct?: SubCategoryScalarFieldEnum | SubCategoryScalarFieldEnum[]
+  }
+
+  /**
+   * SubCategory findMany
+   */
+  export type SubCategoryFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SubCategory
+     */
+    select?: SubCategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SubCategory
+     */
+    omit?: SubCategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SubCategoryInclude<ExtArgs> | null
+    /**
+     * Filter, which SubCategories to fetch.
+     */
+    where?: SubCategoryWhereInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
+     * 
+     * Determine the order of SubCategories to fetch.
+     */
+    orderBy?: SubCategoryOrderByWithRelationInput | SubCategoryOrderByWithRelationInput[]
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
+     * 
+     * Sets the position for listing SubCategories.
+     */
+    cursor?: SubCategoryWhereUniqueInput
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Take `±n` SubCategories from the position of the cursor.
+     */
+    take?: number
+    /**
+     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
+     * 
+     * Skip the first `n` SubCategories.
+     */
+    skip?: number
+    distinct?: SubCategoryScalarFieldEnum | SubCategoryScalarFieldEnum[]
+  }
+
+  /**
+   * SubCategory create
+   */
+  export type SubCategoryCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SubCategory
+     */
+    select?: SubCategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SubCategory
+     */
+    omit?: SubCategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SubCategoryInclude<ExtArgs> | null
+    /**
+     * The data needed to create a SubCategory.
+     */
+    data: XOR<SubCategoryCreateInput, SubCategoryUncheckedCreateInput>
+  }
+
+  /**
+   * SubCategory createMany
+   */
+  export type SubCategoryCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to create many SubCategories.
+     */
+    data: SubCategoryCreateManyInput | SubCategoryCreateManyInput[]
+    skipDuplicates?: boolean
+  }
+
+  /**
+   * SubCategory createManyAndReturn
+   */
+  export type SubCategoryCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SubCategory
+     */
+    select?: SubCategorySelectCreateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the SubCategory
+     */
+    omit?: SubCategoryOmit<ExtArgs> | null
+    /**
+     * The data used to create many SubCategories.
+     */
+    data: SubCategoryCreateManyInput | SubCategoryCreateManyInput[]
+    skipDuplicates?: boolean
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SubCategoryIncludeCreateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * SubCategory update
+   */
+  export type SubCategoryUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SubCategory
+     */
+    select?: SubCategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SubCategory
+     */
+    omit?: SubCategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SubCategoryInclude<ExtArgs> | null
+    /**
+     * The data needed to update a SubCategory.
+     */
+    data: XOR<SubCategoryUpdateInput, SubCategoryUncheckedUpdateInput>
+    /**
+     * Choose, which SubCategory to update.
+     */
+    where: SubCategoryWhereUniqueInput
+  }
+
+  /**
+   * SubCategory updateMany
+   */
+  export type SubCategoryUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * The data used to update SubCategories.
+     */
+    data: XOR<SubCategoryUpdateManyMutationInput, SubCategoryUncheckedUpdateManyInput>
+    /**
+     * Filter which SubCategories to update
+     */
+    where?: SubCategoryWhereInput
+    /**
+     * Limit how many SubCategories to update.
+     */
+    limit?: number
+  }
+
+  /**
+   * SubCategory updateManyAndReturn
+   */
+  export type SubCategoryUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SubCategory
+     */
+    select?: SubCategorySelectUpdateManyAndReturn<ExtArgs> | null
+    /**
+     * Omit specific fields from the SubCategory
+     */
+    omit?: SubCategoryOmit<ExtArgs> | null
+    /**
+     * The data used to update SubCategories.
+     */
+    data: XOR<SubCategoryUpdateManyMutationInput, SubCategoryUncheckedUpdateManyInput>
+    /**
+     * Filter which SubCategories to update
+     */
+    where?: SubCategoryWhereInput
+    /**
+     * Limit how many SubCategories to update.
+     */
+    limit?: number
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SubCategoryIncludeUpdateManyAndReturn<ExtArgs> | null
+  }
+
+  /**
+   * SubCategory upsert
+   */
+  export type SubCategoryUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SubCategory
+     */
+    select?: SubCategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SubCategory
+     */
+    omit?: SubCategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SubCategoryInclude<ExtArgs> | null
+    /**
+     * The filter to search for the SubCategory to update in case it exists.
+     */
+    where: SubCategoryWhereUniqueInput
+    /**
+     * In case the SubCategory found by the `where` argument doesn't exist, create a new SubCategory with this data.
+     */
+    create: XOR<SubCategoryCreateInput, SubCategoryUncheckedCreateInput>
+    /**
+     * In case the SubCategory was found with the provided `where` argument, update it with this data.
+     */
+    update: XOR<SubCategoryUpdateInput, SubCategoryUncheckedUpdateInput>
+  }
+
+  /**
+   * SubCategory delete
+   */
+  export type SubCategoryDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SubCategory
+     */
+    select?: SubCategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SubCategory
+     */
+    omit?: SubCategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SubCategoryInclude<ExtArgs> | null
+    /**
+     * Filter which SubCategory to delete.
+     */
+    where: SubCategoryWhereUniqueInput
+  }
+
+  /**
+   * SubCategory deleteMany
+   */
+  export type SubCategoryDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Filter which SubCategories to delete
+     */
+    where?: SubCategoryWhereInput
+    /**
+     * Limit how many SubCategories to delete.
+     */
+    limit?: number
+  }
+
+  /**
+   * SubCategory.ads
+   */
+  export type SubCategory$adsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the Ad
+     */
+    select?: AdSelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the Ad
+     */
+    omit?: AdOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: AdInclude<ExtArgs> | null
+    where?: AdWhereInput
+    orderBy?: AdOrderByWithRelationInput | AdOrderByWithRelationInput[]
+    cursor?: AdWhereUniqueInput
+    take?: number
+    skip?: number
+    distinct?: AdScalarFieldEnum | AdScalarFieldEnum[]
+  }
+
+  /**
+   * SubCategory without action
+   */
+  export type SubCategoryDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
+    /**
+     * Select specific fields to fetch from the SubCategory
+     */
+    select?: SubCategorySelect<ExtArgs> | null
+    /**
+     * Omit specific fields from the SubCategory
+     */
+    omit?: SubCategoryOmit<ExtArgs> | null
+    /**
+     * Choose, which related nodes to fetch as well
+     */
+    include?: SubCategoryInclude<ExtArgs> | null
+  }
+
+
+  /**
    * Model BlogCategory
    */
 
@@ -5407,25 +6521,31 @@ export namespace Prisma {
   export type BlogCategoryMinAggregateOutputType = {
     id: string | null
     name: string | null
+    slug: string | null
+    description: string | null
+    image: string | null
     createdAt: Date | null
     updatedAt: Date | null
-    image: string | null
   }
 
   export type BlogCategoryMaxAggregateOutputType = {
     id: string | null
     name: string | null
+    slug: string | null
+    description: string | null
+    image: string | null
     createdAt: Date | null
     updatedAt: Date | null
-    image: string | null
   }
 
   export type BlogCategoryCountAggregateOutputType = {
     id: number
     name: number
+    slug: number
+    description: number
+    image: number
     createdAt: number
     updatedAt: number
-    image: number
     _all: number
   }
 
@@ -5433,25 +6553,31 @@ export namespace Prisma {
   export type BlogCategoryMinAggregateInputType = {
     id?: true
     name?: true
+    slug?: true
+    description?: true
+    image?: true
     createdAt?: true
     updatedAt?: true
-    image?: true
   }
 
   export type BlogCategoryMaxAggregateInputType = {
     id?: true
     name?: true
+    slug?: true
+    description?: true
+    image?: true
     createdAt?: true
     updatedAt?: true
-    image?: true
   }
 
   export type BlogCategoryCountAggregateInputType = {
     id?: true
     name?: true
+    slug?: true
+    description?: true
+    image?: true
     createdAt?: true
     updatedAt?: true
-    image?: true
     _all?: true
   }
 
@@ -5530,9 +6656,11 @@ export namespace Prisma {
   export type BlogCategoryGroupByOutputType = {
     id: string
     name: string
+    slug: string
+    description: string | null
+    image: string
     createdAt: Date
     updatedAt: Date
-    image: string
     _count: BlogCategoryCountAggregateOutputType | null
     _min: BlogCategoryMinAggregateOutputType | null
     _max: BlogCategoryMaxAggregateOutputType | null
@@ -5555,9 +6683,11 @@ export namespace Prisma {
   export type BlogCategorySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
+    slug?: boolean
+    description?: boolean
+    image?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    image?: boolean
     posts?: boolean | BlogCategory$postsArgs<ExtArgs>
     _count?: boolean | BlogCategoryCountOutputTypeDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["blogCategory"]>
@@ -5565,28 +6695,34 @@ export namespace Prisma {
   export type BlogCategorySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
+    slug?: boolean
+    description?: boolean
+    image?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    image?: boolean
   }, ExtArgs["result"]["blogCategory"]>
 
   export type BlogCategorySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
     id?: boolean
     name?: boolean
+    slug?: boolean
+    description?: boolean
+    image?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    image?: boolean
   }, ExtArgs["result"]["blogCategory"]>
 
   export type BlogCategorySelectScalar = {
     id?: boolean
     name?: boolean
+    slug?: boolean
+    description?: boolean
+    image?: boolean
     createdAt?: boolean
     updatedAt?: boolean
-    image?: boolean
   }
 
-  export type BlogCategoryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "createdAt" | "updatedAt" | "image", ExtArgs["result"]["blogCategory"]>
+  export type BlogCategoryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "description" | "image" | "createdAt" | "updatedAt", ExtArgs["result"]["blogCategory"]>
   export type BlogCategoryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     posts?: boolean | BlogCategory$postsArgs<ExtArgs>
     _count?: boolean | BlogCategoryCountOutputTypeDefaultArgs<ExtArgs>
@@ -5602,9 +6738,11 @@ export namespace Prisma {
     scalars: $Extensions.GetPayloadResult<{
       id: string
       name: string
+      slug: string
+      description: string | null
+      image: string
       createdAt: Date
       updatedAt: Date
-      image: string
     }, ExtArgs["result"]["blogCategory"]>
     composites: {}
   }
@@ -6031,9 +7169,11 @@ export namespace Prisma {
   interface BlogCategoryFieldRefs {
     readonly id: FieldRef<"BlogCategory", 'String'>
     readonly name: FieldRef<"BlogCategory", 'String'>
+    readonly slug: FieldRef<"BlogCategory", 'String'>
+    readonly description: FieldRef<"BlogCategory", 'String'>
+    readonly image: FieldRef<"BlogCategory", 'String'>
     readonly createdAt: FieldRef<"BlogCategory", 'DateTime'>
     readonly updatedAt: FieldRef<"BlogCategory", 'DateTime'>
-    readonly image: FieldRef<"BlogCategory", 'String'>
   }
     
 
@@ -7624,1107 +8764,6 @@ export namespace Prisma {
      * Choose, which related nodes to fetch as well
      */
     include?: BlogPostInclude<ExtArgs> | null
-  }
-
-
-  /**
-   * Model SubCategory
-   */
-
-  export type AggregateSubCategory = {
-    _count: SubCategoryCountAggregateOutputType | null
-    _min: SubCategoryMinAggregateOutputType | null
-    _max: SubCategoryMaxAggregateOutputType | null
-  }
-
-  export type SubCategoryMinAggregateOutputType = {
-    id: string | null
-    name: string | null
-    slug: string | null
-    categoryId: string | null
-    createdAt: Date | null
-    updatedAt: Date | null
-  }
-
-  export type SubCategoryMaxAggregateOutputType = {
-    id: string | null
-    name: string | null
-    slug: string | null
-    categoryId: string | null
-    createdAt: Date | null
-    updatedAt: Date | null
-  }
-
-  export type SubCategoryCountAggregateOutputType = {
-    id: number
-    name: number
-    slug: number
-    categoryId: number
-    createdAt: number
-    updatedAt: number
-    _all: number
-  }
-
-
-  export type SubCategoryMinAggregateInputType = {
-    id?: true
-    name?: true
-    slug?: true
-    categoryId?: true
-    createdAt?: true
-    updatedAt?: true
-  }
-
-  export type SubCategoryMaxAggregateInputType = {
-    id?: true
-    name?: true
-    slug?: true
-    categoryId?: true
-    createdAt?: true
-    updatedAt?: true
-  }
-
-  export type SubCategoryCountAggregateInputType = {
-    id?: true
-    name?: true
-    slug?: true
-    categoryId?: true
-    createdAt?: true
-    updatedAt?: true
-    _all?: true
-  }
-
-  export type SubCategoryAggregateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which SubCategory to aggregate.
-     */
-    where?: SubCategoryWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of SubCategories to fetch.
-     */
-    orderBy?: SubCategoryOrderByWithRelationInput | SubCategoryOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the start position
-     */
-    cursor?: SubCategoryWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` SubCategories from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` SubCategories.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Count returned SubCategories
-    **/
-    _count?: true | SubCategoryCountAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the minimum value
-    **/
-    _min?: SubCategoryMinAggregateInputType
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
-     * 
-     * Select which fields to find the maximum value
-    **/
-    _max?: SubCategoryMaxAggregateInputType
-  }
-
-  export type GetSubCategoryAggregateType<T extends SubCategoryAggregateArgs> = {
-        [P in keyof T & keyof AggregateSubCategory]: P extends '_count' | 'count'
-      ? T[P] extends true
-        ? number
-        : GetScalarType<T[P], AggregateSubCategory[P]>
-      : GetScalarType<T[P], AggregateSubCategory[P]>
-  }
-
-
-
-
-  export type SubCategoryGroupByArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    where?: SubCategoryWhereInput
-    orderBy?: SubCategoryOrderByWithAggregationInput | SubCategoryOrderByWithAggregationInput[]
-    by: SubCategoryScalarFieldEnum[] | SubCategoryScalarFieldEnum
-    having?: SubCategoryScalarWhereWithAggregatesInput
-    take?: number
-    skip?: number
-    _count?: SubCategoryCountAggregateInputType | true
-    _min?: SubCategoryMinAggregateInputType
-    _max?: SubCategoryMaxAggregateInputType
-  }
-
-  export type SubCategoryGroupByOutputType = {
-    id: string
-    name: string
-    slug: string
-    categoryId: string
-    createdAt: Date
-    updatedAt: Date
-    _count: SubCategoryCountAggregateOutputType | null
-    _min: SubCategoryMinAggregateOutputType | null
-    _max: SubCategoryMaxAggregateOutputType | null
-  }
-
-  type GetSubCategoryGroupByPayload<T extends SubCategoryGroupByArgs> = Prisma.PrismaPromise<
-    Array<
-      PickEnumerable<SubCategoryGroupByOutputType, T['by']> &
-        {
-          [P in ((keyof T) & (keyof SubCategoryGroupByOutputType))]: P extends '_count'
-            ? T[P] extends boolean
-              ? number
-              : GetScalarType<T[P], SubCategoryGroupByOutputType[P]>
-            : GetScalarType<T[P], SubCategoryGroupByOutputType[P]>
-        }
-      >
-    >
-
-
-  export type SubCategorySelect<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    name?: boolean
-    slug?: boolean
-    categoryId?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    category?: boolean | CategoryDefaultArgs<ExtArgs>
-    ads?: boolean | SubCategory$adsArgs<ExtArgs>
-    _count?: boolean | SubCategoryCountOutputTypeDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["subCategory"]>
-
-  export type SubCategorySelectCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    name?: boolean
-    slug?: boolean
-    categoryId?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    category?: boolean | CategoryDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["subCategory"]>
-
-  export type SubCategorySelectUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetSelect<{
-    id?: boolean
-    name?: boolean
-    slug?: boolean
-    categoryId?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-    category?: boolean | CategoryDefaultArgs<ExtArgs>
-  }, ExtArgs["result"]["subCategory"]>
-
-  export type SubCategorySelectScalar = {
-    id?: boolean
-    name?: boolean
-    slug?: boolean
-    categoryId?: boolean
-    createdAt?: boolean
-    updatedAt?: boolean
-  }
-
-  export type SubCategoryOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "name" | "slug" | "categoryId" | "createdAt" | "updatedAt", ExtArgs["result"]["subCategory"]>
-  export type SubCategoryInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    category?: boolean | CategoryDefaultArgs<ExtArgs>
-    ads?: boolean | SubCategory$adsArgs<ExtArgs>
-    _count?: boolean | SubCategoryCountOutputTypeDefaultArgs<ExtArgs>
-  }
-  export type SubCategoryIncludeCreateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    category?: boolean | CategoryDefaultArgs<ExtArgs>
-  }
-  export type SubCategoryIncludeUpdateManyAndReturn<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    category?: boolean | CategoryDefaultArgs<ExtArgs>
-  }
-
-  export type $SubCategoryPayload<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    name: "SubCategory"
-    objects: {
-      category: Prisma.$CategoryPayload<ExtArgs>
-      ads: Prisma.$AdPayload<ExtArgs>[]
-    }
-    scalars: $Extensions.GetPayloadResult<{
-      id: string
-      name: string
-      slug: string
-      categoryId: string
-      createdAt: Date
-      updatedAt: Date
-    }, ExtArgs["result"]["subCategory"]>
-    composites: {}
-  }
-
-  type SubCategoryGetPayload<S extends boolean | null | undefined | SubCategoryDefaultArgs> = $Result.GetResult<Prisma.$SubCategoryPayload, S>
-
-  type SubCategoryCountArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> =
-    Omit<SubCategoryFindManyArgs, 'select' | 'include' | 'distinct' | 'omit'> & {
-      select?: SubCategoryCountAggregateInputType | true
-    }
-
-  export interface SubCategoryDelegate<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> {
-    [K: symbol]: { types: Prisma.TypeMap<ExtArgs>['model']['SubCategory'], meta: { name: 'SubCategory' } }
-    /**
-     * Find zero or one SubCategory that matches the filter.
-     * @param {SubCategoryFindUniqueArgs} args - Arguments to find a SubCategory
-     * @example
-     * // Get one SubCategory
-     * const subCategory = await prisma.subCategory.findUnique({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUnique<T extends SubCategoryFindUniqueArgs>(args: SelectSubset<T, SubCategoryFindUniqueArgs<ExtArgs>>): Prisma__SubCategoryClient<$Result.GetResult<Prisma.$SubCategoryPayload<ExtArgs>, T, "findUnique", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find one SubCategory that matches the filter or throw an error with `error.code='P2025'`
-     * if no matches were found.
-     * @param {SubCategoryFindUniqueOrThrowArgs} args - Arguments to find a SubCategory
-     * @example
-     * // Get one SubCategory
-     * const subCategory = await prisma.subCategory.findUniqueOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findUniqueOrThrow<T extends SubCategoryFindUniqueOrThrowArgs>(args: SelectSubset<T, SubCategoryFindUniqueOrThrowArgs<ExtArgs>>): Prisma__SubCategoryClient<$Result.GetResult<Prisma.$SubCategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first SubCategory that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {SubCategoryFindFirstArgs} args - Arguments to find a SubCategory
-     * @example
-     * // Get one SubCategory
-     * const subCategory = await prisma.subCategory.findFirst({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirst<T extends SubCategoryFindFirstArgs>(args?: SelectSubset<T, SubCategoryFindFirstArgs<ExtArgs>>): Prisma__SubCategoryClient<$Result.GetResult<Prisma.$SubCategoryPayload<ExtArgs>, T, "findFirst", GlobalOmitOptions> | null, null, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find the first SubCategory that matches the filter or
-     * throw `PrismaKnownClientError` with `P2025` code if no matches were found.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {SubCategoryFindFirstOrThrowArgs} args - Arguments to find a SubCategory
-     * @example
-     * // Get one SubCategory
-     * const subCategory = await prisma.subCategory.findFirstOrThrow({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     */
-    findFirstOrThrow<T extends SubCategoryFindFirstOrThrowArgs>(args?: SelectSubset<T, SubCategoryFindFirstOrThrowArgs<ExtArgs>>): Prisma__SubCategoryClient<$Result.GetResult<Prisma.$SubCategoryPayload<ExtArgs>, T, "findFirstOrThrow", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Find zero or more SubCategories that matches the filter.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {SubCategoryFindManyArgs} args - Arguments to filter and select certain fields only.
-     * @example
-     * // Get all SubCategories
-     * const subCategories = await prisma.subCategory.findMany()
-     * 
-     * // Get first 10 SubCategories
-     * const subCategories = await prisma.subCategory.findMany({ take: 10 })
-     * 
-     * // Only select the `id`
-     * const subCategoryWithIdOnly = await prisma.subCategory.findMany({ select: { id: true } })
-     * 
-     */
-    findMany<T extends SubCategoryFindManyArgs>(args?: SelectSubset<T, SubCategoryFindManyArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SubCategoryPayload<ExtArgs>, T, "findMany", GlobalOmitOptions>>
-
-    /**
-     * Create a SubCategory.
-     * @param {SubCategoryCreateArgs} args - Arguments to create a SubCategory.
-     * @example
-     * // Create one SubCategory
-     * const SubCategory = await prisma.subCategory.create({
-     *   data: {
-     *     // ... data to create a SubCategory
-     *   }
-     * })
-     * 
-     */
-    create<T extends SubCategoryCreateArgs>(args: SelectSubset<T, SubCategoryCreateArgs<ExtArgs>>): Prisma__SubCategoryClient<$Result.GetResult<Prisma.$SubCategoryPayload<ExtArgs>, T, "create", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Create many SubCategories.
-     * @param {SubCategoryCreateManyArgs} args - Arguments to create many SubCategories.
-     * @example
-     * // Create many SubCategories
-     * const subCategory = await prisma.subCategory.createMany({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     *     
-     */
-    createMany<T extends SubCategoryCreateManyArgs>(args?: SelectSubset<T, SubCategoryCreateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Create many SubCategories and returns the data saved in the database.
-     * @param {SubCategoryCreateManyAndReturnArgs} args - Arguments to create many SubCategories.
-     * @example
-     * // Create many SubCategories
-     * const subCategory = await prisma.subCategory.createManyAndReturn({
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Create many SubCategories and only return the `id`
-     * const subCategoryWithIdOnly = await prisma.subCategory.createManyAndReturn({
-     *   select: { id: true },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    createManyAndReturn<T extends SubCategoryCreateManyAndReturnArgs>(args?: SelectSubset<T, SubCategoryCreateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SubCategoryPayload<ExtArgs>, T, "createManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Delete a SubCategory.
-     * @param {SubCategoryDeleteArgs} args - Arguments to delete one SubCategory.
-     * @example
-     * // Delete one SubCategory
-     * const SubCategory = await prisma.subCategory.delete({
-     *   where: {
-     *     // ... filter to delete one SubCategory
-     *   }
-     * })
-     * 
-     */
-    delete<T extends SubCategoryDeleteArgs>(args: SelectSubset<T, SubCategoryDeleteArgs<ExtArgs>>): Prisma__SubCategoryClient<$Result.GetResult<Prisma.$SubCategoryPayload<ExtArgs>, T, "delete", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Update one SubCategory.
-     * @param {SubCategoryUpdateArgs} args - Arguments to update one SubCategory.
-     * @example
-     * // Update one SubCategory
-     * const subCategory = await prisma.subCategory.update({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    update<T extends SubCategoryUpdateArgs>(args: SelectSubset<T, SubCategoryUpdateArgs<ExtArgs>>): Prisma__SubCategoryClient<$Result.GetResult<Prisma.$SubCategoryPayload<ExtArgs>, T, "update", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-    /**
-     * Delete zero or more SubCategories.
-     * @param {SubCategoryDeleteManyArgs} args - Arguments to filter SubCategories to delete.
-     * @example
-     * // Delete a few SubCategories
-     * const { count } = await prisma.subCategory.deleteMany({
-     *   where: {
-     *     // ... provide filter here
-     *   }
-     * })
-     * 
-     */
-    deleteMany<T extends SubCategoryDeleteManyArgs>(args?: SelectSubset<T, SubCategoryDeleteManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more SubCategories.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {SubCategoryUpdateManyArgs} args - Arguments to update one or more rows.
-     * @example
-     * // Update many SubCategories
-     * const subCategory = await prisma.subCategory.updateMany({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: {
-     *     // ... provide data here
-     *   }
-     * })
-     * 
-     */
-    updateMany<T extends SubCategoryUpdateManyArgs>(args: SelectSubset<T, SubCategoryUpdateManyArgs<ExtArgs>>): Prisma.PrismaPromise<BatchPayload>
-
-    /**
-     * Update zero or more SubCategories and returns the data updated in the database.
-     * @param {SubCategoryUpdateManyAndReturnArgs} args - Arguments to update many SubCategories.
-     * @example
-     * // Update many SubCategories
-     * const subCategory = await prisma.subCategory.updateManyAndReturn({
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * 
-     * // Update zero or more SubCategories and only return the `id`
-     * const subCategoryWithIdOnly = await prisma.subCategory.updateManyAndReturn({
-     *   select: { id: true },
-     *   where: {
-     *     // ... provide filter here
-     *   },
-     *   data: [
-     *     // ... provide data here
-     *   ]
-     * })
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * 
-     */
-    updateManyAndReturn<T extends SubCategoryUpdateManyAndReturnArgs>(args: SelectSubset<T, SubCategoryUpdateManyAndReturnArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$SubCategoryPayload<ExtArgs>, T, "updateManyAndReturn", GlobalOmitOptions>>
-
-    /**
-     * Create or update one SubCategory.
-     * @param {SubCategoryUpsertArgs} args - Arguments to update or create a SubCategory.
-     * @example
-     * // Update or create a SubCategory
-     * const subCategory = await prisma.subCategory.upsert({
-     *   create: {
-     *     // ... data to create a SubCategory
-     *   },
-     *   update: {
-     *     // ... in case it already exists, update
-     *   },
-     *   where: {
-     *     // ... the filter for the SubCategory we want to update
-     *   }
-     * })
-     */
-    upsert<T extends SubCategoryUpsertArgs>(args: SelectSubset<T, SubCategoryUpsertArgs<ExtArgs>>): Prisma__SubCategoryClient<$Result.GetResult<Prisma.$SubCategoryPayload<ExtArgs>, T, "upsert", GlobalOmitOptions>, never, ExtArgs, GlobalOmitOptions>
-
-
-    /**
-     * Count the number of SubCategories.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {SubCategoryCountArgs} args - Arguments to filter SubCategories to count.
-     * @example
-     * // Count the number of SubCategories
-     * const count = await prisma.subCategory.count({
-     *   where: {
-     *     // ... the filter for the SubCategories we want to count
-     *   }
-     * })
-    **/
-    count<T extends SubCategoryCountArgs>(
-      args?: Subset<T, SubCategoryCountArgs>,
-    ): Prisma.PrismaPromise<
-      T extends $Utils.Record<'select', any>
-        ? T['select'] extends true
-          ? number
-          : GetScalarType<T['select'], SubCategoryCountAggregateOutputType>
-        : number
-    >
-
-    /**
-     * Allows you to perform aggregations operations on a SubCategory.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {SubCategoryAggregateArgs} args - Select which aggregations you would like to apply and on what fields.
-     * @example
-     * // Ordered by age ascending
-     * // Where email contains prisma.io
-     * // Limited to the 10 users
-     * const aggregations = await prisma.user.aggregate({
-     *   _avg: {
-     *     age: true,
-     *   },
-     *   where: {
-     *     email: {
-     *       contains: "prisma.io",
-     *     },
-     *   },
-     *   orderBy: {
-     *     age: "asc",
-     *   },
-     *   take: 10,
-     * })
-    **/
-    aggregate<T extends SubCategoryAggregateArgs>(args: Subset<T, SubCategoryAggregateArgs>): Prisma.PrismaPromise<GetSubCategoryAggregateType<T>>
-
-    /**
-     * Group by SubCategory.
-     * Note, that providing `undefined` is treated as the value not being there.
-     * Read more here: https://pris.ly/d/null-undefined
-     * @param {SubCategoryGroupByArgs} args - Group by arguments.
-     * @example
-     * // Group by city, order by createdAt, get count
-     * const result = await prisma.user.groupBy({
-     *   by: ['city', 'createdAt'],
-     *   orderBy: {
-     *     createdAt: true
-     *   },
-     *   _count: {
-     *     _all: true
-     *   },
-     * })
-     * 
-    **/
-    groupBy<
-      T extends SubCategoryGroupByArgs,
-      HasSelectOrTake extends Or<
-        Extends<'skip', Keys<T>>,
-        Extends<'take', Keys<T>>
-      >,
-      OrderByArg extends True extends HasSelectOrTake
-        ? { orderBy: SubCategoryGroupByArgs['orderBy'] }
-        : { orderBy?: SubCategoryGroupByArgs['orderBy'] },
-      OrderFields extends ExcludeUnderscoreKeys<Keys<MaybeTupleToUnion<T['orderBy']>>>,
-      ByFields extends MaybeTupleToUnion<T['by']>,
-      ByValid extends Has<ByFields, OrderFields>,
-      HavingFields extends GetHavingFields<T['having']>,
-      HavingValid extends Has<ByFields, HavingFields>,
-      ByEmpty extends T['by'] extends never[] ? True : False,
-      InputErrors extends ByEmpty extends True
-      ? `Error: "by" must not be empty.`
-      : HavingValid extends False
-      ? {
-          [P in HavingFields]: P extends ByFields
-            ? never
-            : P extends string
-            ? `Error: Field "${P}" used in "having" needs to be provided in "by".`
-            : [
-                Error,
-                'Field ',
-                P,
-                ` in "having" needs to be provided in "by"`,
-              ]
-        }[HavingFields]
-      : 'take' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "take", you also need to provide "orderBy"'
-      : 'skip' extends Keys<T>
-      ? 'orderBy' extends Keys<T>
-        ? ByValid extends True
-          ? {}
-          : {
-              [P in OrderFields]: P extends ByFields
-                ? never
-                : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-            }[OrderFields]
-        : 'Error: If you provide "skip", you also need to provide "orderBy"'
-      : ByValid extends True
-      ? {}
-      : {
-          [P in OrderFields]: P extends ByFields
-            ? never
-            : `Error: Field "${P}" in "orderBy" needs to be provided in "by"`
-        }[OrderFields]
-    >(args: SubsetIntersection<T, SubCategoryGroupByArgs, OrderByArg> & InputErrors): {} extends InputErrors ? GetSubCategoryGroupByPayload<T> : Prisma.PrismaPromise<InputErrors>
-  /**
-   * Fields of the SubCategory model
-   */
-  readonly fields: SubCategoryFieldRefs;
-  }
-
-  /**
-   * The delegate class that acts as a "Promise-like" for SubCategory.
-   * Why is this prefixed with `Prisma__`?
-   * Because we want to prevent naming conflicts as mentioned in
-   * https://github.com/prisma/prisma-client-js/issues/707
-   */
-  export interface Prisma__SubCategoryClient<T, Null = never, ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs, GlobalOmitOptions = {}> extends Prisma.PrismaPromise<T> {
-    readonly [Symbol.toStringTag]: "PrismaPromise"
-    category<T extends CategoryDefaultArgs<ExtArgs> = {}>(args?: Subset<T, CategoryDefaultArgs<ExtArgs>>): Prisma__CategoryClient<$Result.GetResult<Prisma.$CategoryPayload<ExtArgs>, T, "findUniqueOrThrow", GlobalOmitOptions> | Null, Null, ExtArgs, GlobalOmitOptions>
-    ads<T extends SubCategory$adsArgs<ExtArgs> = {}>(args?: Subset<T, SubCategory$adsArgs<ExtArgs>>): Prisma.PrismaPromise<$Result.GetResult<Prisma.$AdPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
-    /**
-     * Attaches callbacks for the resolution and/or rejection of the Promise.
-     * @param onfulfilled The callback to execute when the Promise is resolved.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of which ever callback is executed.
-     */
-    then<TResult1 = T, TResult2 = never>(onfulfilled?: ((value: T) => TResult1 | PromiseLike<TResult1>) | undefined | null, onrejected?: ((reason: any) => TResult2 | PromiseLike<TResult2>) | undefined | null): $Utils.JsPromise<TResult1 | TResult2>
-    /**
-     * Attaches a callback for only the rejection of the Promise.
-     * @param onrejected The callback to execute when the Promise is rejected.
-     * @returns A Promise for the completion of the callback.
-     */
-    catch<TResult = never>(onrejected?: ((reason: any) => TResult | PromiseLike<TResult>) | undefined | null): $Utils.JsPromise<T | TResult>
-    /**
-     * Attaches a callback that is invoked when the Promise is settled (fulfilled or rejected). The
-     * resolved value cannot be modified from the callback.
-     * @param onfinally The callback to execute when the Promise is settled (fulfilled or rejected).
-     * @returns A Promise for the completion of the callback.
-     */
-    finally(onfinally?: (() => void) | undefined | null): $Utils.JsPromise<T>
-  }
-
-
-
-
-  /**
-   * Fields of the SubCategory model
-   */
-  interface SubCategoryFieldRefs {
-    readonly id: FieldRef<"SubCategory", 'String'>
-    readonly name: FieldRef<"SubCategory", 'String'>
-    readonly slug: FieldRef<"SubCategory", 'String'>
-    readonly categoryId: FieldRef<"SubCategory", 'String'>
-    readonly createdAt: FieldRef<"SubCategory", 'DateTime'>
-    readonly updatedAt: FieldRef<"SubCategory", 'DateTime'>
-  }
-    
-
-  // Custom InputTypes
-  /**
-   * SubCategory findUnique
-   */
-  export type SubCategoryFindUniqueArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the SubCategory
-     */
-    select?: SubCategorySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the SubCategory
-     */
-    omit?: SubCategoryOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SubCategoryInclude<ExtArgs> | null
-    /**
-     * Filter, which SubCategory to fetch.
-     */
-    where: SubCategoryWhereUniqueInput
-  }
-
-  /**
-   * SubCategory findUniqueOrThrow
-   */
-  export type SubCategoryFindUniqueOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the SubCategory
-     */
-    select?: SubCategorySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the SubCategory
-     */
-    omit?: SubCategoryOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SubCategoryInclude<ExtArgs> | null
-    /**
-     * Filter, which SubCategory to fetch.
-     */
-    where: SubCategoryWhereUniqueInput
-  }
-
-  /**
-   * SubCategory findFirst
-   */
-  export type SubCategoryFindFirstArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the SubCategory
-     */
-    select?: SubCategorySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the SubCategory
-     */
-    omit?: SubCategoryOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SubCategoryInclude<ExtArgs> | null
-    /**
-     * Filter, which SubCategory to fetch.
-     */
-    where?: SubCategoryWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of SubCategories to fetch.
-     */
-    orderBy?: SubCategoryOrderByWithRelationInput | SubCategoryOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for SubCategories.
-     */
-    cursor?: SubCategoryWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` SubCategories from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` SubCategories.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of SubCategories.
-     */
-    distinct?: SubCategoryScalarFieldEnum | SubCategoryScalarFieldEnum[]
-  }
-
-  /**
-   * SubCategory findFirstOrThrow
-   */
-  export type SubCategoryFindFirstOrThrowArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the SubCategory
-     */
-    select?: SubCategorySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the SubCategory
-     */
-    omit?: SubCategoryOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SubCategoryInclude<ExtArgs> | null
-    /**
-     * Filter, which SubCategory to fetch.
-     */
-    where?: SubCategoryWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of SubCategories to fetch.
-     */
-    orderBy?: SubCategoryOrderByWithRelationInput | SubCategoryOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for searching for SubCategories.
-     */
-    cursor?: SubCategoryWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` SubCategories from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` SubCategories.
-     */
-    skip?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/distinct Distinct Docs}
-     * 
-     * Filter by unique combinations of SubCategories.
-     */
-    distinct?: SubCategoryScalarFieldEnum | SubCategoryScalarFieldEnum[]
-  }
-
-  /**
-   * SubCategory findMany
-   */
-  export type SubCategoryFindManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the SubCategory
-     */
-    select?: SubCategorySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the SubCategory
-     */
-    omit?: SubCategoryOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SubCategoryInclude<ExtArgs> | null
-    /**
-     * Filter, which SubCategories to fetch.
-     */
-    where?: SubCategoryWhereInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/sorting Sorting Docs}
-     * 
-     * Determine the order of SubCategories to fetch.
-     */
-    orderBy?: SubCategoryOrderByWithRelationInput | SubCategoryOrderByWithRelationInput[]
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination#cursor-based-pagination Cursor Docs}
-     * 
-     * Sets the position for listing SubCategories.
-     */
-    cursor?: SubCategoryWhereUniqueInput
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Take `±n` SubCategories from the position of the cursor.
-     */
-    take?: number
-    /**
-     * {@link https://www.prisma.io/docs/concepts/components/prisma-client/pagination Pagination Docs}
-     * 
-     * Skip the first `n` SubCategories.
-     */
-    skip?: number
-    distinct?: SubCategoryScalarFieldEnum | SubCategoryScalarFieldEnum[]
-  }
-
-  /**
-   * SubCategory create
-   */
-  export type SubCategoryCreateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the SubCategory
-     */
-    select?: SubCategorySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the SubCategory
-     */
-    omit?: SubCategoryOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SubCategoryInclude<ExtArgs> | null
-    /**
-     * The data needed to create a SubCategory.
-     */
-    data: XOR<SubCategoryCreateInput, SubCategoryUncheckedCreateInput>
-  }
-
-  /**
-   * SubCategory createMany
-   */
-  export type SubCategoryCreateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to create many SubCategories.
-     */
-    data: SubCategoryCreateManyInput | SubCategoryCreateManyInput[]
-    skipDuplicates?: boolean
-  }
-
-  /**
-   * SubCategory createManyAndReturn
-   */
-  export type SubCategoryCreateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the SubCategory
-     */
-    select?: SubCategorySelectCreateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the SubCategory
-     */
-    omit?: SubCategoryOmit<ExtArgs> | null
-    /**
-     * The data used to create many SubCategories.
-     */
-    data: SubCategoryCreateManyInput | SubCategoryCreateManyInput[]
-    skipDuplicates?: boolean
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SubCategoryIncludeCreateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * SubCategory update
-   */
-  export type SubCategoryUpdateArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the SubCategory
-     */
-    select?: SubCategorySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the SubCategory
-     */
-    omit?: SubCategoryOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SubCategoryInclude<ExtArgs> | null
-    /**
-     * The data needed to update a SubCategory.
-     */
-    data: XOR<SubCategoryUpdateInput, SubCategoryUncheckedUpdateInput>
-    /**
-     * Choose, which SubCategory to update.
-     */
-    where: SubCategoryWhereUniqueInput
-  }
-
-  /**
-   * SubCategory updateMany
-   */
-  export type SubCategoryUpdateManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * The data used to update SubCategories.
-     */
-    data: XOR<SubCategoryUpdateManyMutationInput, SubCategoryUncheckedUpdateManyInput>
-    /**
-     * Filter which SubCategories to update
-     */
-    where?: SubCategoryWhereInput
-    /**
-     * Limit how many SubCategories to update.
-     */
-    limit?: number
-  }
-
-  /**
-   * SubCategory updateManyAndReturn
-   */
-  export type SubCategoryUpdateManyAndReturnArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the SubCategory
-     */
-    select?: SubCategorySelectUpdateManyAndReturn<ExtArgs> | null
-    /**
-     * Omit specific fields from the SubCategory
-     */
-    omit?: SubCategoryOmit<ExtArgs> | null
-    /**
-     * The data used to update SubCategories.
-     */
-    data: XOR<SubCategoryUpdateManyMutationInput, SubCategoryUncheckedUpdateManyInput>
-    /**
-     * Filter which SubCategories to update
-     */
-    where?: SubCategoryWhereInput
-    /**
-     * Limit how many SubCategories to update.
-     */
-    limit?: number
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SubCategoryIncludeUpdateManyAndReturn<ExtArgs> | null
-  }
-
-  /**
-   * SubCategory upsert
-   */
-  export type SubCategoryUpsertArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the SubCategory
-     */
-    select?: SubCategorySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the SubCategory
-     */
-    omit?: SubCategoryOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SubCategoryInclude<ExtArgs> | null
-    /**
-     * The filter to search for the SubCategory to update in case it exists.
-     */
-    where: SubCategoryWhereUniqueInput
-    /**
-     * In case the SubCategory found by the `where` argument doesn't exist, create a new SubCategory with this data.
-     */
-    create: XOR<SubCategoryCreateInput, SubCategoryUncheckedCreateInput>
-    /**
-     * In case the SubCategory was found with the provided `where` argument, update it with this data.
-     */
-    update: XOR<SubCategoryUpdateInput, SubCategoryUncheckedUpdateInput>
-  }
-
-  /**
-   * SubCategory delete
-   */
-  export type SubCategoryDeleteArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the SubCategory
-     */
-    select?: SubCategorySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the SubCategory
-     */
-    omit?: SubCategoryOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SubCategoryInclude<ExtArgs> | null
-    /**
-     * Filter which SubCategory to delete.
-     */
-    where: SubCategoryWhereUniqueInput
-  }
-
-  /**
-   * SubCategory deleteMany
-   */
-  export type SubCategoryDeleteManyArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Filter which SubCategories to delete
-     */
-    where?: SubCategoryWhereInput
-    /**
-     * Limit how many SubCategories to delete.
-     */
-    limit?: number
-  }
-
-  /**
-   * SubCategory.ads
-   */
-  export type SubCategory$adsArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the Ad
-     */
-    select?: AdSelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the Ad
-     */
-    omit?: AdOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: AdInclude<ExtArgs> | null
-    where?: AdWhereInput
-    orderBy?: AdOrderByWithRelationInput | AdOrderByWithRelationInput[]
-    cursor?: AdWhereUniqueInput
-    take?: number
-    skip?: number
-    distinct?: AdScalarFieldEnum | AdScalarFieldEnum[]
-  }
-
-  /**
-   * SubCategory without action
-   */
-  export type SubCategoryDefaultArgs<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
-    /**
-     * Select specific fields to fetch from the SubCategory
-     */
-    select?: SubCategorySelect<ExtArgs> | null
-    /**
-     * Omit specific fields from the SubCategory
-     */
-    omit?: SubCategoryOmit<ExtArgs> | null
-    /**
-     * Choose, which related nodes to fetch as well
-     */
-    include?: SubCategoryInclude<ExtArgs> | null
   }
 
 
@@ -12039,7 +12078,6 @@ export namespace Prisma {
     updatedAt: 'updatedAt',
     firstName: 'firstName',
     lastName: 'lastName',
-    password: 'password',
     role: 'role',
     emailVerified: 'emailVerified',
     image: 'image'
@@ -12054,18 +12092,34 @@ export namespace Prisma {
     slug: 'slug',
     description: 'description',
     createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
+    updatedAt: 'updatedAt',
+    image: 'image'
   };
 
   export type CategoryScalarFieldEnum = (typeof CategoryScalarFieldEnum)[keyof typeof CategoryScalarFieldEnum]
 
 
+  export const SubCategoryScalarFieldEnum: {
+    id: 'id',
+    name: 'name',
+    slug: 'slug',
+    categoryId: 'categoryId',
+    image: 'image',
+    createdAt: 'createdAt',
+    updatedAt: 'updatedAt'
+  };
+
+  export type SubCategoryScalarFieldEnum = (typeof SubCategoryScalarFieldEnum)[keyof typeof SubCategoryScalarFieldEnum]
+
+
   export const BlogCategoryScalarFieldEnum: {
     id: 'id',
     name: 'name',
+    slug: 'slug',
+    description: 'description',
+    image: 'image',
     createdAt: 'createdAt',
-    updatedAt: 'updatedAt',
-    image: 'image'
+    updatedAt: 'updatedAt'
   };
 
   export type BlogCategoryScalarFieldEnum = (typeof BlogCategoryScalarFieldEnum)[keyof typeof BlogCategoryScalarFieldEnum]
@@ -12086,18 +12140,6 @@ export namespace Prisma {
   };
 
   export type BlogPostScalarFieldEnum = (typeof BlogPostScalarFieldEnum)[keyof typeof BlogPostScalarFieldEnum]
-
-
-  export const SubCategoryScalarFieldEnum: {
-    id: 'id',
-    name: 'name',
-    slug: 'slug',
-    categoryId: 'categoryId',
-    createdAt: 'createdAt',
-    updatedAt: 'updatedAt'
-  };
-
-  export type SubCategoryScalarFieldEnum = (typeof SubCategoryScalarFieldEnum)[keyof typeof SubCategoryScalarFieldEnum]
 
 
   export const SessionScalarFieldEnum: {
@@ -12397,7 +12439,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"User"> | Date | string
     firstName?: StringFilter<"User"> | string
     lastName?: StringFilter<"User"> | string
-    password?: StringFilter<"User"> | string
     role?: EnumRoleNullableFilter<"User"> | $Enums.Role | null
     emailVerified?: BoolFilter<"User"> | boolean
     image?: StringNullableFilter<"User"> | string | null
@@ -12415,7 +12456,6 @@ export namespace Prisma {
     updatedAt?: SortOrder
     firstName?: SortOrder
     lastName?: SortOrder
-    password?: SortOrder
     role?: SortOrderInput | SortOrder
     emailVerified?: SortOrder
     image?: SortOrderInput | SortOrder
@@ -12436,7 +12476,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFilter<"User"> | Date | string
     firstName?: StringFilter<"User"> | string
     lastName?: StringFilter<"User"> | string
-    password?: StringFilter<"User"> | string
     role?: EnumRoleNullableFilter<"User"> | $Enums.Role | null
     emailVerified?: BoolFilter<"User"> | boolean
     image?: StringNullableFilter<"User"> | string | null
@@ -12454,7 +12493,6 @@ export namespace Prisma {
     updatedAt?: SortOrder
     firstName?: SortOrder
     lastName?: SortOrder
-    password?: SortOrder
     role?: SortOrderInput | SortOrder
     emailVerified?: SortOrder
     image?: SortOrderInput | SortOrder
@@ -12474,7 +12512,6 @@ export namespace Prisma {
     updatedAt?: DateTimeWithAggregatesFilter<"User"> | Date | string
     firstName?: StringWithAggregatesFilter<"User"> | string
     lastName?: StringWithAggregatesFilter<"User"> | string
-    password?: StringWithAggregatesFilter<"User"> | string
     role?: EnumRoleNullableWithAggregatesFilter<"User"> | $Enums.Role | null
     emailVerified?: BoolWithAggregatesFilter<"User"> | boolean
     image?: StringNullableWithAggregatesFilter<"User"> | string | null
@@ -12490,6 +12527,7 @@ export namespace Prisma {
     description?: StringNullableFilter<"Category"> | string | null
     createdAt?: DateTimeFilter<"Category"> | Date | string
     updatedAt?: DateTimeFilter<"Category"> | Date | string
+    image?: StringFilter<"Category"> | string
     ads?: AdListRelationFilter
     subCategories?: SubCategoryListRelationFilter
   }
@@ -12501,6 +12539,7 @@ export namespace Prisma {
     description?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    image?: SortOrder
     ads?: AdOrderByRelationAggregateInput
     subCategories?: SubCategoryOrderByRelationAggregateInput
   }
@@ -12515,6 +12554,7 @@ export namespace Prisma {
     description?: StringNullableFilter<"Category"> | string | null
     createdAt?: DateTimeFilter<"Category"> | Date | string
     updatedAt?: DateTimeFilter<"Category"> | Date | string
+    image?: StringFilter<"Category"> | string
     ads?: AdListRelationFilter
     subCategories?: SubCategoryListRelationFilter
   }, "id" | "name" | "slug">
@@ -12526,6 +12566,7 @@ export namespace Prisma {
     description?: SortOrderInput | SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    image?: SortOrder
     _count?: CategoryCountOrderByAggregateInput
     _max?: CategoryMaxOrderByAggregateInput
     _min?: CategoryMinOrderByAggregateInput
@@ -12541,6 +12582,76 @@ export namespace Prisma {
     description?: StringNullableWithAggregatesFilter<"Category"> | string | null
     createdAt?: DateTimeWithAggregatesFilter<"Category"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"Category"> | Date | string
+    image?: StringWithAggregatesFilter<"Category"> | string
+  }
+
+  export type SubCategoryWhereInput = {
+    AND?: SubCategoryWhereInput | SubCategoryWhereInput[]
+    OR?: SubCategoryWhereInput[]
+    NOT?: SubCategoryWhereInput | SubCategoryWhereInput[]
+    id?: StringFilter<"SubCategory"> | string
+    name?: StringFilter<"SubCategory"> | string
+    slug?: StringFilter<"SubCategory"> | string
+    categoryId?: StringFilter<"SubCategory"> | string
+    image?: StringFilter<"SubCategory"> | string
+    createdAt?: DateTimeFilter<"SubCategory"> | Date | string
+    updatedAt?: DateTimeFilter<"SubCategory"> | Date | string
+    category?: XOR<CategoryScalarRelationFilter, CategoryWhereInput>
+    ads?: AdListRelationFilter
+  }
+
+  export type SubCategoryOrderByWithRelationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+    categoryId?: SortOrder
+    image?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    category?: CategoryOrderByWithRelationInput
+    ads?: AdOrderByRelationAggregateInput
+  }
+
+  export type SubCategoryWhereUniqueInput = Prisma.AtLeast<{
+    id?: string
+    slug?: string
+    name_categoryId?: SubCategoryNameCategoryIdCompoundUniqueInput
+    AND?: SubCategoryWhereInput | SubCategoryWhereInput[]
+    OR?: SubCategoryWhereInput[]
+    NOT?: SubCategoryWhereInput | SubCategoryWhereInput[]
+    name?: StringFilter<"SubCategory"> | string
+    categoryId?: StringFilter<"SubCategory"> | string
+    image?: StringFilter<"SubCategory"> | string
+    createdAt?: DateTimeFilter<"SubCategory"> | Date | string
+    updatedAt?: DateTimeFilter<"SubCategory"> | Date | string
+    category?: XOR<CategoryScalarRelationFilter, CategoryWhereInput>
+    ads?: AdListRelationFilter
+  }, "id" | "slug" | "name_categoryId">
+
+  export type SubCategoryOrderByWithAggregationInput = {
+    id?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+    categoryId?: SortOrder
+    image?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+    _count?: SubCategoryCountOrderByAggregateInput
+    _max?: SubCategoryMaxOrderByAggregateInput
+    _min?: SubCategoryMinOrderByAggregateInput
+  }
+
+  export type SubCategoryScalarWhereWithAggregatesInput = {
+    AND?: SubCategoryScalarWhereWithAggregatesInput | SubCategoryScalarWhereWithAggregatesInput[]
+    OR?: SubCategoryScalarWhereWithAggregatesInput[]
+    NOT?: SubCategoryScalarWhereWithAggregatesInput | SubCategoryScalarWhereWithAggregatesInput[]
+    id?: StringWithAggregatesFilter<"SubCategory"> | string
+    name?: StringWithAggregatesFilter<"SubCategory"> | string
+    slug?: StringWithAggregatesFilter<"SubCategory"> | string
+    categoryId?: StringWithAggregatesFilter<"SubCategory"> | string
+    image?: StringWithAggregatesFilter<"SubCategory"> | string
+    createdAt?: DateTimeWithAggregatesFilter<"SubCategory"> | Date | string
+    updatedAt?: DateTimeWithAggregatesFilter<"SubCategory"> | Date | string
   }
 
   export type BlogCategoryWhereInput = {
@@ -12549,39 +12660,47 @@ export namespace Prisma {
     NOT?: BlogCategoryWhereInput | BlogCategoryWhereInput[]
     id?: StringFilter<"BlogCategory"> | string
     name?: StringFilter<"BlogCategory"> | string
+    slug?: StringFilter<"BlogCategory"> | string
+    description?: StringNullableFilter<"BlogCategory"> | string | null
+    image?: StringFilter<"BlogCategory"> | string
     createdAt?: DateTimeFilter<"BlogCategory"> | Date | string
     updatedAt?: DateTimeFilter<"BlogCategory"> | Date | string
-    image?: StringFilter<"BlogCategory"> | string
     posts?: BlogPostListRelationFilter
   }
 
   export type BlogCategoryOrderByWithRelationInput = {
     id?: SortOrder
     name?: SortOrder
+    slug?: SortOrder
+    description?: SortOrderInput | SortOrder
+    image?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    image?: SortOrder
     posts?: BlogPostOrderByRelationAggregateInput
   }
 
   export type BlogCategoryWhereUniqueInput = Prisma.AtLeast<{
     id?: string
     name?: string
+    slug?: string
     AND?: BlogCategoryWhereInput | BlogCategoryWhereInput[]
     OR?: BlogCategoryWhereInput[]
     NOT?: BlogCategoryWhereInput | BlogCategoryWhereInput[]
+    description?: StringNullableFilter<"BlogCategory"> | string | null
+    image?: StringFilter<"BlogCategory"> | string
     createdAt?: DateTimeFilter<"BlogCategory"> | Date | string
     updatedAt?: DateTimeFilter<"BlogCategory"> | Date | string
-    image?: StringFilter<"BlogCategory"> | string
     posts?: BlogPostListRelationFilter
-  }, "id" | "name">
+  }, "id" | "name" | "slug">
 
   export type BlogCategoryOrderByWithAggregationInput = {
     id?: SortOrder
     name?: SortOrder
+    slug?: SortOrder
+    description?: SortOrderInput | SortOrder
+    image?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    image?: SortOrder
     _count?: BlogCategoryCountOrderByAggregateInput
     _max?: BlogCategoryMaxOrderByAggregateInput
     _min?: BlogCategoryMinOrderByAggregateInput
@@ -12593,9 +12712,11 @@ export namespace Prisma {
     NOT?: BlogCategoryScalarWhereWithAggregatesInput | BlogCategoryScalarWhereWithAggregatesInput[]
     id?: StringWithAggregatesFilter<"BlogCategory"> | string
     name?: StringWithAggregatesFilter<"BlogCategory"> | string
+    slug?: StringWithAggregatesFilter<"BlogCategory"> | string
+    description?: StringNullableWithAggregatesFilter<"BlogCategory"> | string | null
+    image?: StringWithAggregatesFilter<"BlogCategory"> | string
     createdAt?: DateTimeWithAggregatesFilter<"BlogCategory"> | Date | string
     updatedAt?: DateTimeWithAggregatesFilter<"BlogCategory"> | Date | string
-    image?: StringWithAggregatesFilter<"BlogCategory"> | string
   }
 
   export type BlogPostWhereInput = {
@@ -12684,70 +12805,6 @@ export namespace Prisma {
     publishedAt?: DateTimeNullableWithAggregatesFilter<"BlogPost"> | Date | string | null
     userId?: StringWithAggregatesFilter<"BlogPost"> | string
     categoryId?: StringNullableWithAggregatesFilter<"BlogPost"> | string | null
-  }
-
-  export type SubCategoryWhereInput = {
-    AND?: SubCategoryWhereInput | SubCategoryWhereInput[]
-    OR?: SubCategoryWhereInput[]
-    NOT?: SubCategoryWhereInput | SubCategoryWhereInput[]
-    id?: StringFilter<"SubCategory"> | string
-    name?: StringFilter<"SubCategory"> | string
-    slug?: StringFilter<"SubCategory"> | string
-    categoryId?: StringFilter<"SubCategory"> | string
-    createdAt?: DateTimeFilter<"SubCategory"> | Date | string
-    updatedAt?: DateTimeFilter<"SubCategory"> | Date | string
-    category?: XOR<CategoryScalarRelationFilter, CategoryWhereInput>
-    ads?: AdListRelationFilter
-  }
-
-  export type SubCategoryOrderByWithRelationInput = {
-    id?: SortOrder
-    name?: SortOrder
-    slug?: SortOrder
-    categoryId?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    category?: CategoryOrderByWithRelationInput
-    ads?: AdOrderByRelationAggregateInput
-  }
-
-  export type SubCategoryWhereUniqueInput = Prisma.AtLeast<{
-    id?: string
-    slug?: string
-    name_categoryId?: SubCategoryNameCategoryIdCompoundUniqueInput
-    AND?: SubCategoryWhereInput | SubCategoryWhereInput[]
-    OR?: SubCategoryWhereInput[]
-    NOT?: SubCategoryWhereInput | SubCategoryWhereInput[]
-    name?: StringFilter<"SubCategory"> | string
-    categoryId?: StringFilter<"SubCategory"> | string
-    createdAt?: DateTimeFilter<"SubCategory"> | Date | string
-    updatedAt?: DateTimeFilter<"SubCategory"> | Date | string
-    category?: XOR<CategoryScalarRelationFilter, CategoryWhereInput>
-    ads?: AdListRelationFilter
-  }, "id" | "slug" | "name_categoryId">
-
-  export type SubCategoryOrderByWithAggregationInput = {
-    id?: SortOrder
-    name?: SortOrder
-    slug?: SortOrder
-    categoryId?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-    _count?: SubCategoryCountOrderByAggregateInput
-    _max?: SubCategoryMaxOrderByAggregateInput
-    _min?: SubCategoryMinOrderByAggregateInput
-  }
-
-  export type SubCategoryScalarWhereWithAggregatesInput = {
-    AND?: SubCategoryScalarWhereWithAggregatesInput | SubCategoryScalarWhereWithAggregatesInput[]
-    OR?: SubCategoryScalarWhereWithAggregatesInput[]
-    NOT?: SubCategoryScalarWhereWithAggregatesInput | SubCategoryScalarWhereWithAggregatesInput[]
-    id?: StringWithAggregatesFilter<"SubCategory"> | string
-    name?: StringWithAggregatesFilter<"SubCategory"> | string
-    slug?: StringWithAggregatesFilter<"SubCategory"> | string
-    categoryId?: StringWithAggregatesFilter<"SubCategory"> | string
-    createdAt?: DateTimeWithAggregatesFilter<"SubCategory"> | Date | string
-    updatedAt?: DateTimeWithAggregatesFilter<"SubCategory"> | Date | string
   }
 
   export type SessionWhereInput = {
@@ -13110,7 +13167,6 @@ export namespace Prisma {
     updatedAt?: Date | string
     firstName: string
     lastName: string
-    password: string
     role?: $Enums.Role | null
     emailVerified: boolean
     image?: string | null
@@ -13128,7 +13184,6 @@ export namespace Prisma {
     updatedAt?: Date | string
     firstName: string
     lastName: string
-    password: string
     role?: $Enums.Role | null
     emailVerified: boolean
     image?: string | null
@@ -13146,7 +13201,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
     role?: NullableEnumRoleFieldUpdateOperationsInput | $Enums.Role | null
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
     image?: NullableStringFieldUpdateOperationsInput | string | null
@@ -13164,7 +13218,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
     role?: NullableEnumRoleFieldUpdateOperationsInput | $Enums.Role | null
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
     image?: NullableStringFieldUpdateOperationsInput | string | null
@@ -13182,7 +13235,6 @@ export namespace Prisma {
     updatedAt?: Date | string
     firstName: string
     lastName: string
-    password: string
     role?: $Enums.Role | null
     emailVerified: boolean
     image?: string | null
@@ -13196,7 +13248,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
     role?: NullableEnumRoleFieldUpdateOperationsInput | $Enums.Role | null
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
     image?: NullableStringFieldUpdateOperationsInput | string | null
@@ -13210,7 +13261,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
     role?: NullableEnumRoleFieldUpdateOperationsInput | $Enums.Role | null
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
     image?: NullableStringFieldUpdateOperationsInput | string | null
@@ -13223,6 +13273,7 @@ export namespace Prisma {
     description?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    image: string
     ads?: AdCreateNestedManyWithoutCategoryInput
     subCategories?: SubCategoryCreateNestedManyWithoutCategoryInput
   }
@@ -13234,6 +13285,7 @@ export namespace Prisma {
     description?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    image: string
     ads?: AdUncheckedCreateNestedManyWithoutCategoryInput
     subCategories?: SubCategoryUncheckedCreateNestedManyWithoutCategoryInput
   }
@@ -13245,6 +13297,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    image?: StringFieldUpdateOperationsInput | string
     ads?: AdUpdateManyWithoutCategoryNestedInput
     subCategories?: SubCategoryUpdateManyWithoutCategoryNestedInput
   }
@@ -13256,6 +13309,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    image?: StringFieldUpdateOperationsInput | string
     ads?: AdUncheckedUpdateManyWithoutCategoryNestedInput
     subCategories?: SubCategoryUncheckedUpdateManyWithoutCategoryNestedInput
   }
@@ -13267,6 +13321,7 @@ export namespace Prisma {
     description?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    image: string
   }
 
   export type CategoryUpdateManyMutationInput = {
@@ -13276,6 +13331,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    image?: StringFieldUpdateOperationsInput | string
   }
 
   export type CategoryUncheckedUpdateManyInput = {
@@ -13285,66 +13341,154 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    image?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type SubCategoryCreateInput = {
+    id?: string
+    name: string
+    slug: string
+    image: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    category: CategoryCreateNestedOneWithoutSubCategoriesInput
+    ads?: AdCreateNestedManyWithoutSubCategoryInput
+  }
+
+  export type SubCategoryUncheckedCreateInput = {
+    id?: string
+    name: string
+    slug: string
+    categoryId: string
+    image: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    ads?: AdUncheckedCreateNestedManyWithoutSubCategoryInput
+  }
+
+  export type SubCategoryUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    image?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    category?: CategoryUpdateOneRequiredWithoutSubCategoriesNestedInput
+    ads?: AdUpdateManyWithoutSubCategoryNestedInput
+  }
+
+  export type SubCategoryUncheckedUpdateInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    categoryId?: StringFieldUpdateOperationsInput | string
+    image?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    ads?: AdUncheckedUpdateManyWithoutSubCategoryNestedInput
+  }
+
+  export type SubCategoryCreateManyInput = {
+    id?: string
+    name: string
+    slug: string
+    categoryId: string
+    image: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type SubCategoryUpdateManyMutationInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    image?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type SubCategoryUncheckedUpdateManyInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    categoryId?: StringFieldUpdateOperationsInput | string
+    image?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type BlogCategoryCreateInput = {
     id?: string
     name: string
+    slug: string
+    description?: string | null
+    image: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    image: string
     posts?: BlogPostCreateNestedManyWithoutCategoryInput
   }
 
   export type BlogCategoryUncheckedCreateInput = {
     id?: string
     name: string
+    slug: string
+    description?: string | null
+    image: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    image: string
     posts?: BlogPostUncheckedCreateNestedManyWithoutCategoryInput
   }
 
   export type BlogCategoryUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    image?: StringFieldUpdateOperationsInput | string
     posts?: BlogPostUpdateManyWithoutCategoryNestedInput
   }
 
   export type BlogCategoryUncheckedUpdateInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    image?: StringFieldUpdateOperationsInput | string
     posts?: BlogPostUncheckedUpdateManyWithoutCategoryNestedInput
   }
 
   export type BlogCategoryCreateManyInput = {
     id?: string
     name: string
+    slug: string
+    description?: string | null
+    image: string
     createdAt?: Date | string
     updatedAt?: Date | string
-    image: string
   }
 
   export type BlogCategoryUpdateManyMutationInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    image?: StringFieldUpdateOperationsInput | string
   }
 
   export type BlogCategoryUncheckedUpdateManyInput = {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    image?: StringFieldUpdateOperationsInput | string
   }
 
   export type BlogPostCreateInput = {
@@ -13441,72 +13585,6 @@ export namespace Prisma {
     publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     userId?: StringFieldUpdateOperationsInput | string
     categoryId?: NullableStringFieldUpdateOperationsInput | string | null
-  }
-
-  export type SubCategoryCreateInput = {
-    id?: string
-    name: string
-    slug: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    category: CategoryCreateNestedOneWithoutSubCategoriesInput
-    ads?: AdCreateNestedManyWithoutSubCategoryInput
-  }
-
-  export type SubCategoryUncheckedCreateInput = {
-    id?: string
-    name: string
-    slug: string
-    categoryId: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    ads?: AdUncheckedCreateNestedManyWithoutSubCategoryInput
-  }
-
-  export type SubCategoryUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    slug?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    category?: CategoryUpdateOneRequiredWithoutSubCategoriesNestedInput
-    ads?: AdUpdateManyWithoutSubCategoryNestedInput
-  }
-
-  export type SubCategoryUncheckedUpdateInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    slug?: StringFieldUpdateOperationsInput | string
-    categoryId?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    ads?: AdUncheckedUpdateManyWithoutSubCategoryNestedInput
-  }
-
-  export type SubCategoryCreateManyInput = {
-    id?: string
-    name: string
-    slug: string
-    categoryId: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-  }
-
-  export type SubCategoryUpdateManyMutationInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    slug?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type SubCategoryUncheckedUpdateManyInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    slug?: StringFieldUpdateOperationsInput | string
-    categoryId?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
 
   export type SessionCreateInput = {
@@ -14051,7 +14129,6 @@ export namespace Prisma {
     updatedAt?: SortOrder
     firstName?: SortOrder
     lastName?: SortOrder
-    password?: SortOrder
     role?: SortOrder
     emailVerified?: SortOrder
     image?: SortOrder
@@ -14065,7 +14142,6 @@ export namespace Prisma {
     updatedAt?: SortOrder
     firstName?: SortOrder
     lastName?: SortOrder
-    password?: SortOrder
     role?: SortOrder
     emailVerified?: SortOrder
     image?: SortOrder
@@ -14079,7 +14155,6 @@ export namespace Prisma {
     updatedAt?: SortOrder
     firstName?: SortOrder
     lastName?: SortOrder
-    password?: SortOrder
     role?: SortOrder
     emailVerified?: SortOrder
     image?: SortOrder
@@ -14120,6 +14195,7 @@ export namespace Prisma {
     description?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    image?: SortOrder
   }
 
   export type CategoryMaxOrderByAggregateInput = {
@@ -14129,6 +14205,7 @@ export namespace Prisma {
     description?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    image?: SortOrder
   }
 
   export type CategoryMinOrderByAggregateInput = {
@@ -14138,30 +14215,72 @@ export namespace Prisma {
     description?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
+    image?: SortOrder
+  }
+
+  export type SubCategoryNameCategoryIdCompoundUniqueInput = {
+    name: string
+    categoryId: string
+  }
+
+  export type SubCategoryCountOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+    categoryId?: SortOrder
+    image?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SubCategoryMaxOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+    categoryId?: SortOrder
+    image?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
+  }
+
+  export type SubCategoryMinOrderByAggregateInput = {
+    id?: SortOrder
+    name?: SortOrder
+    slug?: SortOrder
+    categoryId?: SortOrder
+    image?: SortOrder
+    createdAt?: SortOrder
+    updatedAt?: SortOrder
   }
 
   export type BlogCategoryCountOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    slug?: SortOrder
+    description?: SortOrder
+    image?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    image?: SortOrder
   }
 
   export type BlogCategoryMaxOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    slug?: SortOrder
+    description?: SortOrder
+    image?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    image?: SortOrder
   }
 
   export type BlogCategoryMinOrderByAggregateInput = {
     id?: SortOrder
     name?: SortOrder
+    slug?: SortOrder
+    description?: SortOrder
+    image?: SortOrder
     createdAt?: SortOrder
     updatedAt?: SortOrder
-    image?: SortOrder
   }
 
   export type DateTimeNullableFilter<$PrismaModel = never> = {
@@ -14234,38 +14353,6 @@ export namespace Prisma {
     _count?: NestedIntNullableFilter<$PrismaModel>
     _min?: NestedDateTimeNullableFilter<$PrismaModel>
     _max?: NestedDateTimeNullableFilter<$PrismaModel>
-  }
-
-  export type SubCategoryNameCategoryIdCompoundUniqueInput = {
-    name: string
-    categoryId: string
-  }
-
-  export type SubCategoryCountOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    slug?: SortOrder
-    categoryId?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type SubCategoryMaxOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    slug?: SortOrder
-    categoryId?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
-  }
-
-  export type SubCategoryMinOrderByAggregateInput = {
-    id?: SortOrder
-    name?: SortOrder
-    slug?: SortOrder
-    categoryId?: SortOrder
-    createdAt?: SortOrder
-    updatedAt?: SortOrder
   }
 
   export type SessionCountOrderByAggregateInput = {
@@ -14708,6 +14795,62 @@ export namespace Prisma {
     deleteMany?: SubCategoryScalarWhereInput | SubCategoryScalarWhereInput[]
   }
 
+  export type CategoryCreateNestedOneWithoutSubCategoriesInput = {
+    create?: XOR<CategoryCreateWithoutSubCategoriesInput, CategoryUncheckedCreateWithoutSubCategoriesInput>
+    connectOrCreate?: CategoryCreateOrConnectWithoutSubCategoriesInput
+    connect?: CategoryWhereUniqueInput
+  }
+
+  export type AdCreateNestedManyWithoutSubCategoryInput = {
+    create?: XOR<AdCreateWithoutSubCategoryInput, AdUncheckedCreateWithoutSubCategoryInput> | AdCreateWithoutSubCategoryInput[] | AdUncheckedCreateWithoutSubCategoryInput[]
+    connectOrCreate?: AdCreateOrConnectWithoutSubCategoryInput | AdCreateOrConnectWithoutSubCategoryInput[]
+    createMany?: AdCreateManySubCategoryInputEnvelope
+    connect?: AdWhereUniqueInput | AdWhereUniqueInput[]
+  }
+
+  export type AdUncheckedCreateNestedManyWithoutSubCategoryInput = {
+    create?: XOR<AdCreateWithoutSubCategoryInput, AdUncheckedCreateWithoutSubCategoryInput> | AdCreateWithoutSubCategoryInput[] | AdUncheckedCreateWithoutSubCategoryInput[]
+    connectOrCreate?: AdCreateOrConnectWithoutSubCategoryInput | AdCreateOrConnectWithoutSubCategoryInput[]
+    createMany?: AdCreateManySubCategoryInputEnvelope
+    connect?: AdWhereUniqueInput | AdWhereUniqueInput[]
+  }
+
+  export type CategoryUpdateOneRequiredWithoutSubCategoriesNestedInput = {
+    create?: XOR<CategoryCreateWithoutSubCategoriesInput, CategoryUncheckedCreateWithoutSubCategoriesInput>
+    connectOrCreate?: CategoryCreateOrConnectWithoutSubCategoriesInput
+    upsert?: CategoryUpsertWithoutSubCategoriesInput
+    connect?: CategoryWhereUniqueInput
+    update?: XOR<XOR<CategoryUpdateToOneWithWhereWithoutSubCategoriesInput, CategoryUpdateWithoutSubCategoriesInput>, CategoryUncheckedUpdateWithoutSubCategoriesInput>
+  }
+
+  export type AdUpdateManyWithoutSubCategoryNestedInput = {
+    create?: XOR<AdCreateWithoutSubCategoryInput, AdUncheckedCreateWithoutSubCategoryInput> | AdCreateWithoutSubCategoryInput[] | AdUncheckedCreateWithoutSubCategoryInput[]
+    connectOrCreate?: AdCreateOrConnectWithoutSubCategoryInput | AdCreateOrConnectWithoutSubCategoryInput[]
+    upsert?: AdUpsertWithWhereUniqueWithoutSubCategoryInput | AdUpsertWithWhereUniqueWithoutSubCategoryInput[]
+    createMany?: AdCreateManySubCategoryInputEnvelope
+    set?: AdWhereUniqueInput | AdWhereUniqueInput[]
+    disconnect?: AdWhereUniqueInput | AdWhereUniqueInput[]
+    delete?: AdWhereUniqueInput | AdWhereUniqueInput[]
+    connect?: AdWhereUniqueInput | AdWhereUniqueInput[]
+    update?: AdUpdateWithWhereUniqueWithoutSubCategoryInput | AdUpdateWithWhereUniqueWithoutSubCategoryInput[]
+    updateMany?: AdUpdateManyWithWhereWithoutSubCategoryInput | AdUpdateManyWithWhereWithoutSubCategoryInput[]
+    deleteMany?: AdScalarWhereInput | AdScalarWhereInput[]
+  }
+
+  export type AdUncheckedUpdateManyWithoutSubCategoryNestedInput = {
+    create?: XOR<AdCreateWithoutSubCategoryInput, AdUncheckedCreateWithoutSubCategoryInput> | AdCreateWithoutSubCategoryInput[] | AdUncheckedCreateWithoutSubCategoryInput[]
+    connectOrCreate?: AdCreateOrConnectWithoutSubCategoryInput | AdCreateOrConnectWithoutSubCategoryInput[]
+    upsert?: AdUpsertWithWhereUniqueWithoutSubCategoryInput | AdUpsertWithWhereUniqueWithoutSubCategoryInput[]
+    createMany?: AdCreateManySubCategoryInputEnvelope
+    set?: AdWhereUniqueInput | AdWhereUniqueInput[]
+    disconnect?: AdWhereUniqueInput | AdWhereUniqueInput[]
+    delete?: AdWhereUniqueInput | AdWhereUniqueInput[]
+    connect?: AdWhereUniqueInput | AdWhereUniqueInput[]
+    update?: AdUpdateWithWhereUniqueWithoutSubCategoryInput | AdUpdateWithWhereUniqueWithoutSubCategoryInput[]
+    updateMany?: AdUpdateManyWithWhereWithoutSubCategoryInput | AdUpdateManyWithWhereWithoutSubCategoryInput[]
+    deleteMany?: AdScalarWhereInput | AdScalarWhereInput[]
+  }
+
   export type BlogPostCreateNestedManyWithoutCategoryInput = {
     create?: XOR<BlogPostCreateWithoutCategoryInput, BlogPostUncheckedCreateWithoutCategoryInput> | BlogPostCreateWithoutCategoryInput[] | BlogPostUncheckedCreateWithoutCategoryInput[]
     connectOrCreate?: BlogPostCreateOrConnectWithoutCategoryInput | BlogPostCreateOrConnectWithoutCategoryInput[]
@@ -14782,62 +14925,6 @@ export namespace Prisma {
     delete?: BlogCategoryWhereInput | boolean
     connect?: BlogCategoryWhereUniqueInput
     update?: XOR<XOR<BlogCategoryUpdateToOneWithWhereWithoutPostsInput, BlogCategoryUpdateWithoutPostsInput>, BlogCategoryUncheckedUpdateWithoutPostsInput>
-  }
-
-  export type CategoryCreateNestedOneWithoutSubCategoriesInput = {
-    create?: XOR<CategoryCreateWithoutSubCategoriesInput, CategoryUncheckedCreateWithoutSubCategoriesInput>
-    connectOrCreate?: CategoryCreateOrConnectWithoutSubCategoriesInput
-    connect?: CategoryWhereUniqueInput
-  }
-
-  export type AdCreateNestedManyWithoutSubCategoryInput = {
-    create?: XOR<AdCreateWithoutSubCategoryInput, AdUncheckedCreateWithoutSubCategoryInput> | AdCreateWithoutSubCategoryInput[] | AdUncheckedCreateWithoutSubCategoryInput[]
-    connectOrCreate?: AdCreateOrConnectWithoutSubCategoryInput | AdCreateOrConnectWithoutSubCategoryInput[]
-    createMany?: AdCreateManySubCategoryInputEnvelope
-    connect?: AdWhereUniqueInput | AdWhereUniqueInput[]
-  }
-
-  export type AdUncheckedCreateNestedManyWithoutSubCategoryInput = {
-    create?: XOR<AdCreateWithoutSubCategoryInput, AdUncheckedCreateWithoutSubCategoryInput> | AdCreateWithoutSubCategoryInput[] | AdUncheckedCreateWithoutSubCategoryInput[]
-    connectOrCreate?: AdCreateOrConnectWithoutSubCategoryInput | AdCreateOrConnectWithoutSubCategoryInput[]
-    createMany?: AdCreateManySubCategoryInputEnvelope
-    connect?: AdWhereUniqueInput | AdWhereUniqueInput[]
-  }
-
-  export type CategoryUpdateOneRequiredWithoutSubCategoriesNestedInput = {
-    create?: XOR<CategoryCreateWithoutSubCategoriesInput, CategoryUncheckedCreateWithoutSubCategoriesInput>
-    connectOrCreate?: CategoryCreateOrConnectWithoutSubCategoriesInput
-    upsert?: CategoryUpsertWithoutSubCategoriesInput
-    connect?: CategoryWhereUniqueInput
-    update?: XOR<XOR<CategoryUpdateToOneWithWhereWithoutSubCategoriesInput, CategoryUpdateWithoutSubCategoriesInput>, CategoryUncheckedUpdateWithoutSubCategoriesInput>
-  }
-
-  export type AdUpdateManyWithoutSubCategoryNestedInput = {
-    create?: XOR<AdCreateWithoutSubCategoryInput, AdUncheckedCreateWithoutSubCategoryInput> | AdCreateWithoutSubCategoryInput[] | AdUncheckedCreateWithoutSubCategoryInput[]
-    connectOrCreate?: AdCreateOrConnectWithoutSubCategoryInput | AdCreateOrConnectWithoutSubCategoryInput[]
-    upsert?: AdUpsertWithWhereUniqueWithoutSubCategoryInput | AdUpsertWithWhereUniqueWithoutSubCategoryInput[]
-    createMany?: AdCreateManySubCategoryInputEnvelope
-    set?: AdWhereUniqueInput | AdWhereUniqueInput[]
-    disconnect?: AdWhereUniqueInput | AdWhereUniqueInput[]
-    delete?: AdWhereUniqueInput | AdWhereUniqueInput[]
-    connect?: AdWhereUniqueInput | AdWhereUniqueInput[]
-    update?: AdUpdateWithWhereUniqueWithoutSubCategoryInput | AdUpdateWithWhereUniqueWithoutSubCategoryInput[]
-    updateMany?: AdUpdateManyWithWhereWithoutSubCategoryInput | AdUpdateManyWithWhereWithoutSubCategoryInput[]
-    deleteMany?: AdScalarWhereInput | AdScalarWhereInput[]
-  }
-
-  export type AdUncheckedUpdateManyWithoutSubCategoryNestedInput = {
-    create?: XOR<AdCreateWithoutSubCategoryInput, AdUncheckedCreateWithoutSubCategoryInput> | AdCreateWithoutSubCategoryInput[] | AdUncheckedCreateWithoutSubCategoryInput[]
-    connectOrCreate?: AdCreateOrConnectWithoutSubCategoryInput | AdCreateOrConnectWithoutSubCategoryInput[]
-    upsert?: AdUpsertWithWhereUniqueWithoutSubCategoryInput | AdUpsertWithWhereUniqueWithoutSubCategoryInput[]
-    createMany?: AdCreateManySubCategoryInputEnvelope
-    set?: AdWhereUniqueInput | AdWhereUniqueInput[]
-    disconnect?: AdWhereUniqueInput | AdWhereUniqueInput[]
-    delete?: AdWhereUniqueInput | AdWhereUniqueInput[]
-    connect?: AdWhereUniqueInput | AdWhereUniqueInput[]
-    update?: AdUpdateWithWhereUniqueWithoutSubCategoryInput | AdUpdateWithWhereUniqueWithoutSubCategoryInput[]
-    updateMany?: AdUpdateManyWithWhereWithoutSubCategoryInput | AdUpdateManyWithWhereWithoutSubCategoryInput[]
-    deleteMany?: AdScalarWhereInput | AdScalarWhereInput[]
   }
 
   export type UserCreateNestedOneWithoutSessionsInput = {
@@ -15093,6 +15180,7 @@ export namespace Prisma {
     description?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    image: string
     subCategories?: SubCategoryCreateNestedManyWithoutCategoryInput
   }
 
@@ -15103,6 +15191,7 @@ export namespace Prisma {
     description?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    image: string
     subCategories?: SubCategoryUncheckedCreateNestedManyWithoutCategoryInput
   }
 
@@ -15119,7 +15208,6 @@ export namespace Prisma {
     updatedAt?: Date | string
     firstName: string
     lastName: string
-    password: string
     role?: $Enums.Role | null
     emailVerified: boolean
     image?: string | null
@@ -15136,7 +15224,6 @@ export namespace Prisma {
     updatedAt?: Date | string
     firstName: string
     lastName: string
-    password: string
     role?: $Enums.Role | null
     emailVerified: boolean
     image?: string | null
@@ -15154,6 +15241,7 @@ export namespace Prisma {
     id?: string
     name: string
     slug: string
+    image: string
     createdAt?: Date | string
     updatedAt?: Date | string
     category: CategoryCreateNestedOneWithoutSubCategoriesInput
@@ -15164,6 +15252,7 @@ export namespace Prisma {
     name: string
     slug: string
     categoryId: string
+    image: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -15191,6 +15280,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    image?: StringFieldUpdateOperationsInput | string
     subCategories?: SubCategoryUpdateManyWithoutCategoryNestedInput
   }
 
@@ -15201,6 +15291,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    image?: StringFieldUpdateOperationsInput | string
     subCategories?: SubCategoryUncheckedUpdateManyWithoutCategoryNestedInput
   }
 
@@ -15223,7 +15314,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
     role?: NullableEnumRoleFieldUpdateOperationsInput | $Enums.Role | null
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
     image?: NullableStringFieldUpdateOperationsInput | string | null
@@ -15240,7 +15330,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
     role?: NullableEnumRoleFieldUpdateOperationsInput | $Enums.Role | null
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
     image?: NullableStringFieldUpdateOperationsInput | string | null
@@ -15264,6 +15353,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
+    image?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     category?: CategoryUpdateOneRequiredWithoutSubCategoriesNestedInput
@@ -15274,6 +15364,7 @@ export namespace Prisma {
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
     categoryId?: StringFieldUpdateOperationsInput | string
+    image?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -15616,6 +15707,7 @@ export namespace Prisma {
     id?: string
     name: string
     slug: string
+    image: string
     createdAt?: Date | string
     updatedAt?: Date | string
     ads?: AdCreateNestedManyWithoutSubCategoryInput
@@ -15625,6 +15717,7 @@ export namespace Prisma {
     id?: string
     name: string
     slug: string
+    image: string
     createdAt?: Date | string
     updatedAt?: Date | string
     ads?: AdUncheckedCreateNestedManyWithoutSubCategoryInput
@@ -15680,192 +15773,9 @@ export namespace Prisma {
     name?: StringFilter<"SubCategory"> | string
     slug?: StringFilter<"SubCategory"> | string
     categoryId?: StringFilter<"SubCategory"> | string
+    image?: StringFilter<"SubCategory"> | string
     createdAt?: DateTimeFilter<"SubCategory"> | Date | string
     updatedAt?: DateTimeFilter<"SubCategory"> | Date | string
-  }
-
-  export type BlogPostCreateWithoutCategoryInput = {
-    id?: string
-    title: string
-    content: string
-    excerpt?: string | null
-    image?: string | null
-    status?: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    publishedAt?: Date | string | null
-    user: UserCreateNestedOneWithoutBlogPostInput
-  }
-
-  export type BlogPostUncheckedCreateWithoutCategoryInput = {
-    id?: string
-    title: string
-    content: string
-    excerpt?: string | null
-    image?: string | null
-    status?: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    publishedAt?: Date | string | null
-    userId: string
-  }
-
-  export type BlogPostCreateOrConnectWithoutCategoryInput = {
-    where: BlogPostWhereUniqueInput
-    create: XOR<BlogPostCreateWithoutCategoryInput, BlogPostUncheckedCreateWithoutCategoryInput>
-  }
-
-  export type BlogPostCreateManyCategoryInputEnvelope = {
-    data: BlogPostCreateManyCategoryInput | BlogPostCreateManyCategoryInput[]
-    skipDuplicates?: boolean
-  }
-
-  export type BlogPostUpsertWithWhereUniqueWithoutCategoryInput = {
-    where: BlogPostWhereUniqueInput
-    update: XOR<BlogPostUpdateWithoutCategoryInput, BlogPostUncheckedUpdateWithoutCategoryInput>
-    create: XOR<BlogPostCreateWithoutCategoryInput, BlogPostUncheckedCreateWithoutCategoryInput>
-  }
-
-  export type BlogPostUpdateWithWhereUniqueWithoutCategoryInput = {
-    where: BlogPostWhereUniqueInput
-    data: XOR<BlogPostUpdateWithoutCategoryInput, BlogPostUncheckedUpdateWithoutCategoryInput>
-  }
-
-  export type BlogPostUpdateManyWithWhereWithoutCategoryInput = {
-    where: BlogPostScalarWhereInput
-    data: XOR<BlogPostUpdateManyMutationInput, BlogPostUncheckedUpdateManyWithoutCategoryInput>
-  }
-
-  export type UserCreateWithoutBlogPostInput = {
-    id?: string
-    email: string
-    apiKey?: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    firstName: string
-    lastName: string
-    password: string
-    role?: $Enums.Role | null
-    emailVerified: boolean
-    image?: string | null
-    ads?: AdCreateNestedManyWithoutUserInput
-    sessions?: SessionCreateNestedManyWithoutUserInput
-    accounts?: AccountCreateNestedManyWithoutUserInput
-  }
-
-  export type UserUncheckedCreateWithoutBlogPostInput = {
-    id?: string
-    email: string
-    apiKey?: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    firstName: string
-    lastName: string
-    password: string
-    role?: $Enums.Role | null
-    emailVerified: boolean
-    image?: string | null
-    ads?: AdUncheckedCreateNestedManyWithoutUserInput
-    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
-    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
-  }
-
-  export type UserCreateOrConnectWithoutBlogPostInput = {
-    where: UserWhereUniqueInput
-    create: XOR<UserCreateWithoutBlogPostInput, UserUncheckedCreateWithoutBlogPostInput>
-  }
-
-  export type BlogCategoryCreateWithoutPostsInput = {
-    id?: string
-    name: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    image: string
-  }
-
-  export type BlogCategoryUncheckedCreateWithoutPostsInput = {
-    id?: string
-    name: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    image: string
-  }
-
-  export type BlogCategoryCreateOrConnectWithoutPostsInput = {
-    where: BlogCategoryWhereUniqueInput
-    create: XOR<BlogCategoryCreateWithoutPostsInput, BlogCategoryUncheckedCreateWithoutPostsInput>
-  }
-
-  export type UserUpsertWithoutBlogPostInput = {
-    update: XOR<UserUpdateWithoutBlogPostInput, UserUncheckedUpdateWithoutBlogPostInput>
-    create: XOR<UserCreateWithoutBlogPostInput, UserUncheckedCreateWithoutBlogPostInput>
-    where?: UserWhereInput
-  }
-
-  export type UserUpdateToOneWithWhereWithoutBlogPostInput = {
-    where?: UserWhereInput
-    data: XOR<UserUpdateWithoutBlogPostInput, UserUncheckedUpdateWithoutBlogPostInput>
-  }
-
-  export type UserUpdateWithoutBlogPostInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    apiKey?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    firstName?: StringFieldUpdateOperationsInput | string
-    lastName?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    role?: NullableEnumRoleFieldUpdateOperationsInput | $Enums.Role | null
-    emailVerified?: BoolFieldUpdateOperationsInput | boolean
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    ads?: AdUpdateManyWithoutUserNestedInput
-    sessions?: SessionUpdateManyWithoutUserNestedInput
-    accounts?: AccountUpdateManyWithoutUserNestedInput
-  }
-
-  export type UserUncheckedUpdateWithoutBlogPostInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    email?: StringFieldUpdateOperationsInput | string
-    apiKey?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    firstName?: StringFieldUpdateOperationsInput | string
-    lastName?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
-    role?: NullableEnumRoleFieldUpdateOperationsInput | $Enums.Role | null
-    emailVerified?: BoolFieldUpdateOperationsInput | boolean
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    ads?: AdUncheckedUpdateManyWithoutUserNestedInput
-    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
-    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
-  }
-
-  export type BlogCategoryUpsertWithoutPostsInput = {
-    update: XOR<BlogCategoryUpdateWithoutPostsInput, BlogCategoryUncheckedUpdateWithoutPostsInput>
-    create: XOR<BlogCategoryCreateWithoutPostsInput, BlogCategoryUncheckedCreateWithoutPostsInput>
-    where?: BlogCategoryWhereInput
-  }
-
-  export type BlogCategoryUpdateToOneWithWhereWithoutPostsInput = {
-    where?: BlogCategoryWhereInput
-    data: XOR<BlogCategoryUpdateWithoutPostsInput, BlogCategoryUncheckedUpdateWithoutPostsInput>
-  }
-
-  export type BlogCategoryUpdateWithoutPostsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    image?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type BlogCategoryUncheckedUpdateWithoutPostsInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    name?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    image?: StringFieldUpdateOperationsInput | string
   }
 
   export type CategoryCreateWithoutSubCategoriesInput = {
@@ -15875,6 +15785,7 @@ export namespace Prisma {
     description?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    image: string
     ads?: AdCreateNestedManyWithoutCategoryInput
   }
 
@@ -15885,6 +15796,7 @@ export namespace Prisma {
     description?: string | null
     createdAt?: Date | string
     updatedAt?: Date | string
+    image: string
     ads?: AdUncheckedCreateNestedManyWithoutCategoryInput
   }
 
@@ -15957,6 +15869,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    image?: StringFieldUpdateOperationsInput | string
     ads?: AdUpdateManyWithoutCategoryNestedInput
   }
 
@@ -15967,6 +15880,7 @@ export namespace Prisma {
     description?: NullableStringFieldUpdateOperationsInput | string | null
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    image?: StringFieldUpdateOperationsInput | string
     ads?: AdUncheckedUpdateManyWithoutCategoryNestedInput
   }
 
@@ -15986,6 +15900,194 @@ export namespace Prisma {
     data: XOR<AdUpdateManyMutationInput, AdUncheckedUpdateManyWithoutSubCategoryInput>
   }
 
+  export type BlogPostCreateWithoutCategoryInput = {
+    id?: string
+    title: string
+    content: string
+    excerpt?: string | null
+    image?: string | null
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    publishedAt?: Date | string | null
+    user: UserCreateNestedOneWithoutBlogPostInput
+  }
+
+  export type BlogPostUncheckedCreateWithoutCategoryInput = {
+    id?: string
+    title: string
+    content: string
+    excerpt?: string | null
+    image?: string | null
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    publishedAt?: Date | string | null
+    userId: string
+  }
+
+  export type BlogPostCreateOrConnectWithoutCategoryInput = {
+    where: BlogPostWhereUniqueInput
+    create: XOR<BlogPostCreateWithoutCategoryInput, BlogPostUncheckedCreateWithoutCategoryInput>
+  }
+
+  export type BlogPostCreateManyCategoryInputEnvelope = {
+    data: BlogPostCreateManyCategoryInput | BlogPostCreateManyCategoryInput[]
+    skipDuplicates?: boolean
+  }
+
+  export type BlogPostUpsertWithWhereUniqueWithoutCategoryInput = {
+    where: BlogPostWhereUniqueInput
+    update: XOR<BlogPostUpdateWithoutCategoryInput, BlogPostUncheckedUpdateWithoutCategoryInput>
+    create: XOR<BlogPostCreateWithoutCategoryInput, BlogPostUncheckedCreateWithoutCategoryInput>
+  }
+
+  export type BlogPostUpdateWithWhereUniqueWithoutCategoryInput = {
+    where: BlogPostWhereUniqueInput
+    data: XOR<BlogPostUpdateWithoutCategoryInput, BlogPostUncheckedUpdateWithoutCategoryInput>
+  }
+
+  export type BlogPostUpdateManyWithWhereWithoutCategoryInput = {
+    where: BlogPostScalarWhereInput
+    data: XOR<BlogPostUpdateManyMutationInput, BlogPostUncheckedUpdateManyWithoutCategoryInput>
+  }
+
+  export type UserCreateWithoutBlogPostInput = {
+    id?: string
+    email: string
+    apiKey?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    firstName: string
+    lastName: string
+    role?: $Enums.Role | null
+    emailVerified: boolean
+    image?: string | null
+    ads?: AdCreateNestedManyWithoutUserInput
+    sessions?: SessionCreateNestedManyWithoutUserInput
+    accounts?: AccountCreateNestedManyWithoutUserInput
+  }
+
+  export type UserUncheckedCreateWithoutBlogPostInput = {
+    id?: string
+    email: string
+    apiKey?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    firstName: string
+    lastName: string
+    role?: $Enums.Role | null
+    emailVerified: boolean
+    image?: string | null
+    ads?: AdUncheckedCreateNestedManyWithoutUserInput
+    sessions?: SessionUncheckedCreateNestedManyWithoutUserInput
+    accounts?: AccountUncheckedCreateNestedManyWithoutUserInput
+  }
+
+  export type UserCreateOrConnectWithoutBlogPostInput = {
+    where: UserWhereUniqueInput
+    create: XOR<UserCreateWithoutBlogPostInput, UserUncheckedCreateWithoutBlogPostInput>
+  }
+
+  export type BlogCategoryCreateWithoutPostsInput = {
+    id?: string
+    name: string
+    slug: string
+    description?: string | null
+    image: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type BlogCategoryUncheckedCreateWithoutPostsInput = {
+    id?: string
+    name: string
+    slug: string
+    description?: string | null
+    image: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+  }
+
+  export type BlogCategoryCreateOrConnectWithoutPostsInput = {
+    where: BlogCategoryWhereUniqueInput
+    create: XOR<BlogCategoryCreateWithoutPostsInput, BlogCategoryUncheckedCreateWithoutPostsInput>
+  }
+
+  export type UserUpsertWithoutBlogPostInput = {
+    update: XOR<UserUpdateWithoutBlogPostInput, UserUncheckedUpdateWithoutBlogPostInput>
+    create: XOR<UserCreateWithoutBlogPostInput, UserUncheckedCreateWithoutBlogPostInput>
+    where?: UserWhereInput
+  }
+
+  export type UserUpdateToOneWithWhereWithoutBlogPostInput = {
+    where?: UserWhereInput
+    data: XOR<UserUpdateWithoutBlogPostInput, UserUncheckedUpdateWithoutBlogPostInput>
+  }
+
+  export type UserUpdateWithoutBlogPostInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    apiKey?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    role?: NullableEnumRoleFieldUpdateOperationsInput | $Enums.Role | null
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    ads?: AdUpdateManyWithoutUserNestedInput
+    sessions?: SessionUpdateManyWithoutUserNestedInput
+    accounts?: AccountUpdateManyWithoutUserNestedInput
+  }
+
+  export type UserUncheckedUpdateWithoutBlogPostInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    email?: StringFieldUpdateOperationsInput | string
+    apiKey?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    firstName?: StringFieldUpdateOperationsInput | string
+    lastName?: StringFieldUpdateOperationsInput | string
+    role?: NullableEnumRoleFieldUpdateOperationsInput | $Enums.Role | null
+    emailVerified?: BoolFieldUpdateOperationsInput | boolean
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    ads?: AdUncheckedUpdateManyWithoutUserNestedInput
+    sessions?: SessionUncheckedUpdateManyWithoutUserNestedInput
+    accounts?: AccountUncheckedUpdateManyWithoutUserNestedInput
+  }
+
+  export type BlogCategoryUpsertWithoutPostsInput = {
+    update: XOR<BlogCategoryUpdateWithoutPostsInput, BlogCategoryUncheckedUpdateWithoutPostsInput>
+    create: XOR<BlogCategoryCreateWithoutPostsInput, BlogCategoryUncheckedCreateWithoutPostsInput>
+    where?: BlogCategoryWhereInput
+  }
+
+  export type BlogCategoryUpdateToOneWithWhereWithoutPostsInput = {
+    where?: BlogCategoryWhereInput
+    data: XOR<BlogCategoryUpdateWithoutPostsInput, BlogCategoryUncheckedUpdateWithoutPostsInput>
+  }
+
+  export type BlogCategoryUpdateWithoutPostsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
+  export type BlogCategoryUncheckedUpdateWithoutPostsInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    name?: StringFieldUpdateOperationsInput | string
+    slug?: StringFieldUpdateOperationsInput | string
+    description?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+  }
+
   export type UserCreateWithoutSessionsInput = {
     id?: string
     email: string
@@ -15994,7 +16096,6 @@ export namespace Prisma {
     updatedAt?: Date | string
     firstName: string
     lastName: string
-    password: string
     role?: $Enums.Role | null
     emailVerified: boolean
     image?: string | null
@@ -16011,7 +16112,6 @@ export namespace Prisma {
     updatedAt?: Date | string
     firstName: string
     lastName: string
-    password: string
     role?: $Enums.Role | null
     emailVerified: boolean
     image?: string | null
@@ -16044,7 +16144,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
     role?: NullableEnumRoleFieldUpdateOperationsInput | $Enums.Role | null
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
     image?: NullableStringFieldUpdateOperationsInput | string | null
@@ -16061,7 +16160,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
     role?: NullableEnumRoleFieldUpdateOperationsInput | $Enums.Role | null
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
     image?: NullableStringFieldUpdateOperationsInput | string | null
@@ -16078,7 +16176,6 @@ export namespace Prisma {
     updatedAt?: Date | string
     firstName: string
     lastName: string
-    password: string
     role?: $Enums.Role | null
     emailVerified: boolean
     image?: string | null
@@ -16095,7 +16192,6 @@ export namespace Prisma {
     updatedAt?: Date | string
     firstName: string
     lastName: string
-    password: string
     role?: $Enums.Role | null
     emailVerified: boolean
     image?: string | null
@@ -16128,7 +16224,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
     role?: NullableEnumRoleFieldUpdateOperationsInput | $Enums.Role | null
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
     image?: NullableStringFieldUpdateOperationsInput | string | null
@@ -16145,7 +16240,6 @@ export namespace Prisma {
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     firstName?: StringFieldUpdateOperationsInput | string
     lastName?: StringFieldUpdateOperationsInput | string
-    password?: StringFieldUpdateOperationsInput | string
     role?: NullableEnumRoleFieldUpdateOperationsInput | $Enums.Role | null
     emailVerified?: BoolFieldUpdateOperationsInput | boolean
     image?: NullableStringFieldUpdateOperationsInput | string | null
@@ -16400,6 +16494,7 @@ export namespace Prisma {
     id?: string
     name: string
     slug: string
+    image: string
     createdAt?: Date | string
     updatedAt?: Date | string
   }
@@ -16462,6 +16557,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
+    image?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ads?: AdUpdateManyWithoutSubCategoryNestedInput
@@ -16471,6 +16567,7 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
+    image?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     ads?: AdUncheckedUpdateManyWithoutSubCategoryNestedInput
@@ -16480,60 +16577,9 @@ export namespace Prisma {
     id?: StringFieldUpdateOperationsInput | string
     name?: StringFieldUpdateOperationsInput | string
     slug?: StringFieldUpdateOperationsInput | string
+    image?: StringFieldUpdateOperationsInput | string
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-  }
-
-  export type BlogPostCreateManyCategoryInput = {
-    id?: string
-    title: string
-    content: string
-    excerpt?: string | null
-    image?: string | null
-    status?: string
-    createdAt?: Date | string
-    updatedAt?: Date | string
-    publishedAt?: Date | string | null
-    userId: string
-  }
-
-  export type BlogPostUpdateWithoutCategoryInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
-    excerpt?: NullableStringFieldUpdateOperationsInput | string | null
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    user?: UserUpdateOneRequiredWithoutBlogPostNestedInput
-  }
-
-  export type BlogPostUncheckedUpdateWithoutCategoryInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
-    excerpt?: NullableStringFieldUpdateOperationsInput | string | null
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    userId?: StringFieldUpdateOperationsInput | string
-  }
-
-  export type BlogPostUncheckedUpdateManyWithoutCategoryInput = {
-    id?: StringFieldUpdateOperationsInput | string
-    title?: StringFieldUpdateOperationsInput | string
-    content?: StringFieldUpdateOperationsInput | string
-    excerpt?: NullableStringFieldUpdateOperationsInput | string | null
-    image?: NullableStringFieldUpdateOperationsInput | string | null
-    status?: StringFieldUpdateOperationsInput | string
-    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
-    publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-    userId?: StringFieldUpdateOperationsInput | string
   }
 
   export type AdCreateManySubCategoryInput = {
@@ -16605,6 +16651,58 @@ export namespace Prisma {
     createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
     updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
     expiredAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    userId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type BlogPostCreateManyCategoryInput = {
+    id?: string
+    title: string
+    content: string
+    excerpt?: string | null
+    image?: string | null
+    status?: string
+    createdAt?: Date | string
+    updatedAt?: Date | string
+    publishedAt?: Date | string | null
+    userId: string
+  }
+
+  export type BlogPostUpdateWithoutCategoryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    excerpt?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    user?: UserUpdateOneRequiredWithoutBlogPostNestedInput
+  }
+
+  export type BlogPostUncheckedUpdateWithoutCategoryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    excerpt?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+    userId?: StringFieldUpdateOperationsInput | string
+  }
+
+  export type BlogPostUncheckedUpdateManyWithoutCategoryInput = {
+    id?: StringFieldUpdateOperationsInput | string
+    title?: StringFieldUpdateOperationsInput | string
+    content?: StringFieldUpdateOperationsInput | string
+    excerpt?: NullableStringFieldUpdateOperationsInput | string | null
+    image?: NullableStringFieldUpdateOperationsInput | string | null
+    status?: StringFieldUpdateOperationsInput | string
+    createdAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    updatedAt?: DateTimeFieldUpdateOperationsInput | Date | string
+    publishedAt?: NullableDateTimeFieldUpdateOperationsInput | Date | string | null
     userId?: StringFieldUpdateOperationsInput | string
   }
 

@@ -1,102 +1,169 @@
 import { db } from "@/db";
 import { Prisma } from "../generated/prisma";
+import Electronic from "../public/electronics.svg";
+import Clothes from "../public/clothes.svg";
+import Education from "../public/education.svg";
+import Announcement from "../public/announcement.svg";
+import Furniture from "../public/furniture.svg";
+import Property from "../public/property.svg";
+import Sports from "../public/sports.svg";
+import Settings from "../public/settings.svg";
+import Vehicles from "../public/vehicles.svg";
+import slugify from "slugify";
+
+function generateSlug(name: string): string {
+  return slugify(name, {
+    lower: true,
+    strict: true,
+    trim: true,
+  });
+}
 
 async function main() {
   // Create Users
   const catElectronics = await db.category.create({
     data: {
       name: "Electronics",
-      slug: "electronics",
+      slug: generateSlug("Electronics"),
+      image: Electronic,
       description: "Gadgets and devices",
+    },
+  });
+  const catFurniture = await db.category.create({
+    data: {
+      name: "Furniture",
+      slug: generateSlug("Furniture"),
+      description: "Home and office furniture",
+      image: Furniture,
+    },
+  });
+  const catSports = await db.category.create({
+    data: {
+      name: "Sports",
+      slug: generateSlug("Sports"),
+      description: "Sports equipment and gear",
+      image: Sports,
+    },
+  });
+  const catClothes = await db.category.create({
+    data: {
+      name: "Clothes",
+      slug: generateSlug("Clothes"),
+      description: "Fashion and apparel",
+      image: Clothes,
+    },
+  });
+  const catEducation = await db.category.create({
+    data: {
+      name: "Education",
+      slug: generateSlug("Education"),
+      description: "Books and courses",
+      image: Education,
     },
   });
   const catRealEstate = await db.category.create({
     data: {
       name: "Real Estate",
-      slug: "real-estate",
+      slug: generateSlug("Real Estate"),
       description: "Properties and lands",
+      image: Property,
     },
   });
   const catVehicles = await db.category.create({
     data: {
       name: "Vehicles",
-      slug: "vehicles",
+      slug: generateSlug("Vehicles"),
       description: "Cars, bikes, and more",
+      image: Vehicles,
     },
   });
 
   const catJobs = await db.category.create({
-    data: { name: "Jobs", slug: "jobs", description: "Job listings" },
+    data: {
+      name: "Jobs",
+      slug: generateSlug("Jobs"),
+      description: "Job listings",
+      image: Announcement,
+    },
   });
   const catServices = await db.category.create({
     data: {
       name: "Services",
-      slug: "services",
+      slug: generateSlug("Services"),
       description: "Professional services",
+      image: Settings,
     },
   });
 
   const subCatMobile = await db.subCategory.create({
     data: {
       name: "Mobile Phones",
-      slug: "mobile-phones",
+      slug: generateSlug("Mobile Phones"),
       categoryId: catElectronics.id,
+      image: "https://example.com/img/tech.jpg",
     },
   });
   const subCatApartments = await db.subCategory.create({
     data: {
       name: "Apartments",
-      slug: "apartments",
+      slug: generateSlug("Apartments"),
       categoryId: catRealEstate.id,
+      image: "https://example.com/img/tech.jpg",
     },
   });
   const subCatJobs = await db.subCategory.create({
     data: {
       name: "IT Jobs",
-      slug: "it-jobs",
+      slug: generateSlug("IT Jobs"),
       categoryId: catJobs.id,
+      image: "https://example.com/img/tech.jpg",
     },
   });
   const subCatCars = await db.subCategory.create({
-    data: { name: "Cars", slug: "cars", categoryId: catVehicles.id },
+    data: {
+      name: "Cars",
+      slug: generateSlug("Cars"),
+      categoryId: catVehicles.id,
+      image: "https://example.com/img/tech.jpg",
+    },
   });
   const user1 = await db.user.create({
     data: {
       email: "john@example.com",
-      firstname: "John",
-      lastname: "Doe",
+      firstName: "John",
+      lastName: "Doe",
       emailVerified: true,
     },
   });
   const user2 = await db.user.create({
     data: {
       email: "jane@example.com",
-      firstname: "Jane",
-      lastname: "Smith",
+      firstName: "Jane",
+      lastName: "Smith",
       emailVerified: true,
     },
   });
   const user3 = await db.user.create({
     data: {
       email: "bob@example.com",
-      firstname: "Bob",
-      lastname: "Brown",
+      firstName: "Bob",
+      lastName: "Brown",
       emailVerified: true,
     },
   });
   const user4 = await db.user.create({
     data: {
       email: "alice@example.com",
-      firstname: "Alice",
-      lastname: "Johnson",
+      firstName: "Alice",
+      lastName: "Johnson",
       emailVerified: true,
     },
   });
   const user5 = await db.user.create({
     data: {
       email: "mark@example.com",
-      firstname: "Mark",
-      lastname: "Taylor",
+      firstName: "Mark",
+      lastName: "Taylor",
       emailVerified: true,
     },
   });
@@ -190,26 +257,31 @@ async function main() {
         id: "blogCat1",
         name: "Tech News",
         image: "https://example.com/img/tech.jpg",
+        slug: generateSlug("Tech News"),
       },
       {
         id: "blogCat2",
         name: "Lifestyle",
         image: "https://example.com/img/lifestyle.jpg",
+        slug: generateSlug("Lifestyle"),
       },
       {
         id: "blogCat3",
         name: "Business",
         image: "https://example.com/img/business.jpg",
+        slug: generateSlug("Business"),
       },
       {
         id: "blogCat4",
         name: "Jobs",
         image: "https://example.com/img/jobs.jpg",
+        slug: generateSlug("Jobs"),
       },
       {
         id: "blogCat5",
         name: "Education",
         image: "https://example.com/img/education.jpg",
+        slug: generateSlug("Education"),
       },
     ],
   });

@@ -48,3 +48,13 @@ export type Category = z.infer<typeof CategorySchema>;
 export type SubCategory = z.infer<typeof SubCategorySchema>;
 export type BlogPost = z.infer<typeof BlogPostSchema>;
 export type BlogPostsResponse = z.infer<typeof BlogPostsResponseSchema>;
+
+export const SubCategoryParamsSchema = z.object({
+  categorySlug: z
+    .string()
+    .regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, "Invalid category slug"),
+  subCategorySlug: z
+    .string()
+    .regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, "Invalid subcategory slug"),
+});
+export type SubCategoryParams = z.infer<typeof SubCategoryParamsSchema>;

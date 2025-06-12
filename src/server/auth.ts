@@ -3,8 +3,6 @@ import { prismaAdapter } from "better-auth/adapters/prisma";
 import { db } from "@/db";
 import { nextCookies } from "better-auth/next-js";
 
-import { Role } from "../../generated/prisma";
-
 export const auth = betterAuth({
   emailAndPassword: {
     enabled: true,
@@ -15,10 +13,10 @@ export const auth = betterAuth({
   }),
   user: {
     fields: {
-      name: "firstname",
+      name: "firstName",
     },
     additionalFields: {
-      lastname: {
+      lastName: {
         type: "string",
         required: true,
       },
