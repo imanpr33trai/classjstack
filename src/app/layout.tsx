@@ -33,12 +33,12 @@ export default function RootLayout({
       <body
         className={`${poppins.variable} ${playfairDisplay.variable} antiliased`}
       >
-        <Navbar />
         <Providers>
+          <Navbar />
           {children}
           <Toaster />
+          <Footer />
         </Providers>
-        <Footer />
       </body>
     </html>
   );

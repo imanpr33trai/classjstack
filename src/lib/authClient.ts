@@ -6,4 +6,4 @@ export const authClient = createAuthClient({
   baseURL: "http://localhost:3000",
   plugins: [inferAdditionalFields<typeof auth>()],
 });
-export const { getSession, signIn, signOut, signUp } = authClient;
+export const { getSession, signIn, signOut, signUp, useSession } = authClient;

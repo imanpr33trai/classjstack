@@ -1,175 +1,92 @@
-export const AdsList=() => {
- const ads=  [ {
-      category: "Electronics",
-      subcategory: "Smartphones",
-      adTitle: "Brand New iPhone 14 Pro Max - 256GB",
-      askingPrice: 1200,
-      description: "Latest iPhone 14 Pro Max with 256GB storage, never used. Comes with original accessories.",
-      name: "John Doe",
-      organisation: "TechWorld",
-      email: "john.doe@example.com",
-      phone: "+1 123 456 7890",
-      location: "New York",
-      city: "New York City",
-      town: "Manhattan",
-      neighborhood: "Midtown",
-      postalCode: "10001",
-      expireIn: "30 days",
-    },
-    {
-      category: "Vehicles",
-      subcategory: "Cars",
-      adTitle: "2019 Toyota Corolla LE - Low Mileage",
-      askingPrice: 18000,
-      description: "Well-maintained 2019 Toyota Corolla, 40,000 miles, excellent condition.",
-      name: "Emma Smith",
-      organisation: "Auto Deals",
-      email: "emma.smith@example.com",
-      phone: "+1 987 654 3210",
-      location: "California",
-      city: "Los Angeles",
-      town: "Hollywood",
-      neighborhood: "Sunset Blvd",
-      postalCode: "90028",
-      expireIn: "45 days",
-    },
-    {
-      category: "Real Estate",
-      subcategory: "Apartments for Rent",
-      adTitle: "2 BHK Apartment for Rent in Downtown",
-      askingPrice: 2500,
-      description: "Spacious 2 BHK apartment available for rent in downtown with modern amenities.",
-      name: "Michael Johnson",
-      organisation: "RealtyHub",
-      email: "michael.johnson@example.com",
-      phone: "+1 555 678 9012",
-      location: "Illinois",
-      city: "Chicago",
-      town: "Loop",
-      neighborhood: "South Loop",
-      postalCode: "60605",
-      expireIn: "60 days",
-    },
-    {
-      category: "Jobs",
-      subcategory: "Software Engineer",
-      adTitle: "Hiring Full-Stack Developer - Remote",
-      askingPrice: "Negotiable",
-      description: "Looking for an experienced full-stack developer with expertise in React and Node.js.",
-      name: "Sarah Williams",
-      organisation: "Tech Innovators",
-      email: "sarah.williams@example.com",
-      phone: "+1 444 321 6789",
-      location: "Texas",
-      city: "Austin",
-      town: "Downtown",
-      neighborhood: "Tech Park",
-      postalCode: "73301",
-      expireIn: "90 days",
-    },
-    {
-      category: "Furniture",
-      subcategory: "Sofas",
-      adTitle: "Luxury Leather Sofa Set - 3 Seater",
-      askingPrice: 750,
-      description: "High-quality genuine leather sofa, barely used, in excellent condition.",
-      name: "David Brown",
-      organisation: "Home Decor",
-      email: "david.brown@example.com",
-      phone: "+1 222 789 6543",
-      location: "Florida",
-      city: "Miami",
-      town: "Brickell",
-      neighborhood: "Bayfront",
-      postalCode: "33130",
-      expireIn: "30 days",
-    },
-    {
-      category: "Services",
-      subcategory: "Cleaning",
-      adTitle: "Professional Home Cleaning Service",
-      askingPrice: "Starting at $50",
-      description: "Get your home deep cleaned with our expert cleaning team. Satisfaction guaranteed.",
-      name: "Olivia Clark",
-      organisation: "CleanSwift",
-      email: "olivia.clark@example.com",
-      phone: "+1 777 888 9999",
-      location: "Washington",
-      city: "Seattle",
-      town: "Belltown",
-      neighborhood: "Downtown Core",
-      postalCode: "98121",
-      expireIn: "30 days",
-    },
-    {
-      category: "Pets",
-      subcategory: "Dogs",
-      adTitle: "Golden Retriever Puppies for Sale",
-      askingPrice: 1200,
-      description: "Healthy Golden Retriever puppies available for loving homes. Vaccinated and dewormed.",
-      name: "Daniel Wilson",
-      organisation: "Happy Pets",
-      email: "daniel.wilson@example.com",
-      phone: "+1 999 123 4567",
-      location: "Nevada",
-      city: "Las Vegas",
-      town: "Paradise",
-      neighborhood: "Spring Valley",
-      postalCode: "89109",
-      expireIn: "40 days",
-    },
-    {
-      category: "Fashion",
-      subcategory: "Watches",
-      adTitle: "Rolex Submariner - Authentic Luxury Watch",
-      askingPrice: 9500,
-      description: "Pre-owned but well-maintained Rolex Submariner. Comes with original box and papers.",
-      name: "Sophia Martinez",
-      organisation: "Luxury Timepieces",
-      email: "sophia.martinez@example.com",
-      phone: "+1 333 555 7777",
-      location: "New Jersey",
-      city: "Jersey City",
-      town: "Downtown",
-      neighborhood: "Waterfront",
-      postalCode: "07302",
-      expireIn: "50 days",
-    },
-    {
-      category: "Electronics",
-      subcategory: "Laptops",
-      adTitle: "MacBook Pro 16-inch M1 Max - 1TB SSD",
-      askingPrice: 2300,
-      description: "Lightly used MacBook Pro 16-inch with M1 Max chip. Comes with AppleCare.",
-      name: "Ethan Davis",
-      organisation: "Tech Masters",
-      email: "ethan.davis@example.com",
-      phone: "+1 888 222 4444",
-      location: "Arizona",
-      city: "Phoenix",
-      town: "Camelback",
-      neighborhood: "Downtown",
-      postalCode: "85001",
-      expireIn: "35 days",
-    },
-    {
-      category: "Home & Garden",
-      subcategory: "Kitchen Appliances",
-      adTitle: "Brand New Ninja Air Fryer - 6 Quart",
-      askingPrice: 100,
-      description: "Ninja Air Fryer, still in the box. Perfect for healthy cooking.",
-      name: "Liam White",
-      organisation: "Kitchen Essentials",
-      email: "liam.white@example.com",
-      phone: "+1 666 777 8888",
-      location: "Colorado",
-      city: "Denver",
-      town: "Capitol Hill",
-      neighborhood: "Uptown",
-      postalCode: "80202",
-      expireIn: "20 days",
-    },
-  ];
+"use client";
+
+import { useQuery } from "@tanstack/react-query";
+import { client } from "@/lib/client";
+import { LoadingSpinner } from "./loading-spinner";
+import { Card } from "./ui/card";
+import { Button } from "./ui/button";
+import { cn } from "@/lib/utils";
+import { formatDistanceToNow } from "date-fns";
+import { AdWithUser } from "@/types/ads";
+
+interface AdsListProps {
+  className?: string;
+  limit?: number;
 }
-  export default AdsList;
-  
+
+export const AdsList = ({ className, limit }: AdsListProps) => {
+  const {
+    data: ads,
+    isLoading,
+    error,
+  } = useQuery({
+    queryKey: ["ads"],
+    queryFn: async () => {
+      const response = await client.ads.getAll.$get();
+      const data = await response.json();
+      return data;
+    },
+  });
+
+  if (isLoading) {
+    return (
+      <div className="flex items-center justify-center min-h-[200px]">
+        <LoadingSpinner />
+      </div>
+    );
+  }
+
+  if (error || !ads) {
+    return (
+      <div className="flex items-center justify-center min-h-[200px]">
+        <p className="text-red-500">
+          {error ? (error as Error).message : "Failed to load ads"}
+        </p>
+      </div>
+    );
+  }
+
+  // Limit the number of ads if specified
+  const displayedAds = limit ? ads.slice(0, limit) : ads;
+
+  return (
+    <div
+      className={cn(
+        "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4",
+        className
+      )}
+    >
+      {displayedAds.map((ad: AdWithUser) => (
+        <Card key={ad.id} className="overflow-hidden">
+          <div className="p-4">
+            <h3 className="text-lg font-semibold mb-2">{ad.title}</h3>
+            <p className="text-sm text-gray-600 mb-2 line-clamp-2">
+              {ad.description}
+            </p>
+            <div className="flex justify-between items-center">
+              <span className="text-lg font-bold">
+                ₹{ad.price.toLocaleString()}
+              </span>
+              <span className="text-xs text-gray-500">
+                {formatDistanceToNow(new Date(ad.createdAt), {
+                  addSuffix: true,
+                })}
+              </span>
+            </div>
+            <div className="mt-2 text-sm text-gray-600">
+              <span>{ad.location}</span>
+            </div>
+            <div className="mt-2 text-xs text-gray-500">
+              <span>
+                Posted by: {ad.user.firstName} {ad.user.lastName}
+              </span>
+            </div>
+            <Button href={`/ads/${ad.id}`} className="w-full mt-4">
+              View Details
+            </Button>
+          </div>
+        </Card>
+      ))}
+    </div>
+  );
+};

@@ -1,88 +1,129 @@
 "use client";
-import { cn } from "@/lib/utils";
-import React, { useState } from "react";
-import { Icons } from "./icons";
-import { Button } from "./ui/button";
 
+import { cn } from "@/lib/utils";
+import React from "react";
+import { useQuery } from "@tanstack/react-query";
+import { client } from "@/lib/client";
+import { LoadingSpinner } from "./loading-spinner";
+import type { Category } from "@/types/category";
+import Image from "next/image";
+import Link from "next/link";
 
 interface CategoriesIconsProps {
   className?: string;
-  iconsrc?: string;
   isIcon?: boolean;
-  isLine?: boolean;
+  // 1. Accept state and a handler function from the parent
+  selectedCategory: string | null;
+  onCategorySelect: (categoryId: string | null) => void;
 }
 
 export const CategoriesIcons = ({
   className,
-  isLine = false,
   isIcon = false,
-  iconsrc,
+  selectedCategory,
+  onCategorySelect,
 }: CategoriesIconsProps) => {
-  const categories = [
-    { title: "Furniture", icon: Icons.furniture, },
-    { title: "Services", icon: Icons.setting },
-    { title: "Sports", icon: Icons.sport },
-    { title: "Education", icon: Icons.education },
-    { title: "Announcement", icon: Icons.announcement },
-    { title: "Vehicles", icon: Icons.vehicle },
-    { title: "Clothes", icon: Icons.clothes },
-    { title: "Electronics", icon: Icons.electronic },
-    { title: "Property", icon: Icons.property },
-  ];
+  // This data fetching logic remains the same
+  const {
+    data: categories,
+    isLoading,
+    error,
+  } = useQuery<Category[]>({
+    queryKey: ["categories"],
+    queryFn: async () => {
+      const response = await client.category.getAllCategory.$get();
+      return await response.json();
+    },
+  });
 
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
-  
-
-  const handleCategoryClick = (categoryid: string) => {
-    setSelectedCategory(categoryid);
-  };
-
-
+  // ... (isLoading and error states remain the same) ...
 
   return (
     <div
-      className={cn("flex flex-row cursor-default font-poppins items-center justify-center", className)}
+      className={cn(
+        "flex flex-wrap cursor-default font-poppins items-center justify-center gap-1 px-4",
+        className
+      )}
     >
-      {categories.map(({ title, icon: Icon }) =>
-        isIcon ? (
-          <div 
-            className="group h-48" 
-            key={title} // Key should only be on the outermost element
+      {/* UX Improvement: Add an "All Categories" button to reset the filter */}
+      <div
+        className="group h-auto sm:h-40 md:h-48 w-full sm:w-1/2 md:w-1/3 lg:w-40"
+        onClick={() => onCategorySelect(null)} // Call handler with null
+      >
+        <div
+          className={`flex flex-col gap-2 items-center h-full py-4 sm:py-0 group-hover:bg-brand-100 justify-center transition-colors ${
+            selectedCategory === null ? "bg-brand-100" : ""
+          }`}
+        >
+          {/* You can use a generic icon for "All" */}
+          <Image
+            src="/path/to/all-icon.svg"
+            width={40}
+            height={40}
+            alt="All Categories"
+            className={cn(
+              "w-8 h-8 sm:w-10 sm:h-10",
+              selectedCategory === null ? "invert" : "group-hover:invert"
+            )}
+          />
+          <h6
+            className={cn(
+              "transition-colors text-sm sm:text-base",
+              selectedCategory === null
+                ? "text-white"
+                : "group-hover:text-white"
+            )}
+          >
+            All Categories
+          </h6>
+        </div>
+      </div>
+
+      {categories?.map((category) => (
+        // The `Link` is still useful for right-click -> open in new tab.
+        // But the primary interaction is now the onClick on the div.
+        <Link
+          href={`/categories/${category.slug}`}
+          key={category.id}
+          onClick={(e) => e.preventDefault()}
+        >
+          <div
+            className="group h-auto sm:h-40 md:h-48 w-full sm:w-1/2 md:w-1/3 lg:w-40"
+            // 2. Remove internal state logic. Use the passed-in function.
+            onClick={() => onCategorySelect(category.id)}
           >
             <div
-              className={`flex w-40 flex-col gap-2 items-center h-full group-hover:bg-brand-100  justify-center transition-colors ${
-                selectedCategory === title ? "bg-brand-100" : ""
+              className={`flex flex-col gap-2 items-center h-full py-4 sm:py-0 group-hover:bg-brand-100 justify-center transition-colors ${
+                // 3. Use the passed-in prop to determine active state
+                selectedCategory === category.id ? "bg-brand-100" : ""
               }`}
-              onClick={() => handleCategoryClick(title)}
             >
-              <Icon color="black" className={cn(selectedCategory === title
-                  ? "invert" 
-                  : "group-hover:invert")}  />
-              <h6 className={cn(
-                "transition-colors",
-                selectedCategory === title 
-                  ? "text-white" 
-                  : "group-hover:text-white"
-              )}>
-                {title}
+              <Image
+                src={category.image}
+                width={40}
+                height={40}
+                alt={category.name}
+                className={cn(
+                  "w-8 h-8 sm:w-10 sm:h-10",
+                  selectedCategory === category.id
+                    ? "invert"
+                    : "group-hover:invert"
+                )}
+              />
+              <h6
+                className={cn(
+                  "transition-colors text-sm sm:text-base",
+                  selectedCategory === category.id
+                    ? "text-white"
+                    : "group-hover:text-white"
+                )}
+              >
+                {category.name}
               </h6>
             </div>
           </div>
-        ) : (
-          <React.Fragment key={title}> {/* Use Fragment with key instead of empty fragment */}
-            <Button
-              className="bg-[#191919] h-auto w-auto"
-              // spanClass="group-hover:text-brand-100 transition-colors"
-            >
-              {title}
-            </Button>
-            {categories[categories.length - 1]?.title !== title && (
-              <div className="h-6 w-px bg-[#707070]" />
-            )}
-          </React.Fragment>
-        )
-      )}
+        </Link>
+      ))}
     </div>
   );
 };
-

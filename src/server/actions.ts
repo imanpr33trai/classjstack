@@ -18,6 +18,6 @@ export const signUp = async ({
     lastName,
     name: `${firstName} ${lastName}`,
     password,
-    callbackURL: "/articles",
+    callbackURL: "/ads/ad",
   });
 };

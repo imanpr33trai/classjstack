@@ -10,13 +10,12 @@ export const categoryRouter = j.router({
         id: true,
         name: true,
         slug: true,
-        createdAt: true,
-        updatedAt: true,
+        image: true,
         subCategories: {
           select: {
-            id: true,
             name: true,
             slug: true,
+            id: true,
           },
         },
       },

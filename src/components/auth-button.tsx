@@ -1,46 +1,53 @@
 "use client";
 
 import { Button } from "./ui/button";
-import { signOut } from "@/lib/authClient";
+import { useRouter } from "next/navigation";
+import { signIn, signOut } from "@/lib/authClient";
+import { useSession } from "@/lib/authClient";
+import { LoadingSpinner } from "./loading-spinner";
 
-interface AuthButtonsProps {
-  user: any; // Replace 'any' with your user type
-}
+export const AuthButtons = () => {
+  const router = useRouter();
+  const { data: session, isPending, error } = useSession();
 
-export const AuthButtons = ({ user }: AuthButtonsProps) => {
+  const handleSignOut = async () => {
+    try {
+      await signOut();
+      router.refresh();
+    } catch (error) {
+      console.error("Sign out failed:", error);
+    }
+  };
+
+  if (isPending) {
+    return (
+      <div>
+        <LoadingSpinner />
+      </div>
+    );
+  }
+
   return (
-    <div className="flex flex-row gap-2">
-      {user ? (
-        <Button
-          className="bg-[#191919]"
-          onClick={async () =>
-            await signOut({
-              fetchOptions: {
-                onError(context) {
-                  console.log("Sign out error:", context.error);
-                },
-                onSuccess(context) {
-                  console.log("Sign out successful:", context.data);
-                },
-              },
-            })
-          }
-          variant="destructive"
-        >
-          Logout
-        </Button>
+    <>
+      {session ? (
+        <>
+          <Button variant="destructive" onClick={handleSignOut}>
+            Logout
+          </Button>
+          <Button href="/ads/ad" variant="default">
+            Post Ad
+          </Button>
+        </>
       ) : (
-        <Button className="bg-[#191919]" href="/sign-in" variant="destructive">
-          Login
-        </Button>
+        <>
+          <Button href="/sign-in" variant="destructive">
+            Login
+          </Button>
+          <Button href="/sign-up" variant="default">
+            Sign Up
+          </Button>
+        </>
       )}
-      {user ? (
-        <Button href="/ads/ad" variant="default">
-          Post Ad
-        </Button>
-      ) : (
-        <Button href="/sign-up">SignUp</Button>
-      )}
-    </div>
+    </>
   );
 };

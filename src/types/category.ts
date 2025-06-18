@@ -1,3 +1,4 @@
+import slugify from "slugify";
 import { z } from "zod";
 
 export const SubCategorySchema = z.object({
@@ -8,10 +9,24 @@ export const SubCategorySchema = z.object({
   createdAt: z.date(),
   updatedAt: z.date(),
 });
+export const subCategory = z.object({
+  id: z.string(),
+  slug: z.string(),
+  name: z.string(),
+});
+
+export const CategoryWithSubCategoriesSchema = z.object({
+  id: z.string(),
+  name: z.string(),
+  image: z.string(),
+  slug: z.string(),
+  subCategories: z.array(subCategory),
+});
 
 export const CategorySchema = z.object({
   id: z.string(),
   name: z.string(),
+  image: z.string(),
   slug: z.string(),
   description: z.string().optional(),
   createdAt: z.date(),
@@ -44,7 +59,7 @@ export const BlogPostsResponseSchema = z.object({
   // totalItems: z.number(),
 });
 
-export type Category = z.infer<typeof CategorySchema>;
+export type Category = z.infer<typeof CategoryWithSubCategoriesSchema>;
 export type SubCategory = z.infer<typeof SubCategorySchema>;
 export type BlogPost = z.infer<typeof BlogPostSchema>;
 export type BlogPostsResponse = z.infer<typeof BlogPostsResponseSchema>;

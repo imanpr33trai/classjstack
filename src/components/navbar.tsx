@@ -6,20 +6,10 @@ import { InputComponent } from "./input";
 import { ChevronDownIcon, ChevronDownSquareIcon } from "lucide-react";
 import { Button } from "./ui/button";
 import { auth } from "@/server/auth";
-import { getSession, signOut } from "@/lib/authClient";
+
 import { AuthButtons } from "./auth-button";
 
-export const Navbar = async () => {
-  const user = await getSession({
-    fetchOptions: {
-      onError(context) {
-        console.error("Error fetching session:", context.error);
-      },
-      onSuccess(context) {
-        console.log("Session fetched successfully:", context.data);
-      },
-    },
-  });
+export const Navbar = () => {
   return (
     <nav className="sticky z-[100] h-24 inset-x-0 top-0 w-full bg-[#191919] transition-all">
       <MaxWidthWrapper className="py-0 max-w-full">
@@ -48,41 +38,7 @@ export const Navbar = async () => {
             </div>
 
             <div className="flex flex-row gap-2">
-              {user ? (
-                <Button
-                  className="bg-[#191919]"
-                  onClick={async () =>
-                    await signOut({
-                      fetchOptions: {
-                        onError(context) {
-                          console.log("Sign out error:", context.error);
-                        },
-                        onSuccess(context) {
-                          console.log("Sign out successful:", context.data);
-                        },
-                      },
-                    })
-                  }
-                  variant="destructive"
-                >
-                  Logout
-                </Button>
-              ) : (
-                <Button
-                  className="bg-[#191919]"
-                  href="/sign-in"
-                  variant="destructive"
-                >
-                  Login
-                </Button>
-              )}
-              {user ? (
-                <Button href="/ads/ad" variant="default">
-                  Post Ad
-                </Button>
-              ) : (
-                <Button href="/sign-up">SignUp</Button>
-              )}
+              <AuthButtons />
             </div>
           </div>
         </div>

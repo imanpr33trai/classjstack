@@ -9,8 +9,10 @@ import { Button } from "@/components/ui/button";
 import { useQuery } from "@tanstack/react-query";
 import { client } from "@/lib/client";
 import AllAds from "@/components/all-ads";
+import { useState } from "react";
 
 export const Page = () => {
+  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
   return (
     <>
       <section>
@@ -61,7 +63,10 @@ export const Page = () => {
       <section className="pt-14">
         <MaxWidthWrapper className="px-0 max-w-full md:px-0 ">
           <div className="bg-gray-200  min-h-48 relative  flex flex-row items-center justify-center ">
-            <CategoriesIcons isIcon={true} className="" />
+            <CategoriesIcons
+              onCategorySelect={setSelectedCategory}
+              selectedCategory={selectedCategory}
+            />
           </div>
         </MaxWidthWrapper>
       </section>
@@ -84,7 +89,7 @@ export const Page = () => {
             </div>
           </div>
 
-          <AllAds />
+          <AllAds categoryId={selectedCategory} />
 
           <div className="flex flex-row items-center justify-center gap-5 mt-14">
             <div className="w-[1075px] h-[200px] bg-gray-300" />

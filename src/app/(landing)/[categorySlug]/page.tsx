@@ -6,13 +6,18 @@ const posts = [
   { id: "456", title: "Second Post", category: "Business" },
 ];
 
-export default function CategoryPage() {
+export default async function CategoryPage({
+  params,
+}: {
+  params: { categorySlug: string };
+}) {
+  console.log(params);
   return (
     <div className="max-w-2xl mx-auto p-4">
       <h1 className="text-2xl font-bold mb-4">Category Posts</h1>
       <div className="space-y-4">
         {posts.map((post) => (
-          <Link key={post.id} href={`/post/${post.id}`}>
+          <Link key={post.id} href={`/ads/${post.id}`}>
             <div className="p-4 border rounded-lg hover:bg-gray-100 cursor-pointer transition">
               <h2 className="text-lg font-semibold">{post.title}</h2>
               <p className="text-gray-500">{post.category}</p>

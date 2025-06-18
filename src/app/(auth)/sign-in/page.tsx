@@ -22,6 +22,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { PasswordInput } from "@/components/password-input"; // <-- Import new component
 import { SignInSchema, signInSchema } from "@/types/user"; // <-- Import schema
+import { signIn } from "@/lib/authClient";
 
 // Assuming you have an authClient setup like in the previous example
 // import { authClient } from "@/lib/authClient";
@@ -42,6 +43,11 @@ export default function Page() {
 
   // 2. Create the onSubmit handler
   const onSubmit = async (data: SignInSchema) => {
+    await signIn.email({
+      email: data.email,
+      password: data.password,
+      rememberMe: data.rememberMe,
+    });
     setLoading(true);
     console.log(data); // To see the form data
 

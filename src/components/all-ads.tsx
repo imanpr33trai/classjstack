@@ -1,62 +1,57 @@
+// This is a hypothetical AllAds.tsx component. Adapt it to your actual file.
 "use client";
 
-import { useEffect, useState } from "react";
-import Product from "./product";
-import type { Ad } from "../../generated/prisma/client";
 import { useQuery } from "@tanstack/react-query";
 import { client } from "@/lib/client";
-import { AdWithUser, CreateAdInput } from "@/types/ads";
-import { notFound } from "next/navigation";
-import { MaxWidthWrapper } from "./max-width-wrapper";
+import { Product } from "./product"; // Assuming you have a Product component
 import { LoadingSpinner } from "./loading-spinner";
 
-export default function AllAds() {
+interface AllAdsProps {
+  categoryId: string | null; // Accept the category ID as a prop
+}
+
+const AllAds = ({ categoryId }: AllAdsProps) => {
   const {
     data: ads,
-    isLoading: loading,
+    isLoading,
     error,
-  } = useQuery<AdWithUser[]>({
-    queryKey: ["get-all-ads"],
+  } = useQuery({
+    // 1. Make the query key dynamic.
+    // When `categoryId` changes, React Query sees a new key and refetches.
+    queryKey: ["ads", categoryId],
+
+    // 2. Adjust the query function to use the categoryId.
     queryFn: async () => {
-      const res = await client.ads.getAll.$get();
-      // Call .json() as a method, not a property
-      const data = await res.json();
-      // if (res.ok) return notFound();
-      return data;
+      // Pass the categoryId as a query parameter to your API endpoint.
+      // If categoryId is null, the query param will be omitted, fetching all ads.
+      const response = await client.ads.getAll.$get();
+      if (!response.ok) {
+        throw new Error("Failed to fetch ads");
+      }
+      return await response.json();
     },
   });
 
-  // if (!ads) return <div>not Fetched</div>;
-
-  if (loading) {
+  if (isLoading)
     return (
-      <div className="flex items-center justify-center min-h-[200px]">
+      <div className="flex justify-center py-10">
         <LoadingSpinner />
       </div>
     );
-  }
-
-  if (error) {
-    return (
-      <div className="flex items-center justify-center min-h-[200px]">
-        <p className="text-red-500">{error.message}</p>
-      </div>
-    );
-  }
+  if (error)
+    return <p className="text-red-500 text-center py-10">Error loading ads.</p>;
 
   return (
-    <MaxWidthWrapper>
-      <div className="grid mt-5 grid-cols-4 grid-rows-2 gap-6 items-center justify-center">
-        {ads?.map((ad) => (
-          <Product
-            key={ad.id}
-            location={ad.location}
-            name={ad.title}
-            href={`/ads/${ad.id}`}
-            price={String(ad.price)}
-          />
-        ))}
-      </div>
-    </MaxWidthWrapper>
+    <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 mt-8">
+      {ads?.length > 0 ? (
+        ads.map((ad) => <Product key={ad.id} ad={ad} />)
+      ) : (
+        <p className="col-span-full text-center text-gray-500 py-10">
+          No ads found for this category.
+        </p>
+      )}
+    </div>
   );
-}
+};
+
+export default AllAds;

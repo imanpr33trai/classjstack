@@ -1,0 +1,29 @@
+{
+  "servers": {
+    "@21st-dev/magic": {
+      "type": "stdio",
+      "command": "npx",
+      "args": [
+        "-y",
+        "@21st-dev/magic@latest",
+        "API_KEY=\"7ae075e8dda482b55b67c4e033265efb6e565d3e67ced7d8498e16cf20d27f28\""
+      ]
+    },
+    "Prisma": {
+      "command": "npx",
+      "args": ["-y", "prisma", "mcp"]
+    }
+  }
+}
+// {
+//   "mcpServers": {
+//     "@21st-dev/magic": {
+//       "command": "npx",
+//       "args": [
+//         "-y",
+//         "@21st-dev/magic@latest",
+//         "API_KEY=\"7ae075e8dda482b55b67c4e033265efb6e565d3e67ced7d8498e16cf20d27f28\""
+//       ]
+//     }
+//   }
+// }

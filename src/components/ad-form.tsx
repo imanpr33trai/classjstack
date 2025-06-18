@@ -277,13 +277,13 @@ export default function AdForm() {
             <label htmlFor="name" className="block text-sm font-sm  mb-1">
               Your Name*
             </label>
-            <InputUI className="border h-[50px] border-gray-300 w-full" />
+            <Input className="border h-[50px] border-gray-300 w-full" />
           </div>
           <div className="w-full">
             <label htmlFor="name" className="block text-sm font-sm  mb-1">
               Organisation
             </label>
-            <InputUI className="border h-[50px] border-gray-300 w-full" />
+            <Input className="border h-[50px] border-gray-300 w-full" />
           </div>
         </div>
         <div className="flex w-full text-sm gap-7">
@@ -291,13 +291,13 @@ export default function AdForm() {
             <label htmlFor="name" className="block text-sm font-sm  mb-1">
               Email*
             </label>
-            <InputUI className="border h-[50px] border-gray-300 w-full" />
+            <Input className="border h-[50px] border-gray-300 w-full" />
           </div>
           <div className="w-full">
             <label htmlFor="name" className="block text-sm font-sm  mb-1">
               Phone
             </label>
-            <InputUI className="border h-[50px] border-gray-300 w-full" />
+            <Input className="border h-[50px] border-gray-300 w-full" />
           </div>
         </div>
         <div className="w-full text-sm gap-7">
@@ -305,7 +305,7 @@ export default function AdForm() {
             Location
           </label>
           <div className="relative">
-            <InputUI className="border h-[50px] border-gray-300 w-full" />
+            <Input className="border h-[50px] border-gray-300 w-full" />
             <div className="pointer-events-none absolute inset-y-0 end-0 flex items-center justify-center ps-3 pe-3 text-muted-foreground/80 peer-disabled:opacity-50">
               <MapPin
                 size={16}
@@ -320,7 +320,7 @@ export default function AdForm() {
           <label htmlFor="name" className="block text-sm font-sm  mb-1">
             City, Town, Or Neighborhood
           </label>
-          <InputUI className="border h-[50px] border-gray-300 w-full" />
+          <Input className="border h-[50px] border-gray-300 w-full" />
         </div>
         <div className="flex w-full text-sm gap-7">
           <div className="w-full">
@@ -369,7 +369,7 @@ export default function AdForm() {
         <div className="w-full flex gap-7 text-sm">
           <div className="w-full">
             <label htmlFor="platform">Platform</label>
-            <InputUI
+            <Input
               type="text"
               id="platform"
               name="platform"
@@ -380,7 +380,7 @@ export default function AdForm() {
           </div>
           <div className="w-full">
             <label htmlFor="platform">Link</label>
-            <InputUI
+            <Input
               type="text"
               id="platform"
               name="platform"
@@ -431,7 +431,7 @@ export default function AdForm() {
 //     <div className="space-y-4">
 //       <div>
 //         <label htmlFor="title" className="block text-sm font-medium text-gray-700 mb-1">Ad Title *</label>
-//         <InputUI
+//         <Input
 //           id="title"
 //           name="title"
 //           value={formData.title}
@@ -457,7 +457,7 @@ export default function AdForm() {
 
 //       <div>
 //         <label htmlFor="price" className="block text-sm font-medium text-gray-700 mb-1">Price *</label>
-//         <InputUI
+//         <Input
 //           id="price"
 //           name="price"
 //           value={formData.price}
@@ -512,7 +512,7 @@ export default function AdForm() {
 //     <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
 //       <div>
 //         <label htmlFor="location" className="block text-sm font-medium text-gray-700 mb-1">Location/State *</label>
-//         <InputUI
+//         <Input
 //           id="location"
 //           name="location"
 //           value={formData.location}
@@ -525,7 +525,7 @@ export default function AdForm() {
 
 //       <div>
 //         <label htmlFor="city" className="block text-sm font-medium text-gray-700 mb-1">City *</label>
-//         <InputUI
+//         <Input
 //           id="city"
 //           name="city"
 //           value={formData.city}
@@ -543,7 +543,7 @@ export default function AdForm() {
 //     <div className="space-y-4">
 //       <div>
 //         <label htmlFor="name" className="block text-sm font-medium text-gray-700 mb-1">Name *</label>
-//         <InputUI
+//         <Input
 //           id="name"
 //           name="name"
 //           value={formData.name}
@@ -556,7 +556,7 @@ export default function AdForm() {
 
 //       <div>
 //         <label htmlFor="email" className="block text-sm font-medium text-gray-700 mb-1">Email *</label>
-//         <InputUI
+//         <Input
 //           id="email"
 //           name="email"
 //           type="email"
@@ -570,7 +570,7 @@ export default function AdForm() {
 
 //       <div>
 //         <label htmlFor="phone" className="block text-sm font-medium text-gray-700 mb-1">Phone Number *</label>
-//         <InputUI
+//         <Input
 //           id="phone"
 //           name="phone"
 //           value={formData.phone}
